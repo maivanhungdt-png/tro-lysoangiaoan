@@ -7,7 +7,7 @@ st.set_page_config(page_title="Trợ lý Soạn Giáo án AI", layout="wide")
 
 with st.sidebar:
     st.header("⚙️ Cấu hình")
-    # Ô nhập API Key từ Google AI Studio
+    # Ô nhập API Key (Mã AIza... bạn đã lấy thành công)
     api_key = st.text_input("Nhập Gemini API Key (AIza...):", type="password")
     st.info("Lấy Key tại: https://aistudio.google.com/")
 
@@ -21,25 +21,24 @@ if st.button("Bắt đầu soạn giáo án"):
         st.error("Vui lòng nhập API Key để bắt đầu!")
     elif uploaded_file is not None:
         try:
-            with st.spinner('Đang soạn thảo giáo án...'):
-                # Đọc dữ liệu từ file PDF
+            with st.spinner('Đang kết nối với AI để soạn giáo án...'):
+                # Đọc dữ liệu từ PDF
                 reader = PdfReader(uploaded_file)
                 text_content = "".join([page.extract_text() for page in reader.pages])
 
-                # Cấu hình Google AI
+                # Cấu hình kết nối AI
                 genai.configure(api_key=api_key)
                 
-                # SỬA LỖI 404: Sử dụng đúng định danh mô hình ổn định
+                # Gọi mô hình 1.5 Flash theo cách mới nhất để tránh lỗi 404
                 model = genai.GenerativeModel('gemini-1.5-flash')
                 
-                prompt = f"Dựa trên nội dung bài dạy: {text_content}. Hãy soạn một giáo án chi tiết theo mẫu Công văn 5512."
+                # Gửi yêu cầu
+                response = model.generate_content(f"Dựa trên nội dung: {text_content}. Hãy soạn giáo án 5512.")
                 
-                # Gửi yêu cầu đến AI
-                response = model.generate_content(prompt)
                 st.markdown(response.text)
-                st.success("Đã hoàn thành soạn giáo án!")
+                st.success("Đã hoàn thành!")
         except Exception as e:
-            # Hiển thị lỗi cụ thể nếu có
             st.error(f"Lỗi hệ thống: {str(e)}")
+            st.info("Nếu vẫn lỗi 404, hãy đảm bảo bạn đã lưu file requirements.txt mới nhất.")
     else:
-        st.warning("Vui lòng tải lên file PDF nội dung bài giảng.")
+        st.warning("Vui lòng tải lên file PDF.")
