@@ -50,7 +50,7 @@ if st.button("Bắt đầu soạn giáo án"):
 
                 # Cấu hình AI Gemini
                 genai.configure(api_key=api_key)
-                model = genai.GenerativeModel('gemini-1.5-flash')
+                model = genai.GenerativeModel('gemini-3.0-pro')
                 
                 # Prompt tối ưu theo mẫu giáo án phổ thông
                 prompt = f"""
@@ -71,3 +71,4 @@ if st.button("Bắt đầu soạn giáo án"):
             st.error(f"Lỗi hệ thống: {str(e)}")
     else:
         st.warning("⚠️ Vui lòng tải tài liệu lên trước khi bắt đầu.")
+
