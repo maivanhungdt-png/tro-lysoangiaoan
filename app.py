@@ -7,7 +7,6 @@ st.title("📘 TRỢ LÝ SOẠN GIÁO ÁN THÔNG MINH")
 
 with st.sidebar:
     st.header("⚙️ Cấu hình")
-    # Nhập mã AIza... bạn đã lấy thành công
     api_key = st.text_input("Nhập Gemini API Key (AIza...):", type="password")
 
 st.subheader("📁 1. Tải lên tài liệu bài dạy")
@@ -22,7 +21,7 @@ if st.button("Bắt đầu soạn giáo án"):
                 reader = PdfReader(uploaded_file)
                 text_content = "".join([page.extract_text() for page in reader.pages])
                 genai.configure(api_key=api_key)
-                # Gọi trực tiếp mô hình Flash ổn định
+                # Gọi trực tiếp mô hình Flash ổn định để tránh lỗi 404
                 model = genai.GenerativeModel('gemini-1.5-flash')
                 response = model.generate_content(f"Nội dung bài dạy: {text_content}. Hãy soạn giáo án chi tiết theo Công văn 5512.")
                 st.markdown(response.text)
