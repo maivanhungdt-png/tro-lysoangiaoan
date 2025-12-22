@@ -2,7 +2,7 @@ import streamlit as st
 import google.generativeai as genai
 from PyPDF2 import PdfReader
 
-# Cấu hình giao diện
+# Cấu hình giao diện ứng dụng
 st.set_page_config(page_title="Trợ lý Soạn Giáo án AI", layout="wide")
 
 with st.sidebar:
@@ -22,23 +22,23 @@ if st.button("Bắt đầu soạn giáo án"):
     elif uploaded_file is not None:
         try:
             with st.spinner('Đang kết nối với AI để soạn giáo án...'):
-                # Đọc dữ liệu từ PDF
+                # Đọc dữ liệu từ file PDF
                 reader = PdfReader(uploaded_file)
                 text_content = "".join([page.extract_text() for page in reader.pages])
 
-                # Cấu hình kết nối AI
+                # Cấu hình kết nối Google AI
                 genai.configure(api_key=api_key)
                 
-                # Gọi mô hình 1.5 Flash theo cách mới nhất để tránh lỗi 404
+                # Gọi mô hình 1.5 Flash phiên bản ổn định nhất
                 model = genai.GenerativeModel('gemini-1.5-flash')
                 
-                # Gửi yêu cầu
-                response = model.generate_content(f"Dựa trên nội dung: {text_content}. Hãy soạn giáo án 5512.")
+                # Gửi yêu cầu soạn thảo
+                response = model.generate_content(f"Dựa trên nội dung: {text_content}. Hãy soạn giáo án chi tiết theo Công văn 5512.")
                 
                 st.markdown(response.text)
                 st.success("Đã hoàn thành!")
         except Exception as e:
             st.error(f"Lỗi hệ thống: {str(e)}")
-            st.info("Nếu vẫn lỗi 404, hãy đảm bảo bạn đã lưu file requirements.txt mới nhất.")
+            st.info("Đảm bảo bạn đã dán đúng mã API Key bắt đầu bằng AIza.")
     else:
-        st.warning("Vui lòng tải lên file PDF.")
+        st.warning("Vui lòng tải lên file PDF nội dung bài học.")
