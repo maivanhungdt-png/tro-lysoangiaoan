@@ -277,80 +277,84 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
 
                  III. Tiến trình dạy học
 
-Phần này phải trình bày đúng theo mẫu giáo án truyền thống SGK – SGV,
-giống cấu trúc các bài 2 tiết (ví dụ Tiết 8,9).
+Phần này phải trình bày đúng mẫu giáo án truyền thống theo SGK – SGV
+(ví dụ dạng bài 2 tiết như Tiết 8,9).
 
-CẤU TRÚC BẮT BUỘC:
-
+CẤU TRÚC CHUNG:
 - Hoạt động 1: Khởi động
 - Hoạt động 2: Hình thành kiến thức mới
-  + Hoạt động 2.1: ứng với mục (1) trong SGK
-  + Hoạt động 2.2: ứng với mục (2) trong SGK
-  + (Nếu có mục (3) thì là Hoạt động 2.3)
-  → Trong MỖI Hoạt động 2.x PHẢI BAO GỒM:
-    • Kiến thức mới theo SGK
-    • Luyện tập (SGK) ăn theo mục đó
-    • Vận dụng (SGK) ăn theo mục đó
+  + Hoạt động 2.1: Ứng với mục (1) trong SGK
+  + Hoạt động 2.2: Ứng với mục (2) trong SGK
+  (+ Hoạt động 2.3 nếu có mục (3))
 - Hoạt động 3: Luyện tập
-  → Chỉ dùng để CHỮA BÀI TẬP SGK/SBT (tổng hợp, nâng cao)
 - Hoạt động 4: Vận dụng
-  → Chỉ dùng để CHỮA bài toán thực tế / tình huống / trò chơi học tập
 
-MỖI HOẠT ĐỘNG (Hoạt động 1, 2.1, 2.2, 3, 4) ĐỀU PHẢI CÓ ĐẦY ĐỦ:
+QUY ĐỊNH BẮT BUỘC CHO TẤT CẢ HOẠT ĐỘNG:
+- MỖI hoạt động chỉ sử dụng 01 bảng duy nhất.
+- MỖI bảng chỉ có 02 hàng:
+  + Hàng 1: Tiêu đề cột.
+  + Hàng 2: Toàn bộ nội dung (KHÔNG tách dòng bảng).
+- Tuyệt đối KHÔNG chia Bước 1, 2, 3, 4 thành nhiều dòng bảng.
+- Toàn bộ nội dung trong bảng phải gộp trong 01 ô bằng <br>.
+
+MỖI HOẠT ĐỘNG BẮT BUỘC CÓ:
 a) Mục tiêu
 b) Nội dung
 c) Sản phẩm
-d) Tổ chức thực hiện:
+d) Tổ chức thực hiện
 
-NGAY SAU DÒNG “d) Tổ chức thực hiện:” PHẢI TRÌNH BÀY 01 BẢNG DUY NHẤT
-(theo Markdown) với đúng cấu trúc sau:
+Ngay sau “d) Tổ chức thực hiện:” phải có bảng Markdown dạng:
 
 | Hoạt động | Kết quả hoạt động |
 |---|---|
 
-QUY ĐỊNH BẮT BUỘC CHO BẢNG:
+QUY ĐỊNH TRÌNH BÀY TRONG BẢNG:
 
 1. Cột “Hoạt động”:
-- CHỨA TOÀN BỘ 4 BƯỚC, VIẾT LIỀN TRONG CỘT (KHÔNG VIẾT NGOÀI BẢNG):
-  Bước 1: Chuyển giao nhiệm vụ: …
-  Bước 2: Thực hiện nhiệm vụ: …
-  Bước 3: Báo cáo, thảo luận: …
-  Bước 4: Kết luận, nhận định: …
+- Gộp toàn bộ nội dung sau vào 01 ô, viết liền dòng:
+  a) Mục tiêu: …
+  b) Nội dung: …
+  c) Sản phẩm: …
+  d) Tổ chức thực hiện:
+     Bước 1: Chuyển giao nhiệm vụ: …
+     Bước 2: Thực hiện nhiệm vụ: …
+     Bước 3: Báo cáo, thảo luận: …
+     Bước 4: Kết luận, nhận định: …
+- Các ý cách nhau bằng <br>.
 - KHÔNG dùng dấu gạch đầu dòng (-) trong ô bảng.
-- Các bước ngăn cách bằng <br>.
 
 2. Cột “Kết quả hoạt động”:
-- TUYỆT ĐỐI KHÔNG viết các câu dạng:
-  “HS nắm được…”, “HS hiểu được…”.
+- KHÔNG dùng các câu: “HS nắm được…”, “HS hiểu được…”.
 - CHỈ trình bày:
-  • Nội dung kiến thức hình thành
-  • Ví dụ minh họa
-  • Luyện tập (ghi rõ: Luyện tập 1, 2… – theo SGK)
-  • Vận dụng (ghi rõ: Vận dụng 1, 2… – theo SGK)
-  • Bài tập và LỜI GIẢI CHI TIẾT (nếu có)
-- Văn phong, mức độ chi tiết đúng như cột “Kết quả hoạt động”
-  trong giáo án SGV mẫu.
+  + Nội dung kiến thức hình thành
+  + Kiến thức liên quan
+  + Ví dụ minh họa
+  + Luyện tập x (theo SGK) – có lời giải
+  + Vận dụng x (theo SGK) – có lời giải
+- Văn phong giống cột “Kết quả hoạt động” của SGV.
 
 QUY ĐỊNH RIÊNG THEO LOẠI HOẠT ĐỘNG:
 
 - Hoạt động 2.1; 2.2; 2.3:
-  + Trình bày kiến thức mới theo mục nhỏ SGK
+  + Trình bày kiến thức mới theo mục nhỏ SGK.
   + Ngay trong cột “Kết quả hoạt động” phải có:
-    ▪ Luyện tập x (SGK) – lời giải
-    ▪ Vận dụng x (SGK) – lời giải
-- Hoạt động 3:
-  + Chỉ chữa bài tập SGK/SBT
-  + Không hình thành kiến thức mới
-- Hoạt động 4:
-  + Chỉ chữa bài toán thực tế / tình huống / trò chơi
-  + Nếu là trò chơi, PHẢI ghi rõ luật chơi
+    • Luyện tập x (SGK) – lời giải chi tiết
+    • Vận dụng x (SGK) – lời giải hoặc kết quả
+
+- Hoạt động 3 (Luyện tập):
+  + Chỉ chữa bài tập SGK/SBT.
+  + Không hình thành kiến thức mới.
+
+- Hoạt động 4 (Vận dụng):
+  + Chỉ chữa bài toán thực tế / tình huống / trò chơi.
+  + Nếu là trò chơi: PHẢI ghi rõ luật chơi.
 
 YÊU CẦU CỨNG:
-- KHÔNG tách Luyện tập / Vận dụng thành hoạt động riêng ngoài Hoạt động 2.x
-- KHÔNG gộp nhiều hoạt động vào một bảng
-- KHÔNG dùng ký tự #
-- Văn phong chuẩn giáo án Toán THCS
-
+- Không phát sinh thêm hoạt động.
+- Không chia bảng.
+- Không dùng ký tự #.
+- Văn phong chuẩn giáo án Toán THCS.
+- Nếu phát hiện bảng có hơn 02 hàng, phải tự động gộp lại trước khi xuất kết quả.
 
 
                  YÊU CẦU CHI TIẾT CHO TIẾN TRÌNH DẠY HỌC:
