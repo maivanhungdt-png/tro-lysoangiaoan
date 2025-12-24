@@ -235,8 +235,8 @@ if uploaded_files:
 st.markdown('<div class="section-header">📝 2. THÔNG TIN BÀI DẠY</div>', unsafe_allow_html=True)
 
 c1, c2 = st.columns(2)
-with c1: lop = st.text_input("📚 Lớp:", "Lớp 4")
-with c2: ten_bai = st.text_input("📌 Tên bài học:", placeholder="Ví dụ: Học hát bài...")
+with c1: lop = st.text_input("📚 Lớp:", "Lớp 6")
+with c2: ten_bai = st.text_input("📌 Tên bài học:", placeholder="Ví dụ: bài...")
 
 noidung_bosung = st.text_area("✍️ Ghi chú thêm (nội dung/kiến thức):", height=100)
 yeu_cau_them = st.text_input("💡 Yêu cầu đặc biệt:", placeholder="Ví dụ: Tích hợp trò chơi khởi động...")
@@ -264,11 +264,11 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                 YÊU CẦU LUÔN LUÔN TUÂN THỦ CẤU TRÚC (CÔNG VĂN 5512):
                 I. Mục tiêu: Trong phần này lại chia thành các phần sau: 
                 1. Về kiến thức, 
-                2. Về năng lực (bao gồm năng lực đặc thù, năng lực chung, tích hợp năng lực số)
-		* Nội dung tích hợp
+                2. Về năng lực (bao gồm năng lực đặc thù, năng lực chung, tích hợp năng lực số (Nội dung tích hợp
                     - Lưu ý: Thêm phát triển năng lực số trong mục phát triển năng lực (Dựa vào file Khung năng lực nếu có).
                     - Nội dung tích hợp Học thông qua chơi trong Yêu cầu cần đạt cần cụ thể chi tiết hơn chút nữa.
-                    - Nội dung tích hợp Công dân số cũng cần cụ thể hơn trong yêu cầu cần đạt, 
+                    - Nội dung tích hợp Công dân số cũng cần cụ thể hơn trong yêu cầu cần đạt)),
+		
                 3. Về phẩm chất.
                 
                 II. Thiết bị dạy học và học liệu
@@ -277,43 +277,50 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
 
                  III. Tiến trình dạy học
 
-Phần này phải trình bày đúng theo mẫu giáo án truyền thống
-giống “Tiết 8,9 – Bài 6”.
+Trình bày đúng mẫu giáo án 2 tiết như “Tiết 8,9”.
 
-MỖI HOẠT ĐỘNG (Hoạt động 1, 2.1, 2.2, 3, 4) BẮT BUỘC có:
+MỖI HOẠT ĐỘNG (Hoạt động 1; 2.1; 2.2; 3; 4) phải có:
 a) Mục tiêu
 b) Nội dung
 c) Sản phẩm
 d) Tổ chức thực hiện:
 
-Ngay SAU mục d) Tổ chức thực hiện, PHẢI có BẢNG
-với đúng cấu trúc sau (Markdown):
+Sau dòng “d) Tổ chức thực hiện:” KHÔNG viết nội dung nào bên ngoài,
+mà PHẢI TRÌNH BÀY NGAY MỘT BẢNG duy nhất theo mẫu sau (Markdown):
 
 | Hoạt động | Kết quả hoạt động |
 |---|---|
 
-QUY ĐỊNH BẮT BUỘC CHO BẢNG:
+QUY ĐỊNH CỰC KỲ QUAN TRỌNG:
 
-1. Cột “Hoạt động”:
-- PHẢI chứa đầy đủ 4 bước:
-  *Bước 1: Chuyển giao nhiệm vụ*
-  *Bước 2: Thực hiện nhiệm vụ*
-  *Bước 3: Báo cáo, thảo luận*
-  *Bước 4: Kết luận, nhận định*
-- Mỗi bước ghi rõ việc GV tổ chức, hướng dẫn.
+1. Toàn bộ 4 bước CHỈ được viết TRONG CỘT “Hoạt động”.
+2. Mỗi bước phải viết LIỀN DÒNG, KHÔNG dùng dấu “-” đầu dòng.
+3. Viết đúng mẫu sau:
 
-2. Cột “Kết quả hoạt động”:
-- KHÔNG ghi các câu dạng “HS nắm được…”, “HS hiểu được…”
-- CHỈ trình bày nội dung kiến thức hình thành,
-  ví dụ, luyện tập, vận dụng, bài tập và LỜI GIẢI CHI TIẾT
-- Trình bày đúng văn phong như cột “Kết quả hoạt động”
-  của giáo án Tiết 8,9.
+Bước 1: Chuyển giao nhiệm vụ: …
+Bước 2: Thực hiện nhiệm vụ: …
+Bước 3: Báo cáo, thảo luận: …
+Bước 4: Kết luận, nhận định: …
 
-⚠️ YÊU CẦU CỨNG:
-- Mỗi hoạt động đều phải có bảng riêng.
-- Không gộp bảng.
-- Không dùng ký tự #.
-- Văn phong chuẩn giáo án Toán THCS.
+(viết liên tục trong cùng một ô, ngăn cách bằng <br>)
+
+4. Cột “Kết quả hoạt động”:
+- KHÔNG dùng các câu “HS nắm được…”, “HS hiểu được…”
+- CHỈ trình bày:
+  + Nội dung kiến thức hình thành
+  + Ví dụ
+  + Luyện tập
+  + Vận dụng
+  + Bài tập và LỜI GIẢI
+- Trình bày giống hệt cột “Kết quả hoạt động” của giáo án Tiết 8,9.
+
+5. TUYỆT ĐỐI KHÔNG:
+- Viết Bước 1–4 ngoài bảng
+- Dùng dấu gạch đầu dòng trong ô bảng
+- Gộp nhiều hoạt động vào một bảng
+
+Nếu phát hiện bất kỳ Bước nào nằm ngoài bảng,
+hãy tự động viết lại cho đúng trước khi xuất kết quả.
 
 
                  YÊU CẦU CHI TIẾT CHO TIẾN TRÌNH DẠY HỌC:
