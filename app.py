@@ -76,50 +76,54 @@ def create_doc_stable(content, ten_bai, lop):
             line = line.replace('#', '').strip()
         
         # [XỬ LÝ BẢNG]
+                # [XỬ LÝ BẢNG – ÉP HÒA Ô]
         if line.startswith('|'):
-    table_lines = []
-    while i < len(lines) and lines[i].strip().startswith('|'):
-        table_lines.append(lines[i].strip())
-        i += 1
+            table_lines = []
+            while i < len(lines) and lines[i].strip().startswith('|'):
+                table_lines.append(lines[i].strip())
+                i += 1
 
-    # LẤY TIÊU ĐỀ
-    header = table_lines[0]
-    sep = table_lines[1]
+            # LẤY DÒNG TIÊU ĐỀ
+            header = table_lines[0]
+            cols = len(header.split('|')) - 2
 
-    # GỘP TOÀN BỘ NỘI DUNG CÒN LẠI THÀNH 1 DÒNG
-    body_lines = [r for r in table_lines[2:] if r.strip()]
-    merged_row = ['|']
+            # GỘP TOÀN BỘ NỘI DUNG CÁC DÒNG CÒN LẠI THÀNH 1 DÒNG DUY NHẤT
+            body_lines = table_lines[2:]
+            merged_cells = [''] * cols
 
-    cols = len(header.split('|')) - 2
-    for c in range(cols):
-        cell_texts = []
-        for r in body_lines:
-            parts = r.split('|')[1:-1]
-            if c < len(parts):
-                cell_texts.append(parts[c].strip())
-        merged_row.append(' '.join(cell_texts))
-        merged_row.append('|')
+            for r in body_lines:
+                parts = r.split('|')[1:-1]
+                for c in range(cols):
+                    if c < len(parts):
+                        txt = parts[c].strip()
+                        if txt:
+                            merged_cells[c] += ('<br>' + txt if merged_cells[c] else txt)
 
-    valid_rows = [header, sep, ''.join(merged_row)]
+            # TẠO BẢNG WORD 2 HÀNG
+            table = doc.add_table(rows=2, cols=cols)
+            table.style = 'Table Grid'
+            table.autofit = True
 
-    table = doc.add_table(rows=2, cols=cols)
-    table.style = 'Table Grid'
-    table.autofit = True
-
-    for r_idx, r_text in enumerate(valid_rows[:2]):
-        cells = r_text.split('|')[1:-1]
-        for c_idx, cell_text in enumerate(cells):
-            cell = table.cell(r_idx, c_idx)
-            cell._element.clear_content()
-            p = cell.add_paragraph()
-            if r_idx == 0:
+            # HÀNG TIÊU ĐỀ
+            headers = header.split('|')[1:-1]
+            for c, h in enumerate(headers):
+                cell = table.cell(0, c)
+                cell._element.clear_content()
+                p = cell.add_paragraph()
                 p.alignment = 1
-                run = p.add_run(cell_text.strip())
+                run = p.add_run(h.strip())
                 run.bold = True
-            else:
-                add_formatted_text(p, cell_text.strip())
-    continue
+                run.font.name = 'Times New Roman'
+                run.font.size = Pt(14)
 
+            # HÀNG NỘI DUNG (ĐÃ HÒA)
+            for c, content_text in enumerate(merged_cells):
+                cell = table.cell(1, c)
+                cell._element.clear_content()
+                p = cell.add_paragraph()
+                add_formatted_text(p, content_text)
+
+            continue
             
             if len(table_lines) >= 3: 
                 try:
