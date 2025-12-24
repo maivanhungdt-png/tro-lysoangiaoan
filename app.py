@@ -277,63 +277,87 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
 
                 III. Tiến trình dạy học
 
-Phần này phải trình bày đúng mẫu giáo án truyền thống theo SGK – SGV.
+Phần này dùng để tổ chức lại các nội dung kiến thức đã trình bày ở PHẦN II.
+Yêu cầu trình bày NGHIÊM NGẶT theo mẫu giáo án truyền thống (SGK – SGV).
 
-CẤU TRÚC CHUNG (CHỈ GỒM 4 HOẠT ĐỘNG):
-- 1. Hoạt động 1: Khởi động
-- 2. Hoạt động 2: Hình thành kiến thức mới
-  + Hoạt động 2.1: ứng với mục (1) trong SGK
-  + Hoạt động 2.2: ứng với mục (2) trong SGK
-  (+ Hoạt động 2.3 nếu có mục (3))
-- 3. Hoạt động 3: Luyện tập
-- 4. Hoạt động 4: Vận dụng
+==================== QUY ĐỊNH BẮT BUỘC ====================
 
-VỚI MỖI HOẠT ĐỘNG, PHẢI TRÌNH BÀY THEO ĐÚNG TRÌNH TỰ SAU:
-- Tên hoạt động
-- a) Mục tiêu
-- b) Nội dung
-- c) Sản phẩm
-- d) Tổ chức thực hiện
+A. CẤU TRÚC CHUNG (CHỈ GỒM 4 HOẠT ĐỘNG):
+1. Hoạt động 1: Khởi động
+2. Hoạt động 2: Hình thành kiến thức mới
+   + Hoạt động 2.1: ứng với mục (1) trong SGK / PHẦN II
+   + Hoạt động 2.2: ứng với mục (2) trong SGK / PHẦN II
+   (+ Hoạt động 2.3 nếu có mục (3))
+3. Hoạt động 3: Luyện tập
+4. Hoạt động 4: Vận dụng
 
-SAU MỤC d) BẮT BUỘC CÓ 01 BẢNG MARKDOWN DẠNG:
+B. BẮT BUỘC THỨ TỰ TRÌNH BÀY CHO MỖI HOẠT ĐỘNG
+KHÔNG ĐƯỢC ĐẢO, KHÔNG ĐƯỢC BỎ:
+
+1. Tên hoạt động (ghi rõ: Hoạt động …: …)
+
+2. Viết ĐẦY ĐỦ, TÁCH RIÊNG, NẰM NGOÀI BẢNG:
+a) Mục tiêu:
+b) Nội dung:
+c) Sản phẩm:
+d) Tổ chức thực hiện:
+
+3. NGAY SAU MỤC d) BẮT BUỘC PHẢI CÓ 01 BẢNG,
+KHÔNG CHÈN BẤT KỲ ĐOẠN VĂN NÀO Ở GIỮA.
+
+==================== QUY ĐỊNH VỀ BẢNG ====================
+
+BẢNG PHẢI VIẾT ĐÚNG CHÍNH XÁC DẠNG SAU, KHÔNG BIẾN DẠNG:
 
 | Hoạt động | Kết quả hoạt động |
 |---|---|
+| … | … |
 
-YÊU CẦU BẮT BUỘC VỚI BẢNG (ĐỂ KHÔNG LỖI WORD):
+- Mỗi hoạt động CHỈ ĐƯỢC CÓ 01 BẢNG.
+- Mỗi bảng CHỈ ĐƯỢC CÓ 02 HÀNG (1 hàng tiêu đề, 1 hàng nội dung).
+- TUYỆT ĐỐI KHÔNG chia Bước 1,2,3,4 thành nhiều hàng bảng.
+- Nội dung trong mỗi ô PHẢI GỘP BẰNG <br>.
+- Không dùng danh sách gạch đầu dòng tự động trong bảng.
 
-- Mỗi hoạt động CHỈ DÙNG 01 BẢNG.
-- Mỗi bảng CHỈ CÓ 02 HÀNG:
-  + Hàng 1: tiêu đề bảng.
-  + Hàng 2: toàn bộ nội dung.
-- TUYỆT ĐỐI KHÔNG chia bảng thành nhiều hàng cho các bước.
-- Nội dung trong mỗi ô phải gộp bằng ký hiệu <br>.
+==================== NỘI DUNG TRONG BẢNG ====================
 
-QUY ĐỊNH NỘI DUNG TRONG BẢNG:
-
-1. Cột “Hoạt động”:
-- Trình bày ĐẦY ĐỦ 4 bước:
+CỘT “Hoạt động”:
+- Chỉ mô tả TIẾN TRÌNH TỔ CHỨC DẠY HỌC theo đúng 4 bước:
   Bước 1: Chuyển giao nhiệm vụ
   Bước 2: Thực hiện nhiệm vụ
   Bước 3: Báo cáo, thảo luận
   Bước 4: Kết luận, nhận định
-- Viết liền trong 01 ô, ngăn cách bằng <br>.
-- Không dùng gạch đầu dòng tự động.
+- KHÔNG ghi kiến thức vào cột này.
 
-2. Cột “Kết quả hoạt động”:
-- KHÔNG dùng các câu như: “HS nắm được…”, “HS hiểu được…”.
-- PHẢI TRÌNH BÀY CỤ THỂ:
-  + Kiến thức hình thành
+CỘT “Kết quả hoạt động” (ÁP DỤNG CHO TẤT CẢ HOẠT ĐỘNG):
+- Ghi KẾT QUẢ KIẾN THỨC / NỘI DUNG đạt được sau hoạt động.
+- Nội dung PHẢI TRÙNG KHỚP với phần kiến thức tương ứng ở PHẦN II hoặc SGK.
+- CÓ THỂ bao gồm:
+  + Khái niệm, định nghĩa
+  + Nhận xét, kết luận
   + Ví dụ minh họa
-  + Luyện tập (SGK/SBT) – CÓ LỜI GIẢI CHI TIẾT
-  + Vận dụng – CÓ LỜI GIẢI / KẾT QUẢ / LUẬT CHƠI (nếu là trò chơi)
+  + Bảng, sơ đồ, biểu thức
+  + Bài tập, câu hỏi và LỜI GIẢI CHI TIẾT
 
-QUY ĐỊNH RIÊNG:
-- Hoạt động 2.x: trình bày kiến thức mới theo SGK, kèm luyện tập – vận dụng trong SGK.
-- Hoạt động 3 (Luyện tập): chỉ dùng để CHỮA BÀI TẬP, kết quả phải viết chi tiết.
-- Hoạt động 4 (Vận dụng): chỉ dùng để CHỮA bài toán thực tế / tình huống / trò chơi.
-- Không phát sinh thêm hoạt động khác.
-- Không dùng ký tự # trong toàn bộ phần III.
+- TUYỆT ĐỐI KHÔNG ghi:
+  “HS nắm được…”, “HS hiểu được…”, “HS thực hiện được…”.
+
+==================== QUY ĐỊNH RIÊNG ====================
+
+- Hoạt động 1:
+  + Kết quả hoạt động: kiến thức nền, nội dung dẫn nhập liên quan bài học.
+
+- Hoạt động 2.x:
+  + Kết quả hoạt động: TOÀN BỘ nội dung kiến thức của mục tương ứng ở PHẦN II.
+
+- Hoạt động 3 (Luyện tập):
+  + Kết quả hoạt động: các bài tập luyện tập và LỜI GIẢI CHI TIẾT.
+
+- Hoạt động 4 (Vận dụng):
+  + Kết quả hoạt động: lời giải bài toán thực tế / kết quả tình huống / luật và kết quả trò chơi.
+
+- Không phát sinh thêm hoạt động.
+- Không dùng ký tự # trong toàn bộ Phần III.
 
 
                  YÊU CẦU CHI TIẾT CHO TIẾN TRÌNH DẠY HỌC:
