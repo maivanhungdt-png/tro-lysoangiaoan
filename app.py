@@ -277,50 +277,80 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
 
                  III. Tiến trình dạy học
 
-Trình bày đúng mẫu giáo án 2 tiết như “Tiết 8,9”.
+Phần này phải trình bày đúng theo mẫu giáo án truyền thống SGK – SGV,
+giống cấu trúc các bài 2 tiết (ví dụ Tiết 8,9).
 
-MỖI HOẠT ĐỘNG (Hoạt động 1; 2.1; 2.2; 3; 4) phải có:
+CẤU TRÚC BẮT BUỘC:
+
+- Hoạt động 1: Khởi động
+- Hoạt động 2: Hình thành kiến thức mới
+  + Hoạt động 2.1: ứng với mục (1) trong SGK
+  + Hoạt động 2.2: ứng với mục (2) trong SGK
+  + (Nếu có mục (3) thì là Hoạt động 2.3)
+  → Trong MỖI Hoạt động 2.x PHẢI BAO GỒM:
+    • Kiến thức mới theo SGK
+    • Luyện tập (SGK) ăn theo mục đó
+    • Vận dụng (SGK) ăn theo mục đó
+- Hoạt động 3: Luyện tập
+  → Chỉ dùng để CHỮA BÀI TẬP SGK/SBT (tổng hợp, nâng cao)
+- Hoạt động 4: Vận dụng
+  → Chỉ dùng để CHỮA bài toán thực tế / tình huống / trò chơi học tập
+
+MỖI HOẠT ĐỘNG (Hoạt động 1, 2.1, 2.2, 3, 4) ĐỀU PHẢI CÓ ĐẦY ĐỦ:
 a) Mục tiêu
 b) Nội dung
 c) Sản phẩm
 d) Tổ chức thực hiện:
 
-Sau dòng “d) Tổ chức thực hiện:” KHÔNG viết nội dung nào bên ngoài,
-mà PHẢI TRÌNH BÀY NGAY MỘT BẢNG duy nhất theo mẫu sau (Markdown):
+NGAY SAU DÒNG “d) Tổ chức thực hiện:” PHẢI TRÌNH BÀY 01 BẢNG DUY NHẤT
+(theo Markdown) với đúng cấu trúc sau:
 
 | Hoạt động | Kết quả hoạt động |
 |---|---|
 
-QUY ĐỊNH CỰC KỲ QUAN TRỌNG:
+QUY ĐỊNH BẮT BUỘC CHO BẢNG:
 
-1. Toàn bộ 4 bước CHỈ được viết TRONG CỘT “Hoạt động”.
-2. Mỗi bước phải viết LIỀN DÒNG, KHÔNG dùng dấu “-” đầu dòng.
-3. Viết đúng mẫu sau:
+1. Cột “Hoạt động”:
+- CHỨA TOÀN BỘ 4 BƯỚC, VIẾT LIỀN TRONG CỘT (KHÔNG VIẾT NGOÀI BẢNG):
+  Bước 1: Chuyển giao nhiệm vụ: …
+  Bước 2: Thực hiện nhiệm vụ: …
+  Bước 3: Báo cáo, thảo luận: …
+  Bước 4: Kết luận, nhận định: …
+- KHÔNG dùng dấu gạch đầu dòng (-) trong ô bảng.
+- Các bước ngăn cách bằng <br>.
 
-Bước 1: Chuyển giao nhiệm vụ: …
-Bước 2: Thực hiện nhiệm vụ: …
-Bước 3: Báo cáo, thảo luận: …
-Bước 4: Kết luận, nhận định: …
-
-(viết liên tục trong cùng một ô, ngăn cách bằng <br>)
-
-4. Cột “Kết quả hoạt động”:
-- KHÔNG dùng các câu “HS nắm được…”, “HS hiểu được…”
+2. Cột “Kết quả hoạt động”:
+- TUYỆT ĐỐI KHÔNG viết các câu dạng:
+  “HS nắm được…”, “HS hiểu được…”.
 - CHỈ trình bày:
-  + Nội dung kiến thức hình thành
-  + Ví dụ
-  + Luyện tập
-  + Vận dụng
-  + Bài tập và LỜI GIẢI
-- Trình bày giống hệt cột “Kết quả hoạt động” của giáo án Tiết 8,9.
+  • Nội dung kiến thức hình thành
+  • Ví dụ minh họa
+  • Luyện tập (ghi rõ: Luyện tập 1, 2… – theo SGK)
+  • Vận dụng (ghi rõ: Vận dụng 1, 2… – theo SGK)
+  • Bài tập và LỜI GIẢI CHI TIẾT (nếu có)
+- Văn phong, mức độ chi tiết đúng như cột “Kết quả hoạt động”
+  trong giáo án SGV mẫu.
 
-5. TUYỆT ĐỐI KHÔNG:
-- Viết Bước 1–4 ngoài bảng
-- Dùng dấu gạch đầu dòng trong ô bảng
-- Gộp nhiều hoạt động vào một bảng
+QUY ĐỊNH RIÊNG THEO LOẠI HOẠT ĐỘNG:
 
-Nếu phát hiện bất kỳ Bước nào nằm ngoài bảng,
-hãy tự động viết lại cho đúng trước khi xuất kết quả.
+- Hoạt động 2.1; 2.2; 2.3:
+  + Trình bày kiến thức mới theo mục nhỏ SGK
+  + Ngay trong cột “Kết quả hoạt động” phải có:
+    ▪ Luyện tập x (SGK) – lời giải
+    ▪ Vận dụng x (SGK) – lời giải
+- Hoạt động 3:
+  + Chỉ chữa bài tập SGK/SBT
+  + Không hình thành kiến thức mới
+- Hoạt động 4:
+  + Chỉ chữa bài toán thực tế / tình huống / trò chơi
+  + Nếu là trò chơi, PHẢI ghi rõ luật chơi
+
+YÊU CẦU CỨNG:
+- KHÔNG tách Luyện tập / Vận dụng thành hoạt động riêng ngoài Hoạt động 2.x
+- KHÔNG gộp nhiều hoạt động vào một bảng
+- KHÔNG dùng ký tự #
+- Văn phong chuẩn giáo án Toán THCS
+
 
 
                  YÊU CẦU CHI TIẾT CHO TIẾN TRÌNH DẠY HỌC:
