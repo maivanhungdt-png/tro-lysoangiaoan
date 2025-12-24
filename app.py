@@ -275,86 +275,65 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                 1. Giáo viên
                 2. Học sinh
 
-                 III. Tiến trình dạy học
+                III. Tiến trình dạy học
 
-Phần này phải trình bày đúng mẫu giáo án truyền thống theo SGK – SGV
-(ví dụ dạng bài 2 tiết như Tiết 8,9).
+Phần này phải trình bày đúng mẫu giáo án truyền thống theo SGK – SGV.
 
-CẤU TRÚC CHUNG:
-- Hoạt động 1: Khởi động
-- Hoạt động 2: Hình thành kiến thức mới
-  + Hoạt động 2.1: Ứng với mục (1) trong SGK
-  + Hoạt động 2.2: Ứng với mục (2) trong SGK
+CẤU TRÚC CHUNG (CHỈ GỒM 4 HOẠT ĐỘNG):
+- 1. Hoạt động 1: Khởi động
+- 2. Hoạt động 2: Hình thành kiến thức mới
+  + Hoạt động 2.1: ứng với mục (1) trong SGK
+  + Hoạt động 2.2: ứng với mục (2) trong SGK
   (+ Hoạt động 2.3 nếu có mục (3))
-- Hoạt động 3: Luyện tập
-- Hoạt động 4: Vận dụng
+- 3. Hoạt động 3: Luyện tập
+- 4. Hoạt động 4: Vận dụng
 
-QUY ĐỊNH BẮT BUỘC CHO TẤT CẢ HOẠT ĐỘNG:
-- MỖI hoạt động chỉ sử dụng 01 bảng duy nhất.
-- MỖI bảng chỉ có 02 hàng:
-  + Hàng 1: Tiêu đề cột.
-  + Hàng 2: Toàn bộ nội dung (KHÔNG tách dòng bảng).
-- Tuyệt đối KHÔNG chia Bước 1, 2, 3, 4 thành nhiều dòng bảng.
-- Toàn bộ nội dung trong bảng phải gộp trong 01 ô bằng <br>.
+VỚI MỖI HOẠT ĐỘNG, PHẢI TRÌNH BÀY THEO ĐÚNG TRÌNH TỰ SAU:
+- Tên hoạt động
+- a) Mục tiêu
+- b) Nội dung
+- c) Sản phẩm
+- d) Tổ chức thực hiện
 
-MỖI HOẠT ĐỘNG BẮT BUỘC CÓ:
-a) Mục tiêu
-b) Nội dung
-c) Sản phẩm
-d) Tổ chức thực hiện
-
-Ngay sau “d) Tổ chức thực hiện:” phải có bảng Markdown dạng:
+SAU MỤC d) BẮT BUỘC CÓ 01 BẢNG MARKDOWN DẠNG:
 
 | Hoạt động | Kết quả hoạt động |
 |---|---|
 
-QUY ĐỊNH TRÌNH BÀY TRONG BẢNG:
+YÊU CẦU BẮT BUỘC VỚI BẢNG (ĐỂ KHÔNG LỖI WORD):
+
+- Mỗi hoạt động CHỈ DÙNG 01 BẢNG.
+- Mỗi bảng CHỈ CÓ 02 HÀNG:
+  + Hàng 1: tiêu đề bảng.
+  + Hàng 2: toàn bộ nội dung.
+- TUYỆT ĐỐI KHÔNG chia bảng thành nhiều hàng cho các bước.
+- Nội dung trong mỗi ô phải gộp bằng ký hiệu <br>.
+
+QUY ĐỊNH NỘI DUNG TRONG BẢNG:
 
 1. Cột “Hoạt động”:
-- Gộp toàn bộ nội dung sau vào 01 ô, viết liền dòng:
-  a) Mục tiêu: …
-  b) Nội dung: …
-  c) Sản phẩm: …
-  d) Tổ chức thực hiện:
-     Bước 1: Chuyển giao nhiệm vụ: …
-     Bước 2: Thực hiện nhiệm vụ: …
-     Bước 3: Báo cáo, thảo luận: …
-     Bước 4: Kết luận, nhận định: …
-- Các ý cách nhau bằng <br>.
-- KHÔNG dùng dấu gạch đầu dòng (-) trong ô bảng.
+- Trình bày ĐẦY ĐỦ 4 bước:
+  Bước 1: Chuyển giao nhiệm vụ
+  Bước 2: Thực hiện nhiệm vụ
+  Bước 3: Báo cáo, thảo luận
+  Bước 4: Kết luận, nhận định
+- Viết liền trong 01 ô, ngăn cách bằng <br>.
+- Không dùng gạch đầu dòng tự động.
 
 2. Cột “Kết quả hoạt động”:
-- KHÔNG dùng các câu: “HS nắm được…”, “HS hiểu được…”.
-- CHỈ trình bày:
-  + Nội dung kiến thức hình thành
-  + Kiến thức liên quan
+- KHÔNG dùng các câu như: “HS nắm được…”, “HS hiểu được…”.
+- PHẢI TRÌNH BÀY CỤ THỂ:
+  + Kiến thức hình thành
   + Ví dụ minh họa
-  + Luyện tập x (theo SGK) – có lời giải
-  + Vận dụng x (theo SGK) – có lời giải
-- Văn phong giống cột “Kết quả hoạt động” của SGV.
+  + Luyện tập (SGK/SBT) – CÓ LỜI GIẢI CHI TIẾT
+  + Vận dụng – CÓ LỜI GIẢI / KẾT QUẢ / LUẬT CHƠI (nếu là trò chơi)
 
-QUY ĐỊNH RIÊNG THEO LOẠI HOẠT ĐỘNG:
-
-- Hoạt động 2.1; 2.2; 2.3:
-  + Trình bày kiến thức mới theo mục nhỏ SGK.
-  + Ngay trong cột “Kết quả hoạt động” phải có:
-    • Luyện tập x (SGK) – lời giải chi tiết
-    • Vận dụng x (SGK) – lời giải hoặc kết quả
-
-- Hoạt động 3 (Luyện tập):
-  + Chỉ chữa bài tập SGK/SBT.
-  + Không hình thành kiến thức mới.
-
-- Hoạt động 4 (Vận dụng):
-  + Chỉ chữa bài toán thực tế / tình huống / trò chơi.
-  + Nếu là trò chơi: PHẢI ghi rõ luật chơi.
-
-YÊU CẦU CỨNG:
-- Không phát sinh thêm hoạt động.
-- Không chia bảng.
-- Không dùng ký tự #.
-- Văn phong chuẩn giáo án Toán THCS.
-- Nếu phát hiện bảng có hơn 02 hàng, phải tự động gộp lại trước khi xuất kết quả.
+QUY ĐỊNH RIÊNG:
+- Hoạt động 2.x: trình bày kiến thức mới theo SGK, kèm luyện tập – vận dụng trong SGK.
+- Hoạt động 3 (Luyện tập): chỉ dùng để CHỮA BÀI TẬP, kết quả phải viết chi tiết.
+- Hoạt động 4 (Vận dụng): chỉ dùng để CHỮA bài toán thực tế / tình huống / trò chơi.
+- Không phát sinh thêm hoạt động khác.
+- Không dùng ký tự # trong toàn bộ phần III.
 
 
                  YÊU CẦU CHI TIẾT CHO TIẾN TRÌNH DẠY HỌC:
