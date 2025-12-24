@@ -70,24 +70,39 @@ def create_doc_stable(content, ten_bai, lop):
     i = 0
     while i < len(lines):
         line = lines[i].strip()
+        # XỬ LÝ TIÊU ĐỀ HOẠT ĐỘNG + TỰ ĐỘNG a,b,c,d
+        if line.startswith('Hoạt động'):
+            p = doc.add_paragraph(line)
+            p.runs[0].bold = True
+            p.runs[0].font.name = 'Times New Roman'
+            p.runs[0].font.size = Pt(14)
+
+            doc.add_paragraph('a) Mục tiêu:')
+            doc.add_paragraph('b) Nội dung:')
+            doc.add_paragraph('c) Sản phẩm:')
+            doc.add_paragraph('d) Tổ chức thực hiện:')
+
+            i += 1
+            continue
+
         
         # Xóa dấu # đầu dòng
         if line.startswith('#'):
             line = line.replace('#', '').strip()
         
-        # [XỬ LÝ BẢNG]
-                # [XỬ LÝ BẢNG – ÉP HÒA Ô]
+                # ===== XỬ LÝ BẢNG MARKDOWN – ÉP HÒA Ô TRIỆT ĐỂ =====
         if line.startswith('|'):
             table_lines = []
             while i < len(lines) and lines[i].strip().startswith('|'):
                 table_lines.append(lines[i].strip())
                 i += 1
 
-            # LẤY DÒNG TIÊU ĐỀ
+            # Dòng tiêu đề
             header = table_lines[0]
-            cols = len(header.split('|')) - 2
+            headers = header.split('|')[1:-1]
+            cols = len(headers)
 
-            # GỘP TOÀN BỘ NỘI DUNG CÁC DÒNG CÒN LẠI THÀNH 1 DÒNG DUY NHẤT
+            # Gộp tất cả các dòng nội dung còn lại
             body_lines = table_lines[2:]
             merged_cells = [''] * cols
 
@@ -99,31 +114,31 @@ def create_doc_stable(content, ten_bai, lop):
                         if txt:
                             merged_cells[c] += ('<br>' + txt if merged_cells[c] else txt)
 
-            # TẠO BẢNG WORD 2 HÀNG
+            # Tạo bảng Word CHỈ 2 HÀNG
             table = doc.add_table(rows=2, cols=cols)
             table.style = 'Table Grid'
             table.autofit = True
 
-            # HÀNG TIÊU ĐỀ
-            headers = header.split('|')[1:-1]
+            # Hàng tiêu đề
             for c, h in enumerate(headers):
                 cell = table.cell(0, c)
                 cell._element.clear_content()
                 p = cell.add_paragraph()
-                p.alignment = 1
+                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
                 run = p.add_run(h.strip())
                 run.bold = True
                 run.font.name = 'Times New Roman'
                 run.font.size = Pt(14)
 
-            # HÀNG NỘI DUNG (ĐÃ HÒA)
-            for c, content_text in enumerate(merged_cells):
+            # Hàng nội dung (ĐÃ GỘP)
+            for c, txt in enumerate(merged_cells):
                 cell = table.cell(1, c)
                 cell._element.clear_content()
                 p = cell.add_paragraph()
-                add_formatted_text(p, content_text)
+                add_formatted_text(p, txt)
 
             continue
+
             
             if len(table_lines) >= 3: 
                 try:
