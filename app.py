@@ -5,82 +5,9 @@ import tempfile
 import os
 import io
 import re
-def normalize_fraction(text: str) -> str:
-    fractions = {
-        "1/2": "½",
-        "1/3": "⅓",
-        "2/3": "⅔",
-        "1/4": "¼",
-        "3/4": "¾",
-        "1/5": "⅕",
-        "2/5": "⅖",
-        "3/5": "⅗",
-        "4/5": "⅘",
-        "1/6": "⅙",
-        "5/6": "⅚",
-        "1/8": "⅛",
-        "3/8": "⅜",
-        "5/8": "⅝",
-        "7/8": "⅞",
-    }
-    for k, v in fractions.items():
-        text = text.replace(k, v)
-    return text
-
-
-def normalize_math(text: str) -> str:
-    # Phép nhân: x, axb, *
-    text = re.sub(r'\s+x\s+', ' · ', text)
-    text = re.sub(r'([A-Za-z0-9])x([A-Za-z0-9])', r'\1·\2', text)
-    text = text.replace('*', '·')
-
-    # Lũy thừa
-    text = text.replace('^2', '²').replace('^3', '³')
-
-    # Căn bậc hai
-    text = re.sub(r'sqrt\((.*?)\)', r'√(\1)', text)
-    text = re.sub(r'√\s*([A-Za-z0-9]+)', r'√(\1)', text)
-
-    # Lượng giác
-    text = re.sub(r'\b(sin|cos|tan|cot)\s+([A-Za-z0-9°]+)', r'\1(\2)', text)
-
-    # Phân số Unicode
-    text = normalize_fraction(text)
-
-    return text
-
 from docx import Document
 from docx.shared import Pt, RGBColor, Inches, Cm
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.oxml.ns import qn
-
-# ===================== WORD HELPER: BẢNG HOẠT ĐỘNG =====================
-
-def enable_cell_wrap(cell):
-    tcPr = cell._tc.get_or_add_tcPr()
-    noWrap = tcPr.find(qn('w:noWrap'))
-    if noWrap is not None:
-        tcPr.remove(noWrap)
-
-
-def create_activity_table(doc, left_text, right_text):
-    table = doc.add_table(rows=2, cols=2)
-    table.style = 'Table Grid'
-    table.autofit = False
-
-    # Header
-    table.cell(0, 0).text = "Hoạt động"
-    table.cell(0, 1).text = "Kết quả hoạt động"
-
-    # Nội dung
-    table.cell(1, 0).text = left_text.strip()
-    table.cell(1, 1).text = right_text.strip()
-
-    # Khóa độ rộng & cho phép xuống dòng
-    for row in table.rows:
-        for cell in row.cells:
-            enable_cell_wrap(cell)
-            cell.width = Cm(8)
 
 # --- 1. CẤU HÌNH TRANG ---
 st.set_page_config(page_title="Trợ lý Giáo án NLS", page_icon="📘", layout="centered")
@@ -216,40 +143,10 @@ def create_doc_stable(content, ten_bai, lop):
             p = doc.add_paragraph(style='List Bullet') 
             add_formatted_text(p, clean)
             
-                # d) Tổ chức thực hiện → ÉP THÀNH BẢNG 2 CỘT
-        if line.startswith("d) Tổ chức thực hiện"):
-            activity_lines = []
-            result_lines = []
-            current = "activity"
-            i += 1
-
-            while i < len(lines):
-                l = lines[i].strip()
-
-                # Dừng khi sang mục mới hoặc hoạt động mới
-                if l.startswith(("a)", "b)", "c)", "Hoạt động")):
-                    break
-
-                l = normalize_math(lines[i])
-
-                # Quy ước tách cột giống giáo án mẫu
-                if l.startswith("HS") or "Phần ghi vở" in l or "Kết luận" in l:
-                    current = "result"
-
-                if current == "activity":
-                    activity_lines.append(l)
-                else:
-                    result_lines.append(l)
-
-                i += 1
-
-            create_activity_table(
-                doc,
-                "\n".join(activity_lines),
-                "\n".join(result_lines)
-            )
-            continue
-
+        # Đoạn văn thường
+        else:
+            p = doc.add_paragraph()
+            add_formatted_text(p, line)
             
         i += 1
         
@@ -294,7 +191,7 @@ st.markdown("""
 st.markdown("""
 <div class="main-header">
     <h1>📘 TRỢ LÝ SOẠN GIÁO ÁN TỰ ĐỘNG (NLS)</h1>
-    <p>Tác giả: Mai Văn Hùng - Trường THCS Đồng Yên - ĐT: 0941037116</p>
+    <p>Tác giả: Mai Văn Hùng - Trường THCS Đồng Yên - SĐT: 0941037116</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -338,15 +235,15 @@ if uploaded_files:
 st.markdown('<div class="section-header">📝 2. THÔNG TIN BÀI DẠY</div>', unsafe_allow_html=True)
 
 c1, c2 = st.columns(2)
-with c1: lop = st.text_input("📚 Lớp:", "Lớp 6")
-with c2: ten_bai = st.text_input("📌 Tên bài học:", placeholder="Ví dụ: Học Toán bài...")
+with c1: lop = st.text_input("📚 Lớp:", "Lớp 4")
+with c2: ten_bai = st.text_input("📌 Tên bài học:", placeholder="Ví dụ: Học hát bài...")
 
 noidung_bosung = st.text_area("✍️ Ghi chú thêm (nội dung/kiến thức):", height=100)
 yeu_cau_them = st.text_input("💡 Yêu cầu đặc biệt:", placeholder="Ví dụ: Tích hợp trò chơi khởi động...")
 
 # 3. NÚT XỬ LÝ
 st.markdown("<br>", unsafe_allow_html=True)
-if st.button("🚀 SOẠN GIÁO ÁN NĂNG LỰC SỐ NGAY"):
+if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
     if not api_key: st.toast("Thiếu API Key!", icon="❌")
     elif not uploaded_files and not noidung_bosung and not has_framework: st.toast("Thiếu tài liệu!", icon="⚠️")
     else:
@@ -356,7 +253,7 @@ if st.button("🚀 SOẠN GIÁO ÁN NĂNG LỰC SỐ NGAY"):
                 
                 # --- PROMPT CHI TIẾT CỦA THẦY (BẢN GỐC ĐẦY ĐỦ) ---
                 prompt_instruction = f"""
-                Đóng vai là một Giáo viên dạy toán THCS giỏi, am hiểu chương trình GDPT 2018.
+                Đóng vai là một Giáo viên Tiểu học giỏi, am hiểu chương trình GDPT 2018.
                 Nhiệm vụ: Soạn Kế hoạch bài dạy (Giáo án) cho bài: "{ten_bai}" - {lop}.
 
                 DỮ LIỆU ĐẦU VÀO:
@@ -365,161 +262,66 @@ if st.button("🚀 SOẠN GIÁO ÁN NĂNG LỰC SỐ NGAY"):
                 - Ghi chú bổ sung: "{noidung_bosung}".
 
                 YÊU CẦU LUÔN LUÔN TUÂN THỦ CẤU TRÚC (CÔNG VĂN 5512):
-                I. Yêu cầu cần đạt: Trong phần này lại chia thành các phần sau: 
+                I. Mục tiêu: Trong phần này lại chia thành các phần sau: 
                 1. Về kiến thức, 
-                2. Về năng lực (bao gồm năng lực đặc thù, năng lực chung, phát triển năng lực số), 
-                3. Về phẩm chất.
-                * Nội dung tích hợp (VD: Học thông qua chơi, Công dân số,...)
+                2. Về năng lực (bao gồm năng lực đặc thù, năng lực chung, tích hợp năng lực số)
+		* Nội dung tích hợp
                     - Lưu ý: Thêm phát triển năng lực số trong mục phát triển năng lực (Dựa vào file Khung năng lực nếu có).
                     - Nội dung tích hợp Học thông qua chơi trong Yêu cầu cần đạt cần cụ thể chi tiết hơn chút nữa.
-                    - Nội dung tích hợp Công dân số cũng cần cụ thể hơn trong yêu cầu cần đạt.
-
-                II. Đồ dùng dạy học
+                    - Nội dung tích hợp Công dân số cũng cần cụ thể hơn trong yêu cầu cần đạt, 
+                3. Về phẩm chất.
+                
+                II. Thiết bị dạy học và học liệu
                 1. Giáo viên
                 2. Học sinh
 
-		III. TIẾN TRÌNH DẠY HỌC
+                 III. Tiến trình dạy học
 
-Phần này trình bày theo đúng mẫu giáo án thực tế.
-Mỗi hoạt động gồm:
+Phần này phải trình bày đúng theo mẫu giáo án truyền thống
+giống “Tiết 8,9 – Bài 6”.
+
+MỖI HOẠT ĐỘNG (Hoạt động 1, 2.1, 2.2, 3, 4) BẮT BUỘC có:
 a) Mục tiêu
 b) Nội dung
 c) Sản phẩm
-d) Tổ chức thực hiện (mô tả chung)
-
-Sau đó trình bày bảng 2 cột ghi rõ 4 bước hoạt động.
-Bảng CHỈ gồm hoạt động và kết quả, không đưa mục tiêu/nội dung vào bảng.
-
-------------------------------------------------
-
-1. Hoạt động 1: Hoạt động khởi động
-
-a) Mục tiêu:
-- Gây hứng thú học tập cho HS.
-- Gợi mở vấn đề bài học.
-
-b) Nội dung:
-- Tình huống/câu hỏi khởi động gắn với bài học.
-
-c) Sản phẩm:
-- Câu trả lời, ý kiến của HS.
-
 d) Tổ chức thực hiện:
-- GV tổ chức cho HS thực hiện nhiệm vụ theo các bước.
 
-| Hoạt động của GV & HS (Bước 1–4) | Kết quả hoạt động (kiến thức/kĩ năng + ghi vở) |
+Ngay SAU mục d) Tổ chức thực hiện, PHẢI có BẢNG
+với đúng cấu trúc sau (Markdown):
+
+| Hoạt động | Kết quả hoạt động |
 |---|---|
-| - Bước 1: GV nêu tình huống/câu hỏi khởi động.<br>
-- Bước 2: HS suy nghĩ cá nhân, thảo luận nhóm.<br>
-- Bước 3: HS báo cáo kết quả, nhận xét.<br>
-- Bước 4: GV kết luận, dẫn dắt vào bài mới. |
-- HS tham gia tích cực hoạt động.<br>
-- HS xác định được vấn đề cần học.<br>
-**Phần ghi vở:**<br>
-+ Câu hỏi khởi động.<br>
-+ Tên bài học. |
 
-------------------------------------------------
+QUY ĐỊNH BẮT BUỘC CHO BẢNG:
 
-2. Hoạt động 2: Hoạt động hình thành kiến thức mới
+1. Cột “Hoạt động”:
+- PHẢI chứa đầy đủ 4 bước:
+  *Bước 1: Chuyển giao nhiệm vụ*
+  *Bước 2: Thực hiện nhiệm vụ*
+  *Bước 3: Báo cáo, thảo luận*
+  *Bước 4: Kết luận, nhận định*
+- Mỗi bước ghi rõ việc GV tổ chức, hướng dẫn.
 
-a) Mục tiêu:
-- HS hình thành kiến thức mới theo yêu cầu bài học.
+2. Cột “Kết quả hoạt động”:
+- KHÔNG ghi các câu dạng “HS nắm được…”, “HS hiểu được…”
+- CHỈ trình bày nội dung kiến thức hình thành,
+  ví dụ, luyện tập, vận dụng, bài tập và LỜI GIẢI CHI TIẾT
+- Trình bày đúng văn phong như cột “Kết quả hoạt động”
+  của giáo án Tiết 8,9.
 
-b) Nội dung:
-- Nội dung kiến thức trong SGK.
-
-c) Sản phẩm:
-- Phiếu học tập, bảng kết quả, lời giải.
-
-d) Tổ chức thực hiện:
-- HS làm việc cá nhân/nhóm dưới sự tổ chức của GV.
-
-| Hoạt động của GV & HS (Bước 1–4) | Kết quả hoạt động (kiến thức/kĩ năng + ghi vở) |
-|---|---|
-| - Bước 1: GV giao nhiệm vụ học tập.<br>
-- Bước 2: HS quan sát, phân tích dữ liệu số (phát triển năng lực số).<br>
-- Bước 3: HS trình bày kết quả, thảo luận.<br>
-- Bước 4: GV chuẩn hóa kiến thức. |
-- HS hiểu và trình bày được kiến thức mới.<br>
-- HS rút ra được khái niệm/nhận xét.<br>
-**Phần ghi vở:**<br>
-+ Kiến thức trọng tâm.<br>
-+ Ví dụ minh họa (có lời giải chi tiết). |
-
-------------------------------------------------
-
-3. Hoạt động 3: Luyện tập
-
-a) Mục tiêu:
-- Củng cố, khắc sâu kiến thức đã học.
-- Rèn kĩ năng giải bài tập.
-
-b) Nội dung:
-- Bài tập trong SGK/SBT.
-
-c) Sản phẩm:
-- Bài làm, lời giải của HS.
-
-d) Tổ chức thực hiện:
-- HS làm bài cá nhân/nhóm, GV theo dõi hỗ trợ.
-
-| Hoạt động của GV & HS (Bước 1–4) | Kết quả hoạt động (kiến thức/kĩ năng + ghi vở) |
-|---|---|
-| - Bước 1: GV giao bài tập luyện tập.<br>
-- Bước 2: HS làm bài, có thể sử dụng máy tính để kiểm tra kết quả (năng lực số).<br>
-- Bước 3: HS trình bày lời giải chi tiết.<br>
-- Bước 4: GV nhận xét, chuẩn kiến thức. |
-- HS làm đúng các dạng bài tập.<br>
-- HS trình bày lời giải đầy đủ, rõ ràng.<br>
-**Phần ghi vở:**<br>
-+ Bài tập luyện tập.<br>
-+ Lời giải chi tiết. |
-
-------------------------------------------------
-
-4. Hoạt động 4: Vận dụng
-
-a) Mục tiêu:
-- Vận dụng kiến thức đã học vào thực tiễn.
-
-b) Nội dung:
-- Bài toán/tình huống thực tế hoặc trò chơi.
-
-c) Sản phẩm:
-- Kết quả vận dụng của HS.
-
-d) Tổ chức thực hiện:
-- HS thực hiện nhiệm vụ dưới sự hướng dẫn của GV.
-
-| Hoạt động của GV & HS (Bước 1–4) | Kết quả hoạt động (kiến thức/kĩ năng + ghi vở) |
-|---|---|
-| - Bước 1: GV giao nhiệm vụ vận dụng (nêu rõ yêu cầu/luật chơi).<br>
-- Bước 2: HS thực hiện, liên hệ thực tế.<br>
-- Bước 3: HS báo cáo kết quả.<br>
-- Bước 4: GV nhận xét, đánh giá. |
-- HS vận dụng được kiến thức vào thực tiễn.<br>
-- HS phát triển năng lực giải quyết vấn đề.<br>
-**Phần ghi vở:**<br>
-+ Bài tập vận dụng.<br>
-+ Liên hệ thực tế. |
-
-------------------------------------------------
-
-*Hướng dẫn về nhà:
-- Học bài, ghi nhớ kiến thức.
-- Làm bài tập SGK/SBT.
-- Chuẩn bị bài học tiếp theo.
+⚠️ YÊU CẦU CỨNG:
+- Mỗi hoạt động đều phải có bảng riêng.
+- Không gộp bảng.
+- Không dùng ký tự #.
+- Văn phong chuẩn giáo án Toán THCS.
 
 
-                YÊU CẦU CHI TIẾT CHO TIẾN TRÌNH DẠY HỌC:
-                - Cần ghi chi tiết cụ thể cột Hoạt động của GV & HS cần trinhg bày đủ 4 bước: Bước 1: Chuyển giao nhiệm vụ, Bước 2: Thực hiện nhiệm vụ, Bước 3: Báo cáo, thảo luận, Bước 4: Kết luận, nhận định. 
+                 YÊU CẦU CHI TIẾT CHO TIẾN TRÌNH DẠY HỌC:
+                - Cần ghi chi tiết cụ thể cột Hoạt động cần trình bày đủ 4 bước: Bước 1: Chuyển giao nhiệm vụ, Bước 2: Thực hiện nhiệm vụ, Bước 3: Báo cáo, thảo luận, Bước 4: Kết luận, nhận định. 
                 - Cần chi tiết cụ thể (đặc biệt là Kết quả hoạt động), các: ví dụ, luyện tập 1, luyện tập 2, luyện tập 3, vận dụng 1, vận dụng 2, vận dụng 3, bài tập đều phải có lời giải chi tiết.
                 - Các ý trong tiến trình dạy học được bắt đầu bằng dấu gạch đầu dòng (-).
                 - Tích hợp Học thông qua chơi vào 1 số hoạt động phù hợp.
                 - Riêng các trò chơi trong tiến trình dạy học cần TRÌNH BÀY RÕ LUẬT CHƠI.
-                - Không cần ghi "Mục tiêu HTQC".
-                - Tiết học chỉ có 45 phút, hãy điều chỉnh lượng kiến thức và hoạt động hợp lý.
                 - Không kèm chú thích nguồn trong bài soạn.
                 - Tuyệt đối chỉ bao gồm 4 Hoạt động, không phát sinh thêm.
                 - LUÔN LUÔN TUÂN THỦ THEO NHỮNG YÊU CẦU TRÊN
@@ -573,4 +375,4 @@ d) Tổ chức thực hiện:
 
 # --- CHÂN TRANG ---
 st.markdown("---")
-st.markdown("<div style='text-align: center; color: #666;'>© 2025 - Mai Văn Hùng - Trường THCS Đồng Yên - ĐT: 097 41037116</div>", unsafe_allow_html=True)
+st.markdown("<div style='text-align: center; color: #666;'>© 2025 - Mai Văn Hùng - Trường THCS Đồng Yên - SĐT: 0941037116</div>", unsafe_allow_html=True)
