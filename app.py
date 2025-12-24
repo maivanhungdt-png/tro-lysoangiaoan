@@ -264,40 +264,38 @@ if st.button("🚀 SOẠN GIÁO ÁN NĂNG LỰC SỐ NGAY"):
                 YÊU CẦU LUÔN LUÔN TUÂN THỦ CẤU TRÚC (CÔNG VĂN 5512):
                 I. Yêu cầu cần đạt: Trong phần này lại chia thành các phần sau: 
                 1. Về kiến thức, 
-                2. Về năng lực (bao gồm năng lực đặc thù, năng lực chung, phát triển năng lực số), 
+                2. Về năng lực (bao gồm năng lực đặc thù, năng lực chung, Tích hợp năng lực số: ), 
+ 		- Lưu ý: Thêm phát triển năng lực số trong mục phát triển năng lực (Dựa vào file Khung năng lực nếu có).
+                - Nội dung tích hợp Học thông qua chơi trong Yêu cầu cần đạt cần cụ thể chi tiết hơn chút nữa.
+                - Nội dung tích hợp Công dân số cũng cần cụ thể hơn trong yêu cầu cần đạt,
                 3. Về phẩm chất.
-                * Nội dung tích hợp (VD: Học thông qua chơi, Công dân số,...)
-                    - Lưu ý: Thêm phát triển năng lực số trong mục phát triển năng lực (Dựa vào file Khung năng lực nếu có).
-                    - Nội dung tích hợp Học thông qua chơi trong Yêu cầu cần đạt cần cụ thể chi tiết hơn chút nữa.
-                    - Nội dung tích hợp Công dân số cũng cần cụ thể hơn trong yêu cầu cần đạt.
-
+                    
                 II. Đồ dùng dạy học
                 1. Giáo viên
                 2. Học sinh
 
-                III. TIẾN TRÌNH DẠY HỌC
-		III. TIẾN TRÌNH DẠY HỌC
+               III. TIẾN TRÌNH DẠY HỌC
 
-Phần này trình bày theo đúng mẫu giáo án thực tế.
+Phần này trình bày theo đúng mẫu giáo án thực tế của giáo viên THCS.
+Nội dung, câu chữ, mức độ chi tiết bám sát giáo án mẫu đã cung cấp.
+Chỉ thay đổi hình thức trình bày: đưa phần “Hoạt động / Kết quả hoạt động” vào bảng.
 Mỗi hoạt động gồm:
 a) Mục tiêu
 b) Nội dung
 c) Sản phẩm
 d) Tổ chức thực hiện (mô tả chung)
-
-Sau đó trình bày bảng 2 cột ghi rõ 4 bước hoạt động.
-Bảng CHỈ gồm hoạt động và kết quả, không đưa mục tiêu/nội dung vào bảng.
+Sau đó là bảng 2 cột ghi rõ 4 bước hoạt động.
 
 ------------------------------------------------
 
-1. Hoạt động 1: Hoạt động khởi động
+1. Hoạt động 1: Hoạt động khởi động (Tiết …)
 
 a) Mục tiêu:
-- Gây hứng thú học tập cho HS.
-- Gợi mở vấn đề bài học.
+- Gây hứng thú và gợi động cơ học tập cho HS.
+- Gợi mở vấn đề dẫn dắt vào nội dung bài học.
 
 b) Nội dung:
-- Tình huống/câu hỏi khởi động gắn với bài học.
+- HS chú ý lắng nghe và thực hiện yêu cầu của GV thông qua tình huống/bài toán mở đầu.
 
 c) Sản phẩm:
 - Câu trả lời, ý kiến của HS.
@@ -305,102 +303,152 @@ c) Sản phẩm:
 d) Tổ chức thực hiện:
 - GV tổ chức cho HS thực hiện nhiệm vụ theo các bước.
 
-| Hoạt động của GV & HS (Bước 1–4) | Kết quả hoạt động (kiến thức/kĩ năng + ghi vở) |
+| Hoạt động | Kết quả hoạt động |
 |---|---|
-| - Bước 1: GV nêu tình huống/câu hỏi khởi động.<br>
-- Bước 2: HS suy nghĩ cá nhân, thảo luận nhóm.<br>
-- Bước 3: HS báo cáo kết quả, nhận xét.<br>
-- Bước 4: GV kết luận, dẫn dắt vào bài mới. |
+| *Bước 1: Chuyển giao nhiệm vụ:*<br>
+GV nêu tình huống/bài toán khởi động đúng như SGK hoặc giáo án mẫu.<br><br>
+*Bước 2: Thực hiện nhiệm vụ:*<br>
+HS suy nghĩ cá nhân, thảo luận nhóm và thực hiện yêu cầu của GV.<br><br>
+*Bước 3: Báo cáo, thảo luận:*<br>
+HS trình bày kết quả, HS khác nhận xét, bổ sung.<br><br>
+*Bước 4: Kết luận, nhận định:*<br>
+GV nhận xét, đánh giá và dẫn dắt vào bài học mới. |
 - HS tham gia tích cực hoạt động.<br>
-- HS xác định được vấn đề cần học.<br>
+- HS bước đầu nhận biết được vấn đề của bài học.<br>
 **Phần ghi vở:**<br>
-+ Câu hỏi khởi động.<br>
 + Tên bài học. |
 
 ------------------------------------------------
 
 2. Hoạt động 2: Hoạt động hình thành kiến thức mới
 
-a) Mục tiêu:
-- HS hình thành kiến thức mới theo yêu cầu bài học.
-
-b) Nội dung:
-- Nội dung kiến thức trong SGK.
-
-c) Sản phẩm:
-- Phiếu học tập, bảng kết quả, lời giải.
-
-d) Tổ chức thực hiện:
-- HS làm việc cá nhân/nhóm dưới sự tổ chức của GV.
-
-| Hoạt động của GV & HS (Bước 1–4) | Kết quả hoạt động (kiến thức/kĩ năng + ghi vở) |
-|---|---|
-| - Bước 1: GV giao nhiệm vụ học tập.<br>
-- Bước 2: HS quan sát, phân tích dữ liệu số (phát triển năng lực số).<br>
-- Bước 3: HS trình bày kết quả, thảo luận.<br>
-- Bước 4: GV chuẩn hóa kiến thức. |
-- HS hiểu và trình bày được kiến thức mới.<br>
-- HS rút ra được khái niệm/nhận xét.<br>
-**Phần ghi vở:**<br>
-+ Kiến thức trọng tâm.<br>
-+ Ví dụ minh họa (có lời giải chi tiết). |
+Hoạt động 2 được chia thành các hoạt động nhỏ 2.1; 2.2; 2.3… tương ứng đúng với các mục nhỏ trong SGK.
 
 ------------------------------------------------
 
-3. Hoạt động 3: Luyện tập
+2.1. Hoạt động 2.1: (Tên mục nhỏ thứ nhất trong SGK)
+
+a) Mục tiêu:
+- HS nhận biết và hình thành được kiến thức theo yêu cầu của mục này.
+
+b) Nội dung:
+- HS quan sát SGK, thực hiện các hoạt động học tập theo yêu cầu của GV.
+
+c) Sản phẩm:
+- Phiếu học tập, bảng kết quả, câu trả lời, bài làm của HS.
+
+d) Tổ chức thực hiện:
+- GV tổ chức cho HS làm việc cá nhân/nhóm.
+
+| Hoạt động | Kết quả hoạt động |
+|---|---|
+| *Bước 1: Chuyển giao nhiệm vụ:*<br>
+GV giao nhiệm vụ học tập đúng như SGK và giáo án mẫu (ghi rõ HĐ1, HĐ2, HĐ3…).<br><br>
+*Bước 2: Thực hiện nhiệm vụ:*<br>
+HS thực hiện nhiệm vụ, thảo luận, phân tích và rút ra nhận xét.<br><br>
+*Bước 3: Báo cáo, thảo luận:*<br>
+HS trình bày kết quả, nhận xét và bổ sung cho nhau.<br><br>
+*Bước 4: Kết luận, nhận định:*<br>
+GV chính xác hóa kiến thức, chốt nội dung trọng tâm. |
+- HS hình thành được kiến thức mới.<br>
+- HS rút ra được khái niệm/nhận xét theo SGK.<br>
+**Phần ghi vở:**<br>
++ Nội dung kiến thức trọng tâm.<br>
++ Ví dụ minh họa, luyện tập (ghi đầy đủ lời giải như mẫu). |
+
+(Sau bảng: tiếp tục trình bày đầy đủ Hộp kiến thức, Ví dụ, Luyện tập, Thử thách, lời giải… đúng như giáo án mẫu)
+
+------------------------------------------------
+
+2.2. Hoạt động 2.2: (Tên mục nhỏ thứ hai trong SGK – nếu có)
+
+a) Mục tiêu:
+- HS hiểu và vận dụng được kiến thức của mục này.
+
+b) Nội dung:
+- HS quan sát SGK, thực hiện yêu cầu học tập của GV.
+
+c) Sản phẩm:
+- Bài làm, lời giải, kết quả phân tích của HS.
+
+d) Tổ chức thực hiện:
+- GV tổ chức cho HS thực hiện nhiệm vụ theo các bước.
+
+| Hoạt động | Kết quả hoạt động |
+|---|---|
+| *Bước 1: Chuyển giao nhiệm vụ:*<br>
+GV giao nhiệm vụ theo đúng nội dung SGK.<br><br>
+*Bước 2: Thực hiện nhiệm vụ:*<br>
+HS làm việc cá nhân/nhóm, phân tích và giải quyết nhiệm vụ.<br><br>
+*Bước 3: Báo cáo, thảo luận:*<br>
+HS trình bày kết quả, nhận xét chéo.<br><br>
+*Bước 4: Kết luận, nhận định:*<br>
+GV chốt kiến thức, hướng dẫn HS ghi vở. |
+- HS nắm được phương pháp, kĩ năng cần thiết.<br>
+**Phần ghi vở:**<br>
++ Nội dung kiến thức.<br>
++ Ví dụ, luyện tập có lời giải đầy đủ. |
+
+------------------------------------------------
+
+3. Hoạt động 3: Luyện tập (Tiết …)
 
 a) Mục tiêu:
 - Củng cố, khắc sâu kiến thức đã học.
-- Rèn kĩ năng giải bài tập.
 
 b) Nội dung:
-- Bài tập trong SGK/SBT.
+- Các bài tập trong SGK/SBT.
 
 c) Sản phẩm:
-- Bài làm, lời giải của HS.
+- Bài làm và lời giải của HS.
 
 d) Tổ chức thực hiện:
-- HS làm bài cá nhân/nhóm, GV theo dõi hỗ trợ.
+- GV tổ chức cho HS làm bài và chữa bài.
 
-| Hoạt động của GV & HS (Bước 1–4) | Kết quả hoạt động (kiến thức/kĩ năng + ghi vở) |
+| Hoạt động | Kết quả hoạt động |
 |---|---|
-| - Bước 1: GV giao bài tập luyện tập.<br>
-- Bước 2: HS làm bài, có thể sử dụng máy tính để kiểm tra kết quả (năng lực số).<br>
-- Bước 3: HS trình bày lời giải chi tiết.<br>
-- Bước 4: GV nhận xét, chuẩn kiến thức. |
+| *Bước 1: Chuyển giao nhiệm vụ:*<br>
+GV giao các bài tập luyện tập theo SGK.<br><br>
+*Bước 2: Thực hiện nhiệm vụ:*<br>
+HS làm bài cá nhân/nhóm.<br><br>
+*Bước 3: Báo cáo, thảo luận:*<br>
+HS trình bày lời giải, HS khác nhận xét.<br><br>
+*Bước 4: Kết luận, nhận định:*<br>
+GV nhận xét, đánh giá và chuẩn hóa kiến thức. |
 - HS làm đúng các dạng bài tập.<br>
-- HS trình bày lời giải đầy đủ, rõ ràng.<br>
 **Phần ghi vở:**<br>
-+ Bài tập luyện tập.<br>
-+ Lời giải chi tiết. |
++ Lời giải chi tiết các bài tập. |
 
 ------------------------------------------------
 
-4. Hoạt động 4: Vận dụng
+4. Hoạt động 4: Vận dụng (Tiết …)
 
 a) Mục tiêu:
 - Vận dụng kiến thức đã học vào thực tiễn.
 
 b) Nội dung:
-- Bài toán/tình huống thực tế hoặc trò chơi.
+- Bài toán hoặc tình huống vận dụng trong SGK.
 
 c) Sản phẩm:
 - Kết quả vận dụng của HS.
 
 d) Tổ chức thực hiện:
-- HS thực hiện nhiệm vụ dưới sự hướng dẫn của GV.
+- GV tổ chức cho HS thực hiện nhiệm vụ vận dụng.
 
-| Hoạt động của GV & HS (Bước 1–4) | Kết quả hoạt động (kiến thức/kĩ năng + ghi vở) |
+| Hoạt động | Kết quả hoạt động |
 |---|---|
-| - Bước 1: GV giao nhiệm vụ vận dụng (nêu rõ yêu cầu/luật chơi).<br>
-- Bước 2: HS thực hiện, liên hệ thực tế.<br>
-- Bước 3: HS báo cáo kết quả.<br>
-- Bước 4: GV nhận xét, đánh giá. |
-- HS vận dụng được kiến thức vào thực tiễn.<br>
-- HS phát triển năng lực giải quyết vấn đề.<br>
+| *Bước 1: Chuyển giao nhiệm vụ:*<br>
+
+GV giao bài toán/tình huống vận dụng.<br><br>
+*Bước 2: Thực hiện nhiệm vụ:*<br>
+HS suy nghĩ, vận dụng kiến thức để giải quyết.<br><br>
+*Bước 3: Báo cáo, thảo luận:*<br>
+HS trình bày kết quả.<br><br>
+*Bước 4: Kết luận, nhận định:*<br>
+GV nhận xét, đánh giá. |
+- HS vận dụng được kiến thức vào thực tế.<br>
 **Phần ghi vở:**<br>
-+ Bài tập vận dụng.<br>
-+ Liên hệ thực tế. |
++ Kết quả bài toán vận dụng. |
 
 ------------------------------------------------
 
@@ -408,7 +456,6 @@ d) Tổ chức thực hiện:
 - Học bài, ghi nhớ kiến thức.
 - Làm bài tập SGK/SBT.
 - Chuẩn bị bài học tiếp theo.
-
 
                 YÊU CẦU CHI TIẾT CHO TIẾN TRÌNH DẠY HỌC:
                 - Cần ghi chi tiết cụ thể cột Hoạt động của GV & HS cần trinhg bày đủ 4 bước: Bước 1: Chuyển giao nhiệm vụ, Bước 2: Thực hiện nhiệm vụ, Bước 3: Báo cáo, thảo luận, Bước 4: Kết luận, nhận định. 
