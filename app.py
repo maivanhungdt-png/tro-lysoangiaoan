@@ -276,50 +276,45 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                 III. Tiến trình dạy học
                 ẤU TRÚC CHUNG:
 - 1. Hoạt động 1: Khởi động
-1. Tên hoạt động
-2. a) Mục tiêu
-3. b) Nội dung
-4. c) Sản phẩm
-5. d) Tổ chức thực hiện
-6. Bảng 2 cột
+a) Mục tiêu
+b) Nội dung
+c) Sản phẩm
+d) Tổ chức thực hiện
+Bảng 2 cột
 - 2. Hoạt động 2: Hình thành kiến thức mới
   + Hoạt động 2.1: ứng với mục (1) của SGK
-1. Tên hoạt động
-2. a) Mục tiêu
-3. b) Nội dung
-4. c) Sản phẩm
-5. d) Tổ chức thực hiện
+a) Mục tiêu
+b) Nội dung
+c) Sản phẩm
+d) Tổ chức thực hiện
+Bảng 2 cột
 6. Bảng 2 cột
   + Hoạt động 2.2: ứng với mục (2) của SGK
-1. Tên hoạt động
-2. a) Mục tiêu
-3. b) Nội dung
-4. c) Sản phẩm
-5. d) Tổ chức thực hiện
-6. Bảng 2 cột
+a) Mục tiêu
+b) Nội dung
+c) Sản phẩm
+d) Tổ chức thực hiện
+Bảng 2 cột
   (+ Hoạt động 2.3 nếu có)
 - 3. Hoạt động 3: Luyện tập
-1. Tên hoạt động
-2. a) Mục tiêu
-3. b) Nội dung
-4. c) Sản phẩm
-5. d) Tổ chức thực hiện
-6. Bảng 2 cột
+a) Mục tiêu
+b) Nội dung
+c) Sản phẩm
+d) Tổ chức thực hiện
+Bảng 2 cột
 - 4. Hoạt động 4: Vận dụng
-1. Tên hoạt động
-2. a) Mục tiêu
-3. b) Nội dung
-4. c) Sản phẩm
-5. d) Tổ chức thực hiện
-6. Bảng 2 cột
+a) Mục tiêu
+b) Nội dung
+c) Sản phẩm
+d) Tổ chức thực hiện
+Bảng 2 cột
 
 VỚI MỖI HOẠT ĐỘNG, PHẢI TRÌNH BÀY ĐÚNG THỨ TỰ:
-1. Tên hoạt động
-2. a) Mục tiêu
-3. b) Nội dung
-4. c) Sản phẩm
-5. d) Tổ chức thực hiện
-6. Bảng 2 cột
+a) Mục tiêu
+b) Nội dung
+c) Sản phẩm
+d) Tổ chức thực hiện
+Bảng 2 cột
 
 CÁC MỤC a), b), c), d) PHẢI VIẾT NGOÀI BẢNG.
 SAU MỤC d) BẮT BUỘC MỚI ĐẾN BẢNG.
@@ -337,7 +332,7 @@ QUY ĐỊNH CHUNG CHO TẤT CẢ BẢNG (KHÔNG NGOẠI LỆ):
 - Nội dung trong mỗi ô phải gộp bằng <br>, không chia thành nhiều hàng.
 - Không dùng gạch đầu dòng tự động trong bảng.
 
-QUY ĐỊNH BẮT BUỘC CHO CỘT “Hoạt động của giáo viên và học sinh”:
+QUY ĐỊNH BẮT BUỘC CHO CỘT “Hoạt động của giáo viên và học sinh” trong cột Hoạt động của giáo viên và học sinh:
 - Chỉ mô tả chi tiết tiến trình tổ chức dạy học theo 4 bước:
   Bước 1: Chuyển giao nhiệm vụ
   Bước 2: Thực hiện nhiệm vụ
@@ -367,7 +362,7 @@ QUY ĐỊNH BẮT BUỘC CHO CỘT “Ghi bảng” (ÁP DỤNG CHO TẤT CẢ H
 YÊU CẦU CỨNG:
 - Không mô tả kết quả sư phạm.
 - Không lặp lại câu chữ mục tiêu.
-- Không bỏ trống cột “Kết quả hoạt động”.
+- Không bỏ trống cột “Ghi bảng”.
 
                 YÊU CẦU CHI TIẾT CHO TIẾN TRÌNH DẠY HỌC:
                 - Cần chi tiết cụ thể (đặc biệt là phần ghi bảng).
