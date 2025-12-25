@@ -358,10 +358,6 @@ QUY ĐỊNH BẮT BUỘC CHO CỘT “Ghi bảng” (ÁP DỤNG CHO TẤT CẢ H
   + Ghi bảng: bài tập + lời giải chi tiết.
 - Hoạt động 4 (Vận dụng):
   + Ghi bảng: lời giải bài toán / kết quả tình huống / luật và kết quả trò chơi.
-*Hướng dẫn về nhà*
-- Học bài theo vở ghi và SGK.
-- Hoàn thành các bài tập còn lại.
-- Chuẩn bị trước bài: “……”.
 
 YÊU CẦU CỨNG:
 - Không mô tả kết quả sư phạm.
