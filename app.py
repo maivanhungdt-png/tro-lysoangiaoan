@@ -70,75 +70,17 @@ def create_doc_stable(content, ten_bai, lop):
     i = 0
     while i < len(lines):
         line = lines[i].strip()
-        # XỬ LÝ TIÊU ĐỀ HOẠT ĐỘNG + TỰ ĐỘNG a,b,c,d
-        if line.startswith('Hoạt động'):
-            p = doc.add_paragraph(line)
-            p.runs[0].bold = True
-            p.runs[0].font.name = 'Times New Roman'
-            p.runs[0].font.size = Pt(14)
-
-            doc.add_paragraph('a) Mục tiêu:')
-            doc.add_paragraph('b) Nội dung:')
-            doc.add_paragraph('c) Sản phẩm:')
-            doc.add_paragraph('d) Tổ chức thực hiện:')
-
-            i += 1
-            continue
-
         
         # Xóa dấu # đầu dòng
         if line.startswith('#'):
             line = line.replace('#', '').strip()
         
-                # ===== XỬ LÝ BẢNG MARKDOWN – ÉP HÒA Ô TRIỆT ĐỂ =====
+        # [XỬ LÝ BẢNG]
         if line.startswith('|'):
             table_lines = []
             while i < len(lines) and lines[i].strip().startswith('|'):
                 table_lines.append(lines[i].strip())
                 i += 1
-
-            # Dòng tiêu đề
-            header = table_lines[0]
-            headers = header.split('|')[1:-1]
-            cols = len(headers)
-
-            # Gộp tất cả các dòng nội dung còn lại
-            body_lines = table_lines[2:]
-            merged_cells = [''] * cols
-
-            for r in body_lines:
-                parts = r.split('|')[1:-1]
-                for c in range(cols):
-                    if c < len(parts):
-                        txt = parts[c].strip()
-                        if txt:
-                            merged_cells[c] += ('<br>' + txt if merged_cells[c] else txt)
-
-            # Tạo bảng Word CHỈ 2 HÀNG
-            table = doc.add_table(rows=2, cols=cols)
-            table.style = 'Table Grid'
-            table.autofit = True
-
-            # Hàng tiêu đề
-            for c, h in enumerate(headers):
-                cell = table.cell(0, c)
-                cell._element.clear_content()
-                p = cell.add_paragraph()
-                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-                run = p.add_run(h.strip())
-                run.bold = True
-                run.font.name = 'Times New Roman'
-                run.font.size = Pt(14)
-
-            # Hàng nội dung (ĐÃ GỘP)
-            for c, txt in enumerate(merged_cells):
-                cell = table.cell(1, c)
-                cell._element.clear_content()
-                p = cell.add_paragraph()
-                add_formatted_text(p, txt)
-
-            continue
-
             
             if len(table_lines) >= 3: 
                 try:
@@ -248,7 +190,7 @@ st.markdown("""
 # --- 4. GIAO DIỆN CHÍNH ---
 st.markdown("""
 <div class="main-header">
-    <h1>📘 TRỢ LÝ SOẠN GIÁO ÁN TỰ ĐỘNG (NLS)</h1>
+    <h1>📘 TRỢ LÝ SOẠN GIÁO ÁN KHUNG NĂNG LỰC SỐ TỰ ĐỘNG (NLS)</h1>
     <p>Tác giả: Mai Văn Hùng - Trường THCS Đồng Yên - SĐT: 0941037116</p>
 </div>
 """, unsafe_allow_html=True)
@@ -311,7 +253,7 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                 
                 # --- PROMPT CHI TIẾT CỦA THẦY (BẢN GỐC ĐẦY ĐỦ) ---
                 prompt_instruction = f"""
-                Đóng vai là một Giáo viên THCS giỏi, am hiểu chương trình GDPT 2018.
+                Đóng vai là một Giáo viên THCS với hơn 15 năm kinh nghiệm dạy học, am hiểu chương trình GDPT 2018.
                 Nhiệm vụ: Soạn Kế hoạch bài dạy (Giáo án) cho bài: "{ten_bai}" - {lop}.
 
                 DỮ LIỆU ĐẦU VÀO:
@@ -320,110 +262,119 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                 - Ghi chú bổ sung: "{noidung_bosung}".
 
                 YÊU CẦU LUÔN LUÔN TUÂN THỦ CẤU TRÚC (CÔNG VĂN 5512):
-                I. Mục tiêu: Trong phần này lại chia thành các phần sau: 
+                I. Yêu cầu cần đạt: Trong phần này lại chia thành các phần sau: 
                 1. Về kiến thức, 
-                2. Về năng lực (bao gồm năng lực đặc thù, năng lực chung, tích hợp năng lực số (Nội dung tích hợp
-                    - Lưu ý: Thêm phát triển năng lực số trong mục phát triển năng lực (Dựa vào file Khung năng lực nếu có).
+                2. Về năng lực (bao gồm năng lực đặc thù, năng lực chung, tích hợp năng lực số (Lưu ý: 
                     - Nội dung tích hợp Học thông qua chơi trong Yêu cầu cần đạt cần cụ thể chi tiết hơn chút nữa.
-                    - Nội dung tích hợp Công dân số cũng cần cụ thể hơn trong yêu cầu cần đạt)),
-		
+                    - Nội dung tích hợp Công dân số cũng cần cụ thể hơn trong yêu cầu cần đạt),
                 3. Về phẩm chất.
                 
-                II. Thiết bị dạy học và học liệu
+                II. Đồ dùng dạy học
                 1. Giáo viên
                 2. Học sinh
 
                 III. Tiến trình dạy học
+                ẤU TRÚC CHUNG:
+- 1. Hoạt động 1: Khởi động
+1. Tên hoạt động
+2. a) Mục tiêu
+3. b) Nội dung
+4. c) Sản phẩm
+5. d) Tổ chức thực hiện
+6. Bảng 2 cột
+- 2. Hoạt động 2: Hình thành kiến thức mới
+  + Hoạt động 2.1: ứng với mục (1) của SGK
+1. Tên hoạt động
+2. a) Mục tiêu
+3. b) Nội dung
+4. c) Sản phẩm
+5. d) Tổ chức thực hiện
+6. Bảng 2 cột
+  + Hoạt động 2.2: ứng với mục (2) của SGK
+1. Tên hoạt động
+2. a) Mục tiêu
+3. b) Nội dung
+4. c) Sản phẩm
+5. d) Tổ chức thực hiện
+6. Bảng 2 cột
+  (+ Hoạt động 2.3 nếu có)
+- 3. Hoạt động 3: Luyện tập
+1. Tên hoạt động
+2. a) Mục tiêu
+3. b) Nội dung
+4. c) Sản phẩm
+5. d) Tổ chức thực hiện
+6. Bảng 2 cột
+- 4. Hoạt động 4: Vận dụng
+1. Tên hoạt động
+2. a) Mục tiêu
+3. b) Nội dung
+4. c) Sản phẩm
+5. d) Tổ chức thực hiện
+6. Bảng 2 cột
 
-Phần này dùng để tổ chức lại các nội dung kiến thức đã trình bày ở PHẦN II.
-Yêu cầu trình bày NGHIÊM NGẶT theo mẫu giáo án truyền thống (SGK – SGV).
+VỚI MỖI HOẠT ĐỘNG, PHẢI TRÌNH BÀY ĐÚNG THỨ TỰ:
+1. Tên hoạt động
+2. a) Mục tiêu
+3. b) Nội dung
+4. c) Sản phẩm
+5. d) Tổ chức thực hiện
+6. Bảng 2 cột
 
-==================== QUY ĐỊNH BẮT BUỘC ====================
+CÁC MỤC a), b), c), d) PHẢI VIẾT NGOÀI BẢNG.
+SAU MỤC d) BẮT BUỘC MỚI ĐẾN BẢNG.
 
-A. CẤU TRÚC CHUNG (CHỈ GỒM 4 HOẠT ĐỘNG):
-1. Hoạt động 1: Khởi động
-2. Hoạt động 2: Hình thành kiến thức mới
-   + Hoạt động 2.1: ứng với mục (1) trong SGK / PHẦN II
-   + Hoạt động 2.2: ứng với mục (2) trong SGK / PHẦN II
-   (+ Hoạt động 2.3 nếu có mục (3))
-3. Hoạt động 3: Luyện tập
-4. Hoạt động 4: Vận dụng
+BẢNG PHẢI VIẾT ĐÚNG DẠNG:
 
-B. BẮT BUỘC THỨ TỰ TRÌNH BÀY CHO MỖI HOẠT ĐỘNG
-KHÔNG ĐƯỢC ĐẢO, KHÔNG ĐƯỢC BỎ:
-
-1. Tên hoạt động (ghi rõ: Hoạt động …: …)
-
-2. Viết ĐẦY ĐỦ, TÁCH RIÊNG, NẰM NGOÀI BẢNG:
-a) Mục tiêu:
-b) Nội dung:
-c) Sản phẩm:
-d) Tổ chức thực hiện:
-
-3. NGAY SAU MỤC d) BẮT BUỘC PHẢI CÓ 01 BẢNG,
-KHÔNG CHÈN BẤT KỲ ĐOẠN VĂN NÀO Ở GIỮA.
-
-==================== QUY ĐỊNH VỀ BẢNG ====================
-
-BẢNG PHẢI VIẾT ĐÚNG CHÍNH XÁC DẠNG SAU, KHÔNG BIẾN DẠNG:
-
-| Hoạt động | Kết quả hoạt động |
+| Hoạt động của giáo viên và học sinh | Ghi bảng |
 |---|---|
 | … | … |
 
-- Mỗi hoạt động CHỈ ĐƯỢC CÓ 01 BẢNG.
-- Mỗi bảng CHỈ ĐƯỢC CÓ 02 HÀNG (1 hàng tiêu đề, 1 hàng nội dung).
-- TUYỆT ĐỐI KHÔNG chia Bước 1,2,3,4 thành nhiều hàng bảng.
-- Nội dung trong mỗi ô PHẢI GỘP BẰNG <br>.
-- Không dùng danh sách gạch đầu dòng tự động trong bảng.
+QUY ĐỊNH CHUNG CHO TẤT CẢ BẢNG (KHÔNG NGOẠI LỆ):
 
-==================== NỘI DUNG TRONG BẢNG ====================
+- Mỗi hoạt động chỉ có 01 bảng.
+- Mỗi bảng chỉ có 02 hàng (1 hàng tiêu đề, 1 hàng nội dung).
+- Nội dung trong mỗi ô phải gộp bằng <br>, không chia thành nhiều hàng.
+- Không dùng gạch đầu dòng tự động trong bảng.
 
-CỘT “Hoạt động”:
-- Chỉ mô tả TIẾN TRÌNH TỔ CHỨC DẠY HỌC theo đúng 4 bước:
+QUY ĐỊNH BẮT BUỘC CHO CỘT “Hoạt động của giáo viên và học sinh”:
+- Chỉ mô tả chi tiết tiến trình tổ chức dạy học theo 4 bước:
   Bước 1: Chuyển giao nhiệm vụ
   Bước 2: Thực hiện nhiệm vụ
   Bước 3: Báo cáo, thảo luận
   Bước 4: Kết luận, nhận định
-- KHÔNG ghi kiến thức vào cột này.
 
-CỘT “Kết quả hoạt động” (ÁP DỤNG CHO TẤT CẢ HOẠT ĐỘNG):
-- Ghi KẾT QUẢ KIẾN THỨC / NỘI DUNG đạt được sau hoạt động.
-- Nội dung PHẢI TRÙNG KHỚP với phần kiến thức tương ứng ở PHẦN II hoặc SGK.
-- CÓ THỂ bao gồm:
+QUY ĐỊNH BẮT BUỘC CHO CỘT “Ghi bảng” (ÁP DỤNG CHO TẤT CẢ HOẠT ĐỘNG):
+- Ghi KẾT QUẢ NỘI DUNG đạt được sau hoạt động.
+- Ghi CỤ THỂ, ĐẦY ĐỦ nội dung tương ứng ở SGK.
+- Có thể bao gồm:
   + Khái niệm, định nghĩa
   + Nhận xét, kết luận
   + Ví dụ minh họa
   + Bảng, sơ đồ, biểu thức
-  + Bài tập, câu hỏi và LỜI GIẢI CHI TIẾT
+  + Bài tập, câu hỏi và LỜI GIẢI
 
-- TUYỆT ĐỐI KHÔNG ghi:
-  “HS nắm được…”, “HS hiểu được…”, “HS thực hiện được…”.
-
-==================== QUY ĐỊNH RIÊNG ====================
-
+ÁP DỤNG RIÊNG:
 - Hoạt động 1:
-  + Kết quả hoạt động: kiến thức nền, nội dung dẫn nhập liên quan bài học.
-
+  + Ghi bảng: nội dung dẫn nhập, kiến thức nền được huy động.
 - Hoạt động 2.x:
-  + Kết quả hoạt động: TOÀN BỘ nội dung kiến thức của mục tương ứng ở PHẦN II.
-
+  + Ghi bảng: TOÀN BỘ nội dung kiến thức mục tương ứng ở sgk.
 - Hoạt động 3 (Luyện tập):
-  + Kết quả hoạt động: các bài tập luyện tập và LỜI GIẢI CHI TIẾT.
-
+  + Ghi bảng: bài tập + lời giải chi tiết.
 - Hoạt động 4 (Vận dụng):
-  + Kết quả hoạt động: lời giải bài toán thực tế / kết quả tình huống / luật và kết quả trò chơi.
+  + Ghi bảng: lời giải bài toán / kết quả tình huống / luật và kết quả trò chơi.
 
-- Không phát sinh thêm hoạt động.
-- Không dùng ký tự # trong toàn bộ Phần III.
+YÊU CẦU CỨNG:
+- Không mô tả kết quả sư phạm.
+- Không lặp lại câu chữ mục tiêu.
+- Không bỏ trống cột “Kết quả hoạt động”.
 
-
-                 YÊU CẦU CHI TIẾT CHO TIẾN TRÌNH DẠY HỌC:
-                - Cần ghi chi tiết cụ thể cột Hoạt động cần trình bày đủ 4 bước: Bước 1: Chuyển giao nhiệm vụ, Bước 2: Thực hiện nhiệm vụ, Bước 3: Báo cáo, thảo luận, Bước 4: Kết luận, nhận định. 
-                - Cần chi tiết cụ thể (đặc biệt là Kết quả hoạt động), các: ví dụ, luyện tập 1, luyện tập 2, luyện tập 3, vận dụng 1, vận dụng 2, vận dụng 3, bài tập đều phải có lời giải chi tiết.
+                YÊU CẦU CHI TIẾT CHO TIẾN TRÌNH DẠY HỌC:
+                - Cần chi tiết cụ thể (đặc biệt là phần ghi bảng).
                 - Các ý trong tiến trình dạy học được bắt đầu bằng dấu gạch đầu dòng (-).
                 - Tích hợp Học thông qua chơi vào 1 số hoạt động phù hợp.
                 - Riêng các trò chơi trong tiến trình dạy học cần TRÌNH BÀY RÕ LUẬT CHƠI.
+                - Bài học có thể soạn thành nhiều tiết và mỗi tiết chỉ có 45 phút, hãy điều chỉnh lượng kiến thức và hoạt động hợp lý.
                 - Không kèm chú thích nguồn trong bài soạn.
                 - Tuyệt đối chỉ bao gồm 4 Hoạt động, không phát sinh thêm.
                 - LUÔN LUÔN TUÂN THỦ THEO NHỮNG YÊU CẦU TRÊN
