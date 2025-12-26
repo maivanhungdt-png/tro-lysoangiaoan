@@ -262,19 +262,23 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                 - Ghi chú bổ sung: "{noidung_bosung}".
 
                 YÊU CẦU LUÔN LUÔN TUÂN THỦ CẤU TRÚC (CÔNG VĂN 5512):
-                I. Yêu cầu cần đạt: Trong phần này lại chia thành các phần sau: 
+                I. Mục tiêu: Trong phần này lại chia thành các phần sau: 
                 1. Về kiến thức, 
-                2. Về năng lực (bao gồm năng lực đặc thù, năng lực chung, tích hợp năng lực số (Lưu ý: 
-                    - Nội dung tích hợp Học thông qua chơi trong Yêu cầu cần đạt cần cụ thể chi tiết hơn chút nữa.
-                    - Nội dung tích hợp Công dân số cũng cần cụ thể hơn trong yêu cầu cần đạt)),
+                2. Về năng lực: Trong phần này lại chia thành các phần sau:
+                a) Năng lực đặc thù
+                b) Năng lực chung
+                c) Tích hợp năng lực số: 
+                   Lưu ý: 
+                    + Nội dung tích hợp Học thông qua chơi trong Yêu cầu cần đạt cần cụ thể chi tiết hơn chút nữa.
+                    + Nội dung tích hợp Công dân số cũng cần cụ thể hơn trong yêu cầu cần đạt)),
                 3. Về phẩm chất.
                 
-                II. Đồ dùng dạy học
+                II. Thiết bị dạy học và học liệu
                 1. Giáo viên
                 2. Học sinh
 
                 III. Tiến trình dạy học
-                ẤU TRÚC CHUNG:
+                CẤU TRÚC CHUNG:
 - 1. Hoạt động 1: Khởi động
 a) Mục tiêu
 b) Nội dung
