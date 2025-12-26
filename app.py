@@ -422,11 +422,12 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
 
         st.markdown("### 📋 COPY NỘI DUNG (DÁN MASSIVEMARK)")
 
-	st.text_area(
-    		"👉 Bôi đen (Ctrl+A) → Copy (Ctrl+C) → dán vào MassiveMark",
-    		ket_qua_text,
-    		height=400
-	)
+        st.text_area(
+            "👉 Bôi đen (Ctrl+A) → Copy (Ctrl+C) → dán vào MassiveMark",
+            ket_qua_text,
+            height=400
+        )
+
 
         # ===== TẠO FILE WORD =====
         doc = create_doc_stable(ket_qua_text, ten_bai, lop)
