@@ -401,12 +401,13 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                         else:
                             input_data.append(Image.open(f))
                 
-                    if noidung_bosung:
-                    	input_data.append(noidung_bosung)
+                                    if noidung_bosung:
+                    input_data.append(noidung_bosung)
 
-                               # === SINH KẾT QUẢ ===
+                # === SINH KẾT QUẢ ===
                 response = model.generate_content(input_data)
                 ket_qua_text = response.text
+
 
         except Exception as e:
             st.error(f"Có lỗi xảy ra: {e}")
