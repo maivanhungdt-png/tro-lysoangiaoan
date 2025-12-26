@@ -404,7 +404,43 @@ YÊU CẦU CỨNG:
                 response = model.generate_content(input_data)
                 
                 st.markdown("### 📄 KẾT QUẢ BÀI SOẠN:")
-                st.markdown(f'<div class="lesson-plan-paper">{response.text}</div>', unsafe_allow_html=True)
+st.markdown(
+    f'<div class="lesson-plan-paper" id="lessonContent">{response.text}</div>',
+    unsafe_allow_html=True
+)
+
+# ===== NÚT COPY NỘI DUNG =====
+st.markdown(
+    f"""
+    <button onclick="copyLesson()" 
+    style="
+        margin-top:15px;
+        width:100%;
+        padding:14px;
+        font-size:18px;
+        font-weight:bold;
+        border-radius:10px;
+        background:linear-gradient(90deg,#ff9800,#ff5722);
+        color:white;
+        border:none;
+        cursor:pointer;
+    ">
+    📋 COPY NỘI DUNG (DÁN MASSIVEMARK)
+    </button>
+
+    <script>
+    function copyLesson() {{
+        const text = `{response.text.replace("`", "\\`")}`;
+        navigator.clipboard.writeText(text).then(
+            () => alert("✅ Đã copy! Dán thẳng vào MassiveMark"),
+            () => alert("❌ Không copy được")
+        );
+    }}
+    </script>
+    """,
+    unsafe_allow_html=True
+)
+
                 
                 doc = create_doc_stable(response.text, ten_bai, lop)
                 buf = io.BytesIO()
