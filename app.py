@@ -360,7 +360,7 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
   		+ Ghi bảng: TOÀN BỘ nội dung kiến thức mục tương ứng ở sgk (bao gồm các HĐx, Luyện tập x, vận dụng x, theo từng mục 1 nhỏ, 2 nhỏ ... của sách giáo khoa).
 		- Hoạt động 3 (Luyện tập):Chỉ chữa bài tập của sách giáo khoa
   		+ Ghi bảng: bài tập + lời giải chi tiết.
-		- Hoạt động 4 (Vận dụng):Các bài tập trong sách giáo khoa
+		- Hoạt động 4 (Vận dụng):Các bài tập trong sách giáo khoa hoặc các bài toán có tính thực tế
   		+ Ghi bảng: lời giải bài toán / kết quả tình huống / luật và kết quả trò chơi.
 
 		YÊU CẦU CỨNG:
@@ -419,32 +419,13 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
             unsafe_allow_html=True
         )
 
-        # ===== NÚT COPY (DÁN MASSIVEMARK) =====
-        st.markdown(
-            """
-            <button onclick="copyLesson()" style="
-                margin-top:12px;
-                width:100%;
-                padding:12px;
-                font-size:16px;
-                font-weight:bold;
-                border-radius:8px;
-                background:#ff9800;
-                color:white;
-                border:none;
-                cursor:pointer;">
-            📋 COPY NỘI DUNG (DÁN MASSIVEMARK)
-            </button>
+        st.markdown("### 📋 COPY NỘI DUNG (DÁN MASSIVEMARK)")
 
-            <script>
-            function copyLesson() {
-                const text = document.querySelector('.lesson-plan-paper').innerText;
-                navigator.clipboard.writeText(text);
-            }
-            </script>
-            """,
-            unsafe_allow_html=True
-        )
+	st.text_area(
+    		"👉 Bôi đen (Ctrl+A) → Copy (Ctrl+C) → dán vào MassiveMark",
+    		ket_qua_text,
+    		height=400
+	)
 
         # ===== TẠO FILE WORD =====
         doc = create_doc_stable(ket_qua_text, ten_bai, lop)
