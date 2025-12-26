@@ -280,41 +280,40 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
 		a) Mục tiêu
 		b) Nội dung
 		c) Sản phẩm
-		d) Tổ chức thực hiện
+		d) Tổ chức thực hiện (chỉ ghi đúng dòng này xong đến bảng luôn)
 		Bảng 2 cột
 		- 2. Hoạt động 2: Hình thành kiến thức mới
   		+ Hoạt động 2.1: ứng với mục (1) của SGK
 		a) Mục tiêu
 		b) Nội dung
 		c) Sản phẩm
-		d) Tổ chức thực hiện
+		d) Tổ chức thực hiện (chỉ ghi đúng dòng này xong đến bảng luôn)
 		Bảng 2 cột
-		6. Bảng 2 cột
-  		+ Hoạt động 2.2: ứng với mục (2) của SGK
+		+ Hoạt động 2.2: ứng với mục (2) của SGK
 		a) Mục tiêu
 		b) Nội dung
 		c) Sản phẩm
-		d) Tổ chức thực hiện
+		d) Tổ chức thực hiện (chỉ ghi đúng dòng này xong đến bảng luôn)
 		Bảng 2 cột
   		(+ Hoạt động 2.3 nếu có)
 		- 3. Hoạt động 3: Luyện tập
 		a) Mục tiêu
 		b) Nội dung
 		c) Sản phẩm
-		d) Tổ chức thực hiện
+		d) Tổ chức thực hiện (chỉ ghi đúng dòng này xong đến bảng luôn)
 		Bảng 2 cột
 		- 4. Hoạt động 4: Vận dụng
 		a) Mục tiêu
 		b) Nội dung
 		c) Sản phẩm
-		d) Tổ chức thực hiện
+		d) Tổ chức thực hiện (chỉ ghi đúng dòng này xong đến bảng luôn)
 		Bảng 2 cột
 
 		VỚI MỖI HOẠT ĐỘNG, PHẢI TRÌNH BÀY ĐÚNG THỨ TỰ:
 		a) Mục tiêu
 		b) Nội dung
 		c) Sản phẩm
-		d) Tổ chức thực hiện
+		d) Tổ chức thực hiện (chỉ ghi đúng dòng này xong đến bảng luôn)
 		Bảng 2 cột
 
 		CÁC MỤC a), b), c), d) PHẢI VIẾT NGOÀI BẢNG.
@@ -334,6 +333,7 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
 		- Không dùng gạch đầu dòng tự động trong bảng.
 
 		QUY ĐỊNH BẮT BUỘC CHO CỘT “Hoạt động của giáo viên và học sinh” trong cột Hoạt động của giáo viên và học sinh:
+
 		- Chỉ mô tả thật chi tiết tiến trình tổ chức dạy học theo 4 bước:
   		Bước 1: Chuyển giao nhiệm vụ (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
   		Bước 2: Thực hiện nhiệm vụ (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
@@ -357,7 +357,7 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
 		- Hoạt động 1:
   		+ Ghi bảng: nội dung dẫn nhập, kiến thức nền được huy động.
 		- Hoạt động 2.x:
-  		+ Ghi bảng: TOÀN BỘ nội dung kiến thức mục tương ứng ở sgk (bao gồm các HĐ1, HĐ2, ... Luyện tập 1, luyện tập 2,... vận dụng 1, vận dụng 2 ...theo từng mục 1 nhỏ, 2 nhỏ ... của sách giáo khoa).
+  		+ Ghi bảng: TOÀN BỘ nội dung kiến thức mục tương ứng ở sgk (bao gồm các HĐx, Luyện tập x, vận dụng x, theo từng mục 1 nhỏ, 2 nhỏ ... của sách giáo khoa).
 		- Hoạt động 3 (Luyện tập):Chỉ chữa bài tập của sách giáo khoa
   		+ Ghi bảng: bài tập + lời giải chi tiết.
 		- Hoạt động 4 (Vận dụng):Các bài tập trong sách giáo khoa
