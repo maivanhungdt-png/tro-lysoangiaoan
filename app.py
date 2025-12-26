@@ -401,112 +401,70 @@ YÊU CẦU CỨNG:
                 
                 if noidung_bosung: input_data.append(noidung_bosung)
                 
-                response = model.generate_content(input_data)
-                ket_qua_text = response.text
-st.markdown("### 📄 KẾT QUẢ BÀI SOẠN:")
-st.markdown(
-    f'<div class="lesson-plan-paper" id="lessonContent">{ket_qua_text}</div>',
-    unsafe_allow_html=True
-)
-
-st.markdown(
-    """
-    <button onclick="copyLesson()" style="
-        margin-top:15px;
-        width:100%;
-        padding:14px;
-        font-size:18px;
-        font-weight:bold;
-        border-radius:10px;
-        background:#ff9800;
-        color:white;
-        border:none;
-        cursor:pointer;">
-    📋 COPY NỘI DUNG
-    </button>
-
-    <script>
-    function copyLesson() {
-        const text = document.querySelector('.lesson-plan-paper').innerText;
-        navigator.clipboard.writeText(text).then(
-            () => alert("✅ Đã copy"),
-            () => alert("❌ Không copy được")
-        );
-    }
-    </script>
-    """,
-    unsafe_allow_html=True
-)
-
-doc = create_doc_stable(ket_qua_text, ten_bai, lop)
-buf = io.BytesIO()
-doc.save(buf)
-buf.seek(0)
-
-st.download_button(
-    label="⬇️ TẢI FILE WORD CHUẨN A4",
-    data=buf,
-    file_name=f"GiaoAn_{ten_bai}.docx",
-    mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    type="primary"
-)
-
-               
-
-
-                
-                doc = create_doc_stable(response.text, ten_bai, lop)
-                buf = io.BytesIO()
-                doc.save(buf)
-                buf.seek(0)
-                
-                st.download_button(
-                    label="⬇️ TẢI FILE WORD CHUẨN A4",
-                    data=buf,
-                    file_name=f"GiaoAn_{ten_bai}.docx",
-                    mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                    type="primary"
-                )
-                
-                for p in temp_paths: os.remove(p)
+               response = model.generate_content(input_data)
+ket_qua_text = response.text
 
         except Exception as e:
             st.error(f"Có lỗi xảy ra: {e}")
-st.markdown("### 📄 KẾT QUẢ BÀI SOẠN:")
-st.markdown(
-    f'<div class="lesson-plan-paper" id="lessonContent">{ket_qua_text}</div>',
-    unsafe_allow_html=True
-)
+            st.stop()
 
-st.markdown(
-    """
-    <button onclick="copyLesson()" style="
-        margin-top:15px;
-        width:100%;
-        padding:14px;
-        font-size:18px;
-        font-weight:bold;
-        border-radius:10px;
-        background:#ff9800;
-        color:white;
-        border:none;
-        cursor:pointer;">
-    📋 COPY NỘI DUNG
-    </button>
+        # ===== HIỂN THỊ KẾT QUẢ =====
+        st.markdown("### 📄 KẾT QUẢ BÀI SOẠN:")
+        st.markdown(
+            f'<div class="lesson-plan-paper">{ket_qua_text}</div>',
+            unsafe_allow_html=True
+        )
 
-    <script>
-    function copyLesson() {
-        const text = document.querySelector('.lesson-plan-paper').innerText;
-        navigator.clipboard.writeText(text).then(
-            () => alert("✅ Đã copy"),
-            () => alert("❌ Không copy được")
-        );
-    }
-    </script>
-    """,
-    unsafe_allow_html=True
-)
+        # ===== NÚT COPY (DÁN MASSIVEMARK) =====
+        st.markdown(
+            """
+            <button onclick="copyLesson()" style="
+                margin-top:12px;
+                width:100%;
+                padding:12px;
+                font-size:16px;
+                font-weight:bold;
+                border-radius:8px;
+                background:#ff9800;
+                color:white;
+                border:none;
+                cursor:pointer;">
+            📋 COPY NỘI DUNG (DÁN MASSIVEMARK)
+            </button>
+
+            <script>
+            function copyLesson() {
+                const text = document.querySelector('.lesson-plan-paper').innerText;
+                navigator.clipboard.writeText(text).then(
+                    () => alert("✅ Đã copy. Dán vào MassiveMark"),
+                    () => alert("❌ Không copy được")
+                );
+            }
+            </script>
+            """,
+            unsafe_allow_html=True
+        )
+
+        # ===== TẠO FILE WORD =====
+        doc = create_doc_stable(ket_qua_text, ten_bai, lop)
+        buf = io.BytesIO()
+        doc.save(buf)
+        buf.seek(0)
+
+        st.download_button(
+            label="⬇️ TẢI FILE WORD CHUẨN A4",
+            data=buf,
+            file_name=f"GiaoAn_{ten_bai}.docx",
+            mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            type="primary"
+        )
+
+        for p in temp_paths:
+            os.remove(p)
 
 # --- CHÂN TRANG ---
 st.markdown("---")
-st.markdown("<div style='text-align: center; color: #666;'>© 2025 - Mai Văn Hùng - Trường THCS Đồng Yên - SĐT: 0941037116</div>", unsafe_allow_html=True)
+st.markdown(
+    "<div style='text-align: center; color: #666;'>© 2025 - Mai Văn Hùng - Trường THCS Đồng Yên - SĐT: 0941037116</div>",
+    unsafe_allow_html=True
+)
