@@ -401,7 +401,7 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                         else:
                             input_data.append(Image.open(f))
                 
-                                    if noidung_bosung:
+                if noidung_bosung:
                     input_data.append(noidung_bosung)
 
                 # === SINH KẾT QUẢ ===
