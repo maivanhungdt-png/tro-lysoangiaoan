@@ -267,10 +267,7 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                 2. Về năng lực: Trong phần này lại chia thành các phần sau:
                 a) Năng lực đặc thù
                 b) Năng lực chung
-                c) Tích hợp năng lực số: 
-                   Lưu ý: 
-                    + Nội dung tích hợp Học thông qua chơi trong Yêu cầu cần đạt cần cụ thể chi tiết hơn chút nữa.
-                    + Nội dung tích hợp Công dân số cũng cần cụ thể hơn trong yêu cầu cần đạt)),
+                c) Tích hợp năng lực số, 
                 3. Về phẩm chất.
                 
                 II. Thiết bị dạy học và học liệu
@@ -347,9 +344,11 @@ QUY ĐỊNH BẮT BUỘC CHO CỘT “Ghi bảng” (ÁP DỤNG CHO TẤT CẢ H
 - Ghi KẾT QUẢ NỘI DUNG đạt được sau hoạt động.
 - Ghi CỤ THỂ, ĐẦY ĐỦ nội dung tương ứng ở SGK.
 - Có thể bao gồm:
+  + HĐ 1, HĐ 2, HĐ ...
   + Khái niệm, định nghĩa
   + Nhận xét, kết luận
   + Ví dụ minh họa
+  + Luyện tập 1, Luyện tập 2, Luyện tập ...
   + Bảng, sơ đồ, biểu thức
   + Bài tập, câu hỏi và LỜI GIẢI
 
