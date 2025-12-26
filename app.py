@@ -368,7 +368,7 @@ YÊU CẦU CỨNG:
 - Không bỏ trống cột “Ghi bảng”.
 
                 YÊU CẦU CHI TIẾT CHO TIẾN TRÌNH DẠY HỌC:
-                - Cần chi tiết cụ thể (đặc biệt là phần ghi bảng).
+                - Cần chi tiết cụ thể (đặc biệt là phần ghi bảng có đầy đủ tất cả nội dung trong sách giáo khoa).
                 - Các ý trong tiến trình dạy học được bắt đầu bằng dấu gạch đầu dòng (-).
                 - Tích hợp Học thông qua chơi vào 1 số hoạt động phù hợp.
                 - Riêng các trò chơi trong tiến trình dạy học cần TRÌNH BÀY RÕ LUẬT CHƠI.
@@ -402,13 +402,9 @@ YÊU CẦU CỨNG:
                 if noidung_bosung: input_data.append(noidung_bosung)
                 
                 response = model.generate_content(input_data)
-                
-                st.markdown("### 📄 KẾT QUẢ BÀI SOẠN:")
-st.markdown(
-    f'<div class="lesson-plan-paper" id="lessonContent">{response.text}</div>',
-    unsafe_allow_html=True
-)
+                ket_qua_text = response.text
 
+               
 # ===== NÚT COPY NỘI DUNG =====
 st.markdown(
     f"""
@@ -459,6 +455,40 @@ st.markdown(
 
         except Exception as e:
             st.error(f"Có lỗi xảy ra: {e}")
+st.markdown("### 📄 KẾT QUẢ BÀI SOẠN:")
+st.markdown(
+    f'<div class="lesson-plan-paper" id="lessonContent">{ket_qua_text}</div>',
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    """
+    <button onclick="copyLesson()" style="
+        margin-top:15px;
+        width:100%;
+        padding:14px;
+        font-size:18px;
+        font-weight:bold;
+        border-radius:10px;
+        background:#ff9800;
+        color:white;
+        border:none;
+        cursor:pointer;">
+    📋 COPY NỘI DUNG
+    </button>
+
+    <script>
+    function copyLesson() {
+        const text = document.querySelector('.lesson-plan-paper').innerText;
+        navigator.clipboard.writeText(text).then(
+            () => alert("✅ Đã copy"),
+            () => alert("❌ Không copy được")
+        );
+    }
+    </script>
+    """,
+    unsafe_allow_html=True
+)
 
 # --- CHÂN TRANG ---
 st.markdown("---")
