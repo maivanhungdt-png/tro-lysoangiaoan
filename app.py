@@ -369,6 +369,7 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
 		- Không bỏ trống cột “Ghi bảng”.
 
                 YÊU CẦU CHI TIẾT CHO TIẾN TRÌNH DẠY HỌC:
+		- Hoạt động 2.x:Nếu trong sách giáo khoa ứng với các mục 1, mục 2 .. mà có phần Vận dụng hoặc Vận dụng x, thì phải cho vào cột ghi bảng.
                 - Cần chi tiết cụ thể (đặc biệt là phần ghi bảng có đầy đủ tất cả nội dung trong sách giáo khoa).
                 - Các ý trong tiến trình dạy học được bắt đầu bằng dấu gạch đầu dòng (-).
                 - Tích hợp Học thông qua chơi vào 1 số hoạt động phù hợp.
