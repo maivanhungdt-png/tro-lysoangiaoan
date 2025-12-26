@@ -403,39 +403,56 @@ YÊU CẦU CỨNG:
                 
                 response = model.generate_content(input_data)
                 ket_qua_text = response.text
-
-               
-# ===== NÚT COPY NỘI DUNG =====
+st.markdown("### 📄 KẾT QUẢ BÀI SOẠN:")
 st.markdown(
-    f"""
-    <button onclick="copyLesson()" 
-    style="
+    f'<div class="lesson-plan-paper" id="lessonContent">{ket_qua_text}</div>',
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    """
+    <button onclick="copyLesson()" style="
         margin-top:15px;
         width:100%;
         padding:14px;
         font-size:18px;
         font-weight:bold;
         border-radius:10px;
-        background:linear-gradient(90deg,#ff9800,#ff5722);
+        background:#ff9800;
         color:white;
         border:none;
-        cursor:pointer;
-    ">
-    📋 COPY NỘI DUNG (DÁN MASSIVEMARK)
+        cursor:pointer;">
+    📋 COPY NỘI DUNG
     </button>
 
     <script>
-    function copyLesson() {{
-        const text = `{response.text.replace("`", "\\`")}`;
+    function copyLesson() {
+        const text = document.querySelector('.lesson-plan-paper').innerText;
         navigator.clipboard.writeText(text).then(
-            () => alert("✅ Đã copy! Dán thẳng vào MassiveMark"),
+            () => alert("✅ Đã copy"),
             () => alert("❌ Không copy được")
         );
-    }}
+    }
     </script>
     """,
     unsafe_allow_html=True
 )
+
+doc = create_doc_stable(ket_qua_text, ten_bai, lop)
+buf = io.BytesIO()
+doc.save(buf)
+buf.seek(0)
+
+st.download_button(
+    label="⬇️ TẢI FILE WORD CHUẨN A4",
+    data=buf,
+    file_name=f"GiaoAn_{ten_bai}.docx",
+    mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    type="primary"
+)
+
+               
+
 
                 
                 doc = create_doc_stable(response.text, ten_bai, lop)
