@@ -400,7 +400,7 @@ YÊU CẦU CỨNG:
                             input_data.append(Image.open(f))
                 
                     if noidung_bosung:
-                    input_data.append(noidung_bosung)
+                    	input_data.append(noidung_bosung)
 
                                # === SINH KẾT QUẢ ===
                 response = model.generate_content(input_data)
