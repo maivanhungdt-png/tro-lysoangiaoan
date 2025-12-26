@@ -335,20 +335,19 @@ QUY ĐỊNH CHUNG CHO TẤT CẢ BẢNG (KHÔNG NGOẠI LỆ):
 
 QUY ĐỊNH BẮT BUỘC CHO CỘT “Hoạt động của giáo viên và học sinh” trong cột Hoạt động của giáo viên và học sinh:
 - Chỉ mô tả chi tiết tiến trình tổ chức dạy học theo 4 bước:
-  Bước 1: Chuyển giao nhiệm vụ
-  Bước 2: Thực hiện nhiệm vụ
-  Bước 3: Báo cáo, thảo luận
-  Bước 4: Kết luận, nhận định
+  Bước 1: Chuyển giao nhiệm vụ (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
+  Bước 2: Thực hiện nhiệm vụ (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
+  Bước 3: Báo cáo, thảo luận (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
+  Bước 4: Kết luận, nhận định (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
 
 QUY ĐỊNH BẮT BUỘC CHO CỘT “Ghi bảng” (ÁP DỤNG CHO TẤT CẢ HOẠT ĐỘNG):
 - Ghi KẾT QUẢ NỘI DUNG đạt được sau hoạt động.
 - Ghi CỤ THỂ, ĐẦY ĐỦ nội dung tương ứng ở SGK.
 - Có thể bao gồm:
-  + HĐ 1, HĐ 2, HĐ ...
+  
   + Khái niệm, định nghĩa
   + Nhận xét, kết luận
   + Ví dụ minh họa
-  + Luyện tập 1, Luyện tập 2, Luyện tập ...
   + Bảng, sơ đồ, biểu thức
   + Bài tập, câu hỏi và LỜI GIẢI
 
@@ -356,10 +355,10 @@ QUY ĐỊNH BẮT BUỘC CHO CỘT “Ghi bảng” (ÁP DỤNG CHO TẤT CẢ H
 - Hoạt động 1:
   + Ghi bảng: nội dung dẫn nhập, kiến thức nền được huy động.
 - Hoạt động 2.x:
-  + Ghi bảng: TOÀN BỘ nội dung kiến thức mục tương ứng ở sgk.
-- Hoạt động 3 (Luyện tập):
+  + Ghi bảng: TOÀN BỘ nội dung kiến thức mục tương ứng ở sgk (bao gồm các HĐ 1, HĐ 2, ... Luyện tập 1, luyện tập 2,... vận dụng 1, vận dụng 2 ...theo từng mục 1 nhỏ, 2 nhỏ ... của sách giáo khoa).
+- Hoạt động 3 (Luyện tập):Chỉ chữa bài tập của sách giáo khoa
   + Ghi bảng: bài tập + lời giải chi tiết.
-- Hoạt động 4 (Vận dụng):
+- Hoạt động 4 (Vận dụng):Các bài tập trong sách giáo khoa
   + Ghi bảng: lời giải bài toán / kết quả tình huống / luật và kết quả trò chơi.
 
 YÊU CẦU CỨNG:
