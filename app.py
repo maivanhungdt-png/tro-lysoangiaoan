@@ -276,95 +276,97 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
 
                 III. Tiến trình dạy học
                 CẤU TRÚC CHUNG:
-- 1. Hoạt động 1: Khởi động
-a) Mục tiêu
-b) Nội dung
-c) Sản phẩm
-d) Tổ chức thực hiện
-Bảng 2 cột
-- 2. Hoạt động 2: Hình thành kiến thức mới
-  + Hoạt động 2.1: ứng với mục (1) của SGK
-a) Mục tiêu
-b) Nội dung
-c) Sản phẩm
-d) Tổ chức thực hiện
-Bảng 2 cột
-6. Bảng 2 cột
-  + Hoạt động 2.2: ứng với mục (2) của SGK
-a) Mục tiêu
-b) Nội dung
-c) Sản phẩm
-d) Tổ chức thực hiện
-Bảng 2 cột
-  (+ Hoạt động 2.3 nếu có)
-- 3. Hoạt động 3: Luyện tập
-a) Mục tiêu
-b) Nội dung
-c) Sản phẩm
-d) Tổ chức thực hiện
-Bảng 2 cột
-- 4. Hoạt động 4: Vận dụng
-a) Mục tiêu
-b) Nội dung
-c) Sản phẩm
-d) Tổ chức thực hiện
-Bảng 2 cột
+		- 1. Hoạt động 1: Khởi động
+		a) Mục tiêu
+		b) Nội dung
+		c) Sản phẩm
+		d) Tổ chức thực hiện
+		Bảng 2 cột
+		- 2. Hoạt động 2: Hình thành kiến thức mới
+  		+ Hoạt động 2.1: ứng với mục (1) của SGK
+		a) Mục tiêu
+		b) Nội dung
+		c) Sản phẩm
+		d) Tổ chức thực hiện
+		Bảng 2 cột
+		6. Bảng 2 cột
+  		+ Hoạt động 2.2: ứng với mục (2) của SGK
+		a) Mục tiêu
+		b) Nội dung
+		c) Sản phẩm
+		d) Tổ chức thực hiện
+		Bảng 2 cột
+  		(+ Hoạt động 2.3 nếu có)
+		- 3. Hoạt động 3: Luyện tập
+		a) Mục tiêu
+		b) Nội dung
+		c) Sản phẩm
+		d) Tổ chức thực hiện
+		Bảng 2 cột
+		- 4. Hoạt động 4: Vận dụng
+		a) Mục tiêu
+		b) Nội dung
+		c) Sản phẩm
+		d) Tổ chức thực hiện
+		Bảng 2 cột
 
-VỚI MỖI HOẠT ĐỘNG, PHẢI TRÌNH BÀY ĐÚNG THỨ TỰ:
-a) Mục tiêu
-b) Nội dung
-c) Sản phẩm
-d) Tổ chức thực hiện
-Bảng 2 cột
+		VỚI MỖI HOẠT ĐỘNG, PHẢI TRÌNH BÀY ĐÚNG THỨ TỰ:
+		a) Mục tiêu
+		b) Nội dung
+		c) Sản phẩm
+		d) Tổ chức thực hiện
+		Bảng 2 cột
 
-CÁC MỤC a), b), c), d) PHẢI VIẾT NGOÀI BẢNG.
-SAU MỤC d) BẮT BUỘC MỚI ĐẾN BẢNG.
+		CÁC MỤC a), b), c), d) PHẢI VIẾT NGOÀI BẢNG.
+		SAU MỤC d) BẮT BUỘC MỚI ĐẾN BẢNG.
 
-BẢNG PHẢI VIẾT ĐÚNG DẠNG:
+		BẢNG PHẢI VIẾT ĐÚNG DẠNG:
 
-| Hoạt động của giáo viên và học sinh | Ghi bảng |
-|---|---|
-| … | … |
+		| Hoạt động của giáo viên và học sinh | Ghi bảng |
+		|---|---|
+		| … | … |
 
-QUY ĐỊNH CHUNG CHO TẤT CẢ BẢNG (KHÔNG NGOẠI LỆ):
+		QUY ĐỊNH CHUNG CHO TẤT CẢ BẢNG (KHÔNG NGOẠI LỆ):
 
-- Mỗi hoạt động chỉ có 01 bảng.
-- Mỗi bảng chỉ có 02 hàng (1 hàng tiêu đề, 1 hàng nội dung).
-- Nội dung trong mỗi ô phải gộp bằng <br>, không chia thành nhiều hàng.
-- Không dùng gạch đầu dòng tự động trong bảng.
+		- Mỗi hoạt động chỉ có 01 bảng.
+		- Mỗi bảng chỉ có 02 hàng (1 hàng tiêu đề, 1 hàng nội dung).
+		- Nội dung trong mỗi ô phải gộp bằng <br>, không chia thành nhiều hàng.
+		- Không dùng gạch đầu dòng tự động trong bảng.
 
-QUY ĐỊNH BẮT BUỘC CHO CỘT “Hoạt động của giáo viên và học sinh” trong cột Hoạt động của giáo viên và học sinh:
-- Chỉ mô tả chi tiết tiến trình tổ chức dạy học theo 4 bước:
-  Bước 1: Chuyển giao nhiệm vụ (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
-  Bước 2: Thực hiện nhiệm vụ (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
-  Bước 3: Báo cáo, thảo luận (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
-  Bước 4: Kết luận, nhận định (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
+		QUY ĐỊNH BẮT BUỘC CHO CỘT “Hoạt động của giáo viên và học sinh” trong cột Hoạt động của giáo viên và học sinh:
+		- Chỉ mô tả thật chi tiết tiến trình tổ chức dạy học theo 4 bước:
+  		Bước 1: Chuyển giao nhiệm vụ (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
+  		Bước 2: Thực hiện nhiệm vụ (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
+  		Bước 3: Báo cáo, thảo luận (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
+  		Bước 4: Kết luận, nhận định (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
 
-QUY ĐỊNH BẮT BUỘC CHO CỘT “Ghi bảng” (ÁP DỤNG CHO TẤT CẢ HOẠT ĐỘNG):
-- Ghi KẾT QUẢ NỘI DUNG đạt được sau hoạt động.
-- Ghi CỤ THỂ, ĐẦY ĐỦ nội dung tương ứng ở SGK.
-- Có thể bao gồm:
-  
-  + Khái niệm, định nghĩa
-  + Nhận xét, kết luận
-  + Ví dụ minh họa
-  + Bảng, sơ đồ, biểu thức
-  + Bài tập, câu hỏi và LỜI GIẢI
+		QUY ĐỊNH BẮT BUỘC CHO CỘT “Ghi bảng” (ÁP DỤNG CHO TẤT CẢ HOẠT ĐỘNG):
+		- Ghi KẾT QUẢ NỘI DUNG đạt được sau hoạt động.
+		- Ghi CỤ THỂ, ĐẦY ĐỦ nội dung tương ứng ở SGK.
+		- Có thể bao gồm:
+  		+ HĐx
+  		+ Khái niệm, định nghĩa
+  		+ Nhận xét, kết luận
+  		+ Ví dụ minh họa
+  		+ Luyện tập x
+  		+ Vận dụng x
+  		+ Bảng, sơ đồ, biểu thức
+  		+ Bài tập, câu hỏi và LỜI GIẢI
 
-ÁP DỤNG RIÊNG:
-- Hoạt động 1:
-  + Ghi bảng: nội dung dẫn nhập, kiến thức nền được huy động.
-- Hoạt động 2.x:
-  + Ghi bảng: TOÀN BỘ nội dung kiến thức mục tương ứng ở sgk (bao gồm các HĐ 1, HĐ 2, ... Luyện tập 1, luyện tập 2,... vận dụng 1, vận dụng 2 ...theo từng mục 1 nhỏ, 2 nhỏ ... của sách giáo khoa).
-- Hoạt động 3 (Luyện tập):Chỉ chữa bài tập của sách giáo khoa
-  + Ghi bảng: bài tập + lời giải chi tiết.
-- Hoạt động 4 (Vận dụng):Các bài tập trong sách giáo khoa
-  + Ghi bảng: lời giải bài toán / kết quả tình huống / luật và kết quả trò chơi.
+		ÁP DỤNG RIÊNG:
+		- Hoạt động 1:
+  		+ Ghi bảng: nội dung dẫn nhập, kiến thức nền được huy động.
+		- Hoạt động 2.x:
+  		+ Ghi bảng: TOÀN BỘ nội dung kiến thức mục tương ứng ở sgk (bao gồm các HĐ1, HĐ2, ... Luyện tập 1, luyện tập 2,... vận dụng 1, vận dụng 2 ...theo từng mục 1 nhỏ, 2 nhỏ ... của sách giáo khoa).
+		- Hoạt động 3 (Luyện tập):Chỉ chữa bài tập của sách giáo khoa
+  		+ Ghi bảng: bài tập + lời giải chi tiết.
+		- Hoạt động 4 (Vận dụng):Các bài tập trong sách giáo khoa
+  		+ Ghi bảng: lời giải bài toán / kết quả tình huống / luật và kết quả trò chơi.
 
-YÊU CẦU CỨNG:
-- Không mô tả kết quả sư phạm.
-- Không lặp lại câu chữ mục tiêu.
-- Không bỏ trống cột “Ghi bảng”.
+		YÊU CẦU CỨNG:
+		- Không mô tả kết quả sư phạm.
+		- Không lặp lại câu chữ mục tiêu.
+		- Không bỏ trống cột “Ghi bảng”.
 
                 YÊU CẦU CHI TIẾT CHO TIẾN TRÌNH DẠY HỌC:
                 - Cần chi tiết cụ thể (đặc biệt là phần ghi bảng có đầy đủ tất cả nội dung trong sách giáo khoa).
