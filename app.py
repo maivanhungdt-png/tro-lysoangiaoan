@@ -177,7 +177,6 @@ def create_doc_stable(content, ten_bai, lop):
                                                 run.font.size = Pt(14)
                                             else:
                                                 add_formatted_text(p, sub_line)
-                except: pass
             continue 
             
         if not line:
