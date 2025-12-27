@@ -352,7 +352,7 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                 model = genai.GenerativeModel('gemini-2.5-flash-lite-preview-09-2025')
                 
                 # --- PROMPT CHI TIẾT CỦA THẦY (BẢN GỐC ĐẦY ĐỦ) ---
-                prompt_instruction = f"""
+                prompt_instruction = rf"""
                 Đóng vai là một Giáo viên THCS với hơn 15 năm kinh nghiệm dạy học, am hiểu chương trình GDPT 2018.
                 Nhiệm vụ: Soạn Kế hoạch bài dạy (Giáo án) cho bài: "{ten_bai}" - {lop}.
 
