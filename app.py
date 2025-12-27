@@ -490,7 +490,7 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                 if noidung_bosung:
                     input_data.append(noidung_bosung)
 
-                       # === SINH KẾT QUẢ ===
+                # === SINH KẾT QUẢ ===
                 response = model.generate_content(input_data)
                 ket_qua_text = response.text
 
