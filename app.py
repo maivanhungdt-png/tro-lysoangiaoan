@@ -516,7 +516,9 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                     ket_qua_text = auto_wrap_math(ket_qua_text)
                     ket_qua_text = process_math_blocks(ket_qua_text)
 
-            except Exception as e:
+            
+        try:
+        except Exception as e:
                 st.error(f"Có lỗi xảy ra: {e}")
                 st.stop()
 
