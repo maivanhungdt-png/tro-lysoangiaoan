@@ -10,7 +10,10 @@ import re
 def latex_to_mathtype(expr: str) -> str:
     expr = expr.strip()
 
-    # ===== PHÂN SỐ → DẠNG SGK a/b =====
+    # ===== CHUẨN DẤU TRỪ =====
+    expr = expr.replace('-', '−')
+
+    # ===== PHÂN SỐ \frac{a}{b} → (a)/(b) =====
     while re.search(r'\\frac\{([^{}]+)\}\{([^{}]+)\}', expr):
         expr = re.sub(
             r'\\frac\{([^{}]+)\}\{([^{}]+)\}',
@@ -21,7 +24,7 @@ def latex_to_mathtype(expr: str) -> str:
     # ===== CĂN BẬC HAI =====
     expr = re.sub(r'\\sqrt\{([^{}]+)\}', r'√(\1)', expr)
 
-    # ===== LŨY THỪA → CHỈ SỐ TRÊN =====
+    # ===== LŨY THỪA → CHỈ SỐ TRÊN (x², x³, xⁿ) =====
     power_map = {
         '0':'⁰','1':'¹','2':'²','3':'³','4':'⁴',
         '5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹',
@@ -30,7 +33,9 @@ def latex_to_mathtype(expr: str) -> str:
 
     def power_replace(match):
         exp = match.group(1)
-        return ''.join(power_map.get(c, f'^({c})') for c in exp)
+        if exp in power_map:
+            return power_map[exp]
+        return '^(' + exp + ')'
 
     expr = re.sub(r'\^\{([^}]+)\}', lambda m: power_replace(m), expr)
 
@@ -42,7 +47,7 @@ def latex_to_mathtype(expr: str) -> str:
     expr = expr.replace(r'\ge', '≥')
     expr = expr.replace(r'\ne', '≠')
 
-    # ===== KÝ HIỆU HÌNH HỌC – SGK =====
+    # ===== HÌNH HỌC – ĐÚNG SGK =====
     replacements = {
         r'\Delta': 'Δ',
         r'\triangle': 'Δ',
@@ -59,12 +64,16 @@ def latex_to_mathtype(expr: str) -> str:
     # ===== ĐỘ =====
     expr = expr.replace(r'^\circ', '°')
 
-    # ===== LOẠI HÀM KHÔNG THUỘC THCS =====
+    # ===== LOẠI BỎ HÀM NGOÀI THCS =====
     for f in ['int', 'lim', 'log', 'ln', 'sin', 'cos', 'tan']:
+        expr = re.sub(rf'{f}\s*\(.*?\)', '', expr)
         expr = expr.replace(f, '')
 
-    # ===== BỎ NGOẶC LATEX =====
+    # ===== DỌN SẠCH NGOẶC LATEX =====
     expr = expr.replace('{', '').replace('}', '')
+
+    # ===== GỌN KHOẢNG TRẮNG =====
+    expr = re.sub(r'\s+', ' ', expr).strip()
 
     return expr
 
@@ -213,11 +222,11 @@ def create_doc_stable(content, ten_bai, lop):
             p.runs[0].font.size = Pt(14)
         
         # [THAY ĐỔI THEO YÊU CẦU]: Gạch đầu dòng THỦ CÔNG (Không dùng Auto Bullet)
-        elif line.startswith('- ') or line.startswith('- '):
+        elif line.startswith('- '):
             clean = line[2:].strip()
-    # Lệnh này khiến Word tự động thụt dòng (Auto Bullet) -> KHÔNG DÙNG NỮA
-            p = doc.add_paragraph(style='List Bullet') 
+            p = doc.add_paragraph("– ")
             add_formatted_text(p, clean)
+
             
         # Đoạn văn thường
         else:
@@ -460,6 +469,7 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                 Lưu ý chung: Bám sát nội dung trong Sách giáo khoa và sách giáo viên (từ tài liệu đính kèm) để đưa nội dung vào bài soạn cho chính xác. KHÔNG dùng ký tự # ở đầu dòng.
 
                 QUY ƯỚC VIẾT CÔNG THỨC TOÁN (BẮT BUỘC TUÂN THỦ):
+		- Ưu tiên viết công thức theo kiểu SGK THCS: a/b, x², √(x+1), dùng dấu “.” cho phép nhân.
 		- TẤT CẢ công thức toán học (biểu thức, phương trình, hệ phương trình, công thức, kết luận)
   đều phải đặt trong cặp thẻ [MATH] ... [/MATH].
 		- Bên trong [MATH], chỉ dùng LaTeX cơ bản phù hợp chương trình THCS.
