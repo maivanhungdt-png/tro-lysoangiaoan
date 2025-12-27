@@ -10,99 +10,23 @@ import re
 # ===== XỬ LÝ CÔNG THỨC TOÁN THCS (CHUẨN SGK) =====
 import re
 
-def latex_to_mathtype(expr: str) -> str:
-    expr = expr.strip()
-    # ===== LOẠI BỎ $...$ (LaTeX trôi nổi) =====
-    expr = re.sub(r'\$(.*?)\$', r'\1', expr)
-    # ===== LOẠI BỎ KÝ HIỆU NGOÀI SGK =====
-    expr = re.sub(r'\\underbrace\{.*?\}_\{.*?\}', '', expr)
-    expr = re.sub(r'\\overbrace\{.*?\}_\{.*?\}', '', expr)
-    expr = re.sub(r'\\mathbb\{.*?\}', 'N', expr)
-    expr = re.sub(r'\\text\{.*?\}', '', expr)
-
-
-    # ===== CHUẨN DẤU TRỪ =====
-    expr = expr.replace('-', '−')
-
-    # ===== PHÂN SỐ \frac{a}{b} → (a)/(b) =====
-    while re.search(r'\\frac\{([^{}]+)\}\{([^{}]+)\}', expr):
-        expr = re.sub(
-            r'\\frac\{([^{}]+)\}\{([^{}]+)\}',
-            r'(\1)/(\2)',
-            expr
-        )
-
-    # ===== CĂN BẬC HAI =====
-    expr = re.sub(r'\\sqrt\{([^{}]+)\}', r'√(\1)', expr)
-
-    # ===== SỐ MŨ – BẮT MỌI TRƯỜNG HỢP THCS =====
-    power_map = {
-        '0':'⁰','1':'¹','2':'²','3':'³','4':'⁴',
-        '5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'
-    }
-
-    def to_superscript(num):
-        return ''.join(power_map.get(c, '^'+c) for c in num)
-
-    # (x+1)^{2}, a^{10}
-    expr = re.sub(
-        r'(\([^)]+\)|[a-zA-Z0-9]+)\^\{(\d+)\}',
-        lambda m: m.group(1) + to_superscript(m.group(2)),
-        expr
-    )
-
-    # (x+1)^2, a^3, 10^2
-    expr = re.sub(
-        r'(\([^)]+\)|[a-zA-Z0-9]+)\^(\d+)',
-        lambda m: m.group(1) + to_superscript(m.group(2)),
-        expr
-    )
-
-    # ===== CHỈ SỐ DƯỚI =====
-    expr = re.sub(r'_\{([^}]+)\}', r'_\1', expr)
-
-    # ===== SO SÁNH =====
-    expr = expr.replace(r'\le', '≤')
-    expr = expr.replace(r'\ge', '≥')
-    expr = expr.replace(r'\ne', '≠')
-
-    # ===== HÌNH HỌC – CHUẨN SGK =====
-    replacements = {
-        r'\Delta': 'Δ',
-        r'\triangle': 'Δ',
-        r'\angle': '∠',
-        r'\perp': '⊥',
-        r'\parallel': '∥',
-        r'\pm': '±',
-        r'\cdot': '.',
-        r'\times': '.',
-    }
-    for k, v in replacements.items():
-        expr = expr.replace(k, v)
-
-    # ===== ĐỘ =====
-    expr = expr.replace(r'\^\circ', '°')
-
-    # ===== LOẠI BỎ HÀM NGOÀI THCS =====
-    for f in ['int', 'lim', 'log', 'ln', 'sin', 'cos', 'tan']:
-        expr = re.sub(rf'{f}\s*\(.*?\)', '', expr)
-        expr = expr.replace(f, '')
-
-    # ===== DỌN SẠCH NGOẶC LATEX =====
-    expr = expr.replace('{', '').replace('}', '')
-
-    # ===== LÀM ĐẸP DẤU =====
-    expr = re.sub(r'=', ' = ', expr)
-    expr = re.sub(r',', ', ', expr)
-    expr = re.sub(r'\s+', ' ', expr).strip()
-
-    return expr
-
-
 def process_math_blocks(text: str) -> str:
+    """
+    Chuẩn đầu ra:
+    - Bỏ thẻ [MATH] [/MATH]
+    - Giữ NGUYÊN LaTeX cơ bản
+    - Không chuyển đổi ký hiệu
+    - Phục vụ MathType Batch Convert
+    """
+    def repl(match):
+        expr = match.group(1).strip()
+        # bỏ dấu $ nếu AI lỡ sinh
+        expr = re.sub(r'\$(.*?)\$', r'\1', expr)
+        return expr
+
     return re.sub(
         r'\[MATH\](.*?)\[/MATH\]',
-        lambda m: latex_to_mathtype(m.group(1)),
+        repl,
         text,
         flags=re.DOTALL
     )
@@ -494,7 +418,9 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
 		- \displaystyle
 		- \left, \right
 		Nếu cần diễn giải, PHẢI viết bằng lời theo văn phong SGK Toán THCS.
-		- Ưu tiên viết công thức theo kiểu SGK THCS: a/b, x², √(x+1), dùng dấu “.” cho phép nhân.
+		- Công thức PHẢI viết bằng LaTeX cơ bản theo SGK THCS:
+  		ví dụ: \frac{2}{5}, 2^4, \sqrt{18}, a\cdot b
+		- KHÔNG dùng Unicode: ², ³, √
 		- TẤT CẢ công thức toán học (biểu thức, phương trình, hệ phương trình, công thức, kết luận)
   đều phải đặt trong cặp thẻ [MATH] ... [/MATH].
 		- Bên trong [MATH], chỉ dùng LaTeX cơ bản phù hợp chương trình THCS.
