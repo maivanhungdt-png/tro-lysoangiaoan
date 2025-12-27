@@ -193,6 +193,35 @@ else:
 if api_key:
     genai.configure(api_key=api_key)
 
+
+# ================== KHUNG NĂNG LỰC SỐ ==================
+st.markdown('<div class="section-header">📂 1. TÀI LIỆU NGUỒN</div>', unsafe_allow_html=True)
+
+has_framework = False
+if os.path.exists(FILE_KHUNG_NANG_LUC):
+    st.success(f"✅ Đã tích hợp khung năng lực số: {FILE_KHUNG_NANG_LUC}")
+    has_framework = True
+else:
+    st.info("ℹ️ Chưa có file khung năng lực số (khungnanglucso.pdf).")
+
+uploaded_files = st.file_uploader(
+    "Tải Ảnh/PDF bài dạy (kéo thả vào đây):",
+    type=["jpg", "png", "pdf"],
+    accept_multiple_files=True
+)
+
+if uploaded_files:
+    st.caption("👁️ Xem trước tài liệu:")
+    cols = st.columns(3)
+    for i, f in enumerate(uploaded_files):
+        if f.type in ["image/jpeg", "image/png"]:
+            with cols[i % 3]:
+                st.image(f, caption=f.name)
+        else:
+            with cols[i % 3]:
+                st.info(f"📄 {f.name}")
+# ======================================================
+
 uploaded_files = st.file_uploader("Tải Ảnh/PDF bài dạy:", type=["jpg","png","pdf"], accept_multiple_files=True)
 
 output_mode = st.radio("🧮 Chọn cách xử lý công thức:", ["Word / MathType", "Copy MassiveMark (BibCit)"], index=1)
@@ -314,6 +343,29 @@ LƯU Ý:
                 if os.path.exists(p):
                     os.remove(p)
 
+
+# ================== HIỂN THỊ & XUẤT KẾT QUẢ ==================
+st.markdown("### 📄 KẾT QUẢ BÀI SOẠN")
+st.markdown(f'<div class="lesson-plan-paper">{ket_qua_text}</div>', unsafe_allow_html=True)
+
+st.markdown("### 📋 COPY NỘI DUNG")
+st.text_area("Bôi đen (Ctrl+A) → Copy (Ctrl+C)", ket_qua_text, height=350)
+
+if output_mode == "Word / MathType":
+    safe_name = re.sub(r'[\\/:*?"<>|]', '', ten_bai) or "GiaoAn"
+    doc = create_doc_stable(ket_qua_text, ten_bai, lop)
+    buf = io.BytesIO()
+    doc.save(buf)
+    buf.seek(0)
+
+    st.download_button(
+        label="⬇️ TẢI FILE WORD CHUẨN A4",
+        data=buf,
+        file_name=f"GiaoAn_{safe_name}.docx",
+        mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        type="primary"
+    )
+# =============================================================
         st.markdown("### 📄 KẾT QUẢ")
         st.text_area("Kết quả", ket_qua_text, height=400)
 
