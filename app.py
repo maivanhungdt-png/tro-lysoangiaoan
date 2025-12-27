@@ -12,6 +12,8 @@ import re
 
 def latex_to_mathtype(expr: str) -> str:
     expr = expr.strip()
+    # ===== LOẠI BỎ $...$ (LaTeX trôi nổi) =====
+    expr = re.sub(r'\$(.*?)\$', r'\1', expr)
     # ===== LOẠI BỎ KÝ HIỆU NGOÀI SGK =====
     expr = re.sub(r'\\underbrace\{.*?\}_\{.*?\}', '', expr)
     expr = re.sub(r'\\overbrace\{.*?\}_\{.*?\}', '', expr)
@@ -499,6 +501,11 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
 		- Không sử dụng $, $$, \( \), \[ \], hoặc LaTeX hiển thị.
 		- Mỗi công thức viết trên MỘT DÒNG.
 		- Không viết công thức trôi nổi ngoài [MATH].
+		CẢNH BÁO BẮT BUỘC:
+		- MỌI ký hiệu toán học nếu không nằm trong [MATH] ... [/MATH] đều bị coi là SAI.
+		- TUYỆT ĐỐI KHÔNG dùng $...$, $$...$$.
+		- Nếu viết quy tắc, công thức, kết luận → PHẢI đặt trong [MATH].
+		- Văn bản thường KHÔNG được chứa ký hiệu ^, =, ≠, ≥, ≤.
 
 		LƯU Ý QUAN TRỌNG TỪ NGƯỜI DÙNG: {yeu_cau_them}
                 """
