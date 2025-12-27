@@ -5,9 +5,14 @@ import tempfile
 import os
 import io
 import re
+MATH_BLOCK = re.compile(r"\$\$(.*?)\$\$", re.DOTALL)
 from docx import Document
 from docx.shared import Pt, RGBColor, Inches, Cm
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from lxml import etree
+import latex2mathml.converter as latex2mathml
+from docx.oxml import parse_xml
+from docx.oxml.ns import nsdecls
 
 # --- 1. CẤU HÌNH TRANG ---
 st.set_page_config(page_title="Trợ lý Giáo án NLS", page_icon="📘", layout="centered")
@@ -29,6 +34,26 @@ def add_formatted_text(paragraph, text):
             run.bold = True
         else:
             run = paragraph.add_run(part)
+        run.font.name = 'Times New Roman'
+        run.font.size = Pt(14)
+def add_math_omml(paragraph, latex):
+    """
+    Chèn công thức toán chuẩn Word (OMML)
+    Mở & chỉnh sửa được bằng MathType 7
+    """
+    try:
+        mathml = latex2mathml.convert(latex)
+        omml = f'''
+        <m:oMathPara {nsdecls("m")}>
+          <m:oMath>
+            {mathml}
+          </m:oMath>
+        </m:oMathPara>
+        '''
+        element = parse_xml(omml)
+        paragraph._p.append(element)
+    except:
+        run = paragraph.add_run(latex)
         run.font.name = 'Times New Roman'
         run.font.size = Pt(14)
 
@@ -70,7 +95,16 @@ def create_doc_stable(content, ten_bai, lop):
     i = 0
     while i < len(lines):
         line = lines[i].strip()
-        
+        # ===== XỬ LÝ CÔNG THỨC TOÁN (MathType 7) =====
+        math_match = MATH_BLOCK.search(line)
+        if math_match:
+            latex = math_match.group(1).strip()
+            p = doc.add_paragraph()
+            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            add_math_omml(p, latex)
+            i += 1
+            continue
+
         # Xóa dấu # đầu dòng
         if line.startswith('#'):
             line = line.replace('#', '').strip()
@@ -112,14 +146,21 @@ def create_doc_stable(content, ten_bai, lop):
                                             p.paragraph_format.space_after = Pt(2)
                                             p.paragraph_format.line_spacing = 1.1
                                             
-                                            if r_idx == 0: # Tiêu đề bảng
+                                            if r_idx == 0:  # Tiêu đề bảng
                                                 p.alignment = 1
-                                                run = p.add_run(sub_line.replace('**',''))
+                                                run = p.add_run(sub_line.replace('**', ''))
                                                 run.bold = True
                                                 run.font.name = 'Times New Roman'
                                                 run.font.size = Pt(14)
                                             else:
-                                                add_formatted_text(p, sub_line)
+                                                math_match = MATH_BLOCK.search(sub_line)
+                                                if math_match:
+                                                    latex = math_match.group(1).strip()
+                                                    add_math_omml(p, latex)
+                                                else:
+                                                    add_formatted_text(p, sub_line)
+
+
                 except: pass
             continue 
             
