@@ -2,17 +2,16 @@ import streamlit as st
 import google.generativeai as genai
 from docx import Document
 from docx.shared import Pt, Cm
-import io
-import re
+import io, re
 
-# ================= CẤU HÌNH TRANG =================
+# ================== CẤU HÌNH ==================
 st.set_page_config(
     page_title="Soạn giáo án CV5512 tích hợp năng lực số",
     page_icon="📘",
     layout="centered"
 )
 
-# ================= CẤU TRÚC GIÁO ÁN (GIỮ NGUYÊN) =================
+# ================== CẤU TRÚC GIÁO ÁN (GIỮ NGUYÊN) ==================
 STRUCTURE = """
 I. MỤC TIÊU
 1. Về kiến thức
@@ -63,10 +62,9 @@ d) Tổ chức thực hiện
 IV. ĐIỀU CHỈNH SAU TIẾT DẠY
 """
 
-# ================= HÀM TẠO WORD =================
+# ================== HÀM WORD ==================
 def create_word(content, ten_bai, lop):
     doc = Document()
-
     sec = doc.sections[0]
     sec.top_margin = Cm(2)
     sec.bottom_margin = Cm(2)
@@ -77,78 +75,94 @@ def create_word(content, ten_bai, lop):
     style.font.name = 'Times New Roman'
     style.font.size = Pt(14)
 
-    title = doc.add_heading(f"KẾ HOẠCH BÀI DẠY: {ten_bai.upper()}", level=0)
+    title = doc.add_heading(f"KẾ HOẠCH BÀI DẠY: {ten_bai.upper()}", 0)
     title.alignment = 1
-
-    p = doc.add_paragraph(f"Lớp: {lop}\n")
-    p.runs[0].bold = True
+    doc.add_paragraph(f"Lớp: {lop}")
 
     for line in content.split("\n"):
-        para = doc.add_paragraph(line)
-        for run in para.runs:
-            run.font.name = 'Times New Roman'
-            run.font.size = Pt(14)
-
+        p = doc.add_paragraph(line)
+        for r in p.runs:
+            r.font.name = 'Times New Roman'
+            r.font.size = Pt(14)
     return doc
 
-# ================= GIAO DIỆN =================
+# ================== GIAO DIỆN ==================
 st.title("📘 SOẠN GIÁO ÁN CV5512 – TÍCH HỢP NĂNG LỰC SỐ")
 
 api_key = st.text_input("🔑 Gemini API Key", type="password")
 if api_key:
     genai.configure(api_key=api_key)
 
+st.header("📦 Khung năng lực số")
+nls = st.multiselect(
+    "Chọn các năng lực số cần tích hợp:",
+    [
+        "Sử dụng học liệu số",
+        "Khai thác Internet an toàn",
+        "Tạo sản phẩm học tập số",
+        "Giao tiếp – hợp tác qua nền tảng số",
+        "Ứng dụng CNTT giải quyết vấn đề"
+    ]
+)
+
+st.header("📂 Tài liệu dạy học")
+uploaded_files = st.file_uploader(
+    "Tải SGK / tài liệu (PDF, ảnh):",
+    type=["pdf", "png", "jpg"],
+    accept_multiple_files=True
+)
+
+st.header("📝 Thông tin bài dạy")
 lop = st.text_input("Lớp:", "Lớp 6")
 ten_bai = st.text_input("Tên bài học:")
-ghi_chu = st.text_area("Ghi chú của giáo viên (định hướng năng lực số, học liệu số):", height=120)
 
-# ================= SOẠN GIÁO ÁN =================
+tao_tro_choi = st.checkbox("🎮 Có tạo trò chơi khởi động không?")
+ghi_chu = st.text_area("Ghi chú giáo viên:", height=120)
+
+# ================== SOẠN ==================
 if st.button("🚀 SOẠN GIÁO ÁN"):
-    if not api_key or not ten_bai.strip():
-        st.error("Cần nhập API key và tên bài học.")
+    if not api_key or not ten_bai:
+        st.error("Thiếu API key hoặc tên bài")
     else:
         prompt = f"""
 Bạn là giáo viên THCS.
 
-Hãy soạn KẾ HOẠCH BÀI DẠY theo Công văn 5512 cho bài:
-- Tên bài: {ten_bai}
+Soạn KẾ HOẠCH BÀI DẠY theo Công văn 5512 cho:
+- Bài: {ten_bai}
 - Lớp: {lop}
 
-PHẢI GIỮ NGUYÊN CẤU TRÚC SAU (KHÔNG ĐƯỢC THAY ĐỔI):
+GIỮ NGUYÊN CẤU TRÚC SAU (KHÔNG ĐƯỢC THAY ĐỔI):
 {STRUCTURE}
 
 YÊU CẦU BẮT BUỘC:
 - Đúng 4 hoạt động.
-- Mỗi hoạt động chỉ có 01 bảng 2 cột: Hoạt động GV–HS | Ghi bảng.
+- Mỗi hoạt động chỉ có 01 bảng 2 cột.
 - Không tạo bảng 3 hoặc 4 cột.
-- Tích hợp rõ NĂNG LỰC SỐ trong mục Mục tiêu và trong hoạt động học.
-- Viết giáo án đầy đủ, dùng được nộp hồ sơ.
+- Tích hợp các NĂNG LỰC SỐ sau: {", ".join(nls) if nls else "Không yêu cầu cụ thể"}
+- {"Hoạt động 1 có trò chơi khởi động" if tao_tro_choi else "Hoạt động 1 không thiết kế trò chơi"}
 
-Ghi chú giáo viên:
+GHI CHÚ GIÁO VIÊN:
 {ghi_chu}
 """
 
         model = genai.GenerativeModel("gemini-1.5-flash")
-        response = model.generate_content(prompt)
+        result = model.generate_content(prompt)
+        st.session_state["ga"] = result.text
 
-        ket_qua = response.text
-        st.session_state["result"] = ket_qua
+# ================== KẾT QUẢ ==================
+if "ga" in st.session_state:
+    st.header("📄 GIÁO ÁN HOÀN CHỈNH")
+    st.text_area("Nội dung:", st.session_state["ga"], height=500)
 
-# ================= HIỂN THỊ & XUẤT =================
-if "result" in st.session_state:
-    st.markdown("## 📄 GIÁO ÁN HOÀN CHỈNH")
-    st.text_area("Nội dung giáo án:", st.session_state["result"], height=500)
-
-    # Xuất Word
-    doc = create_word(st.session_state["result"], ten_bai, lop)
+    doc = create_word(st.session_state["ga"], ten_bai, lop)
     buf = io.BytesIO()
     doc.save(buf)
     buf.seek(0)
 
-    safe_name = re.sub(r'[\\/:*?"<>|]', '', ten_bai)
+    safe = re.sub(r'[\\/:*?"<>|]', '', ten_bai)
     st.download_button(
-        "⬇️ Tải file Word (.docx)",
+        "⬇️ Tải file Word",
         buf,
-        file_name=f"GiaoAn_{safe_name}.docx",
+        file_name=f"GiaoAn_{safe}.docx",
         mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     )
