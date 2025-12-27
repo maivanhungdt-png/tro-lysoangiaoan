@@ -7,6 +7,28 @@ import io
 import re
 
 # =========================================================
+# CHUYỂN CÔNG THỨC SANG CHUẨN MASSIVEMARK (BIBCIT)
+# =========================================================
+def convert_math_for_massivemark(text: str) -> str:
+    """
+    Đầu ra để COPY → dán vào https://www.bibcit.com/en/massivemark
+    Công thức ở dạng \( ... \)
+    """
+    # 1. Nếu có [MATH] thì đổi sang \( ... \)
+    text = re.sub(
+        r'\[MATH\](.*?)\[/MATH\]',
+        lambda m: r'\(' + m.group(1).strip() + r'\)',
+        text,
+        flags=re.DOTALL
+    )
+
+    # 2. Bọc các biểu thức SGK còn sót
+    pattern = r'(?<!\\\()(\b(?:\\frac\{.*?\}\{.*?\}|\\sqrt\{.*?\}|[0-9a-zA-Z]+(?:\^[0-9a-zA-Z]+)?\s*(?:=|>|<|≥|≤)\s*[0-9a-zA-Z]+(?:\^[0-9a-zA-Z]+)?))'
+    text = re.sub(pattern, r'\\(\1\\)', text)
+
+    return text
+
+# =========================================================
 # XỬ LÝ CÔNG THỨC TOÁN THCS – CHUẨN SGK + MATHYPE
 # =========================================================
 import re
@@ -267,6 +289,12 @@ if uploaded_files:
 
 # 2. THÔNG TIN
 st.markdown('<div class="section-header">📝 2. THÔNG TIN BÀI DẠY</div>', unsafe_allow_html=True)
+# ===== CHỌN ĐỊNH DẠNG XUẤT CÔNG THỨC =====
+output_mode = st.radio(
+    "🧮 Chọn cách xử lý công thức:",
+    ["Word / MathType", "Copy MassiveMark (BibCit)"],
+    index=1
+)
 
 c1, c2 = st.columns(2)
 with c1: lop = st.text_input("📚 Lớp:", "Lớp 6")
@@ -462,51 +490,57 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                 if noidung_bosung:
                     input_data.append(noidung_bosung)
 
-                # === SINH KẾT QUẢ ===
+                       # === SINH KẾT QUẢ ===
                 response = model.generate_content(input_data)
                 ket_qua_text = response.text
 
-                # ===== XỬ LÝ CÔNG THỨC TOÁN (CHUẨN SGK + MATHYPE) =====
-                ket_qua_text = auto_wrap_math(ket_qua_text)
-                ket_qua_text = process_math_blocks(ket_qua_text)
+                # ===== XỬ LÝ THEO CHẾ ĐỘ NGƯỜI DÙNG CHỌN =====
+                if output_mode == "Copy MassiveMark (BibCit)":
+                    ket_qua_text = convert_math_for_massivemark(ket_qua_text)
+                else:
+                    ket_qua_text = auto_wrap_math(ket_qua_text)
+                    ket_qua_text = process_math_blocks(ket_qua_text)
 
+            except Exception as e:
+                st.error(f"Có lỗi xảy ra: {e}")
+                st.stop()
 
-        except Exception as e:
-            st.error(f"Có lỗi xảy ra: {e}")
-            st.stop()
+            # ===== HIỂN THỊ KẾT QUẢ =====
+            st.markdown("### 📄 KẾT QUẢ BÀI SOẠN:")
+            st.markdown(
+                f'<div class="lesson-plan-paper">{ket_qua_text}</div>',
+                unsafe_allow_html=True
+            )
 
-        # ===== HIỂN THỊ KẾT QUẢ =====
-        st.markdown("### 📄 KẾT QUẢ BÀI SOẠN:")
-        st.markdown(
-            f'<div class="lesson-plan-paper">{ket_qua_text}</div>',
-            unsafe_allow_html=True
-        )
+            if output_mode == "Copy MassiveMark (BibCit)":
+                st.markdown("### 📋 COPY → DÁN VÀO MASSIVEMARK")
+                st.caption("👉 https://www.bibcit.com/en/massivemark")
+            else:
+                st.markdown("### 📋 COPY NỘI DUNG")
 
-        st.markdown("### 📋 COPY NỘI DUNG (DÁN MASSIVEMARK)")
+            st.text_area(
+                "👉 Bôi đen (Ctrl+A) → Copy (Ctrl+C)",
+                ket_qua_text,
+                height=400
+            )
 
-        st.text_area(
-            "👉 Bôi đen (Ctrl+A) → Copy (Ctrl+C) → dán vào MassiveMark",
-            ket_qua_text,
-            height=400
-        )
+            # ===== TẠO FILE WORD (CHỈ KHI CHỌN WORD) =====
+            if output_mode == "Word / MathType":
+                doc = create_doc_stable(ket_qua_text, ten_bai, lop)
+                buf = io.BytesIO()
+                doc.save(buf)
+                buf.seek(0)
 
+                st.download_button(
+                    label="⬇️ TẢI FILE WORD CHUẨN A4",
+                    data=buf,
+                    file_name=f"GiaoAn_{ten_bai}.docx",
+                    mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    type="primary"
+                )
 
-        # ===== TẠO FILE WORD =====
-        doc = create_doc_stable(ket_qua_text, ten_bai, lop)
-        buf = io.BytesIO()
-        doc.save(buf)
-        buf.seek(0)
-
-        st.download_button(
-            label="⬇️ TẢI FILE WORD CHUẨN A4",
-            data=buf,
-            file_name=f"GiaoAn_{ten_bai}.docx",
-            mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-            type="primary"
-        )
-
-        for p in temp_paths:
-            os.remove(p)
+            for p in temp_paths:
+                os.remove(p)
 
 # --- CHÂN TRANG ---
 st.markdown("---")
