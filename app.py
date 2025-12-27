@@ -5,6 +5,70 @@ import tempfile
 import os
 import io
 import re
+# ===== XỬ LÝ CÔNG THỨC TOÁN THCS (LaTeX → MathType) =====
+
+def latex_to_mathtype(expr: str) -> str:
+    expr = expr.strip()
+
+    # Phân số
+    while re.search(r'\\frac\{[^{}]*\}\{[^{}]*\}', expr):
+        expr = re.sub(
+            r'\\frac\{([^{}]+)\}\{([^{}]+)\}',
+            r'(\1)/(\2)',
+            expr
+        )
+
+    # Căn
+    expr = re.sub(r'\\sqrt\{([^{}]+)\}', r'sqrt(\1)', expr)
+
+    # Lũy thừa
+    expr = re.sub(r'\^\{([^}]+)\}', r'^(\1)', expr)
+
+    # Chỉ số dưới
+    expr = re.sub(r'_\{([^}]+)\}', r'_(\1)', expr)
+
+    # Hệ phương trình
+    expr = expr.replace(r'\begin{cases}', '{')
+    expr = expr.replace(r'\end{cases}', '}')
+    expr = expr.replace(r'\\', '; ')
+
+    # So sánh
+    expr = expr.replace(r'\le', '≤')
+    expr = expr.replace(r'\ge', '≥')
+    expr = expr.replace(r'\ne', '≠')
+
+    # Ký hiệu THCS
+    replacements = {
+        r'\Delta': 'Δ',
+        r'\angle': '∠',
+        r'\triangle': 'Δ',
+        r'\perp': '⟂',
+        r'\parallel': '∥',
+        r'\pm': '±',
+        r'\cdot': '*',
+        r'\times': '*',
+    }
+    for k, v in replacements.items():
+        expr = expr.replace(k, v)
+
+    # Bỏ ngoặc LaTeX
+    expr = expr.replace('{', '').replace('}', '')
+
+    return expr
+
+
+def process_math_blocks(text: str) -> str:
+    def repl(match):
+        latex = match.group(1)
+        return latex_to_mathtype(latex)
+
+    return re.sub(
+        r'\[MATH\](.*?)\[/MATH\]',
+        lambda m: repl(m),
+        text,
+        flags=re.DOTALL
+    )
+
 from docx import Document
 from docx.shared import Pt, RGBColor, Inches, Cm
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -383,7 +447,15 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
 
                 Lưu ý chung: Bám sát nội dung trong Sách giáo khoa và sách giáo viên (từ tài liệu đính kèm) để đưa nội dung vào bài soạn cho chính xác. KHÔNG dùng ký tự # ở đầu dòng.
 
-                LƯU Ý QUAN TRỌNG TỪ NGƯỜI DÙNG: {yeu_cau_them}
+                QUY ƯỚC VIẾT CÔNG THỨC TOÁN (BẮT BUỘC TUÂN THỦ):
+		- TẤT CẢ công thức toán học (biểu thức, phương trình, hệ phương trình, công thức, kết luận)
+  đều phải đặt trong cặp thẻ [MATH] ... [/MATH].
+		- Bên trong [MATH], chỉ dùng LaTeX cơ bản phù hợp chương trình THCS.
+		- Không sử dụng $, $$, \( \), \[ \], hoặc LaTeX hiển thị.
+		- Mỗi công thức viết trên MỘT DÒNG.
+		- Không viết công thức trôi nổi ngoài [MATH].
+
+		LƯU Ý QUAN TRỌNG TỪ NGƯỜI DÙNG: {yeu_cau_them}
                 """
 
                 input_data = [prompt_instruction]
@@ -405,8 +477,12 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                     input_data.append(noidung_bosung)
 
                 # === SINH KẾT QUẢ ===
-                response = model.generate_content(input_data)
-                ket_qua_text = response.text
+		response = model.generate_content(input_data)
+		ket_qua_text = response.text
+
+		# ===== XỬ LÝ CÔNG THỨC TOÁN =====
+		ket_qua_text = process_math_blocks(ket_qua_text)
+
 
 
         except Exception as e:
