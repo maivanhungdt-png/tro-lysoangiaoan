@@ -5,22 +5,30 @@ import tempfile
 import os
 import io
 import re
-# ===== XỬ LÝ CÔNG THỨC TOÁN THCS (LaTeX → MathType) =====
 
-# ===== XỬ LÝ CÔNG THỨC TOÁN THCS (CHUẨN SGK) =====
+# =========================================================
+# XỬ LÝ CÔNG THỨC TOÁN THCS – CHUẨN SGK + MATHYPE
+# =========================================================
 import re
+
+def auto_wrap_math(text: str) -> str:
+    """
+    TỰ ĐỘNG BỌC [MATH]...[/MATH] cho các biểu thức toán SGK
+    nếu AI quên bọc thẻ.
+    """
+    pattern = r'(?<!\[MATH\])(\b(?:\\frac\{.*?\}\{.*?\}|\\sqrt\{.*?\}|[0-9a-zA-Z]+(?:\^[0-9a-zA-Z]+)?\s*(?:=|>|<|≥|≤)\s*[0-9a-zA-Z]+(?:\^[0-9a-zA-Z]+)?))'
+    return re.sub(pattern, r'[MATH]\1[/MATH]', text)
+
 
 def process_math_blocks(text: str) -> str:
     """
-    Chuẩn đầu ra:
-    - Bỏ thẻ [MATH] [/MATH]
-    - Giữ NGUYÊN LaTeX cơ bản
-    - Không chuyển đổi ký hiệu
-    - Phục vụ MathType Batch Convert
+    CHUẨN ĐẦU RA CHO WORD + MATHTYPE
+    - Bóc [MATH] [/MATH]
+    - Giữ nguyên LaTeX cơ bản
     """
     def repl(match):
         expr = match.group(1).strip()
-        # bỏ dấu $ nếu AI lỡ sinh
+        # bỏ $ nếu AI lỡ sinh
         expr = re.sub(r'\$(.*?)\$', r'\1', expr)
         return expr
 
@@ -458,9 +466,9 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                 response = model.generate_content(input_data)
                 ket_qua_text = response.text
 
-                # ===== XỬ LÝ CÔNG THỨC TOÁN =====
+                # ===== XỬ LÝ CÔNG THỨC TOÁN (CHUẨN SGK + MATHYPE) =====
+                ket_qua_text = auto_wrap_math(ket_qua_text)
                 ket_qua_text = process_math_blocks(ket_qua_text)
-
 
 
         except Exception as e:
