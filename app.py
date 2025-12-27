@@ -231,7 +231,7 @@ st.markdown("""
 # --- 4. GIAO DIỆN CHÍNH ---
 st.markdown("""
 <div class="main-header">
-    <h1>📘 TRỢ LÝ SOẠN GIÁO ÁN KHUNG NĂNG LỰC SỐ TỰ ĐỘNG (NLS)</h1>
+    <h1>📘 TRỢ LÝ TẠO KẾ HOẠCH BÀI DẠY THCS CHUẨN ĐỊNH DẠNG 2 CỘT ĐÚNG MẪU 5512 TỰ ĐỘNG TÍCH HỢP KHUNG NĂNG LỰC SỐ (NLS)</h1>
     <p>Tác giả: Mai Văn Hùng - Trường THCS Đồng Yên - SĐT: 0941037116</p>
 </div>
 """, unsafe_allow_html=True)
