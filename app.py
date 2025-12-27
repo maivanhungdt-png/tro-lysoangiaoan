@@ -10,48 +10,53 @@ import re
 def latex_to_mathtype(expr: str) -> str:
     expr = expr.strip()
 
-    # Phân số
-    while re.search(r'\\frac\{[^{}]*\}\{[^{}]*\}', expr):
+    # ===== PHÂN SỐ → MATH TYPE LINEAR =====
+    # \frac{a}{b} → frac(a,b)
+    while re.search(r'\\frac\{([^{}]+)\}\{([^{}]+)\}', expr):
         expr = re.sub(
             r'\\frac\{([^{}]+)\}\{([^{}]+)\}',
-            r'(\1)/(\2)',
+            r'frac(\1,\2)',
             expr
         )
 
-    # Căn
-    expr = re.sub(r'\\sqrt\{([^{}]+)\}', r'sqrt(\1)', expr)
+    # ===== CĂN BẬC HAI =====
+    # \sqrt{x} → rad(x)
+    expr = re.sub(r'\\sqrt\{([^{}]+)\}', r'rad(\1)', expr)
 
-    # Lũy thừa
+    # ===== LŨY THỪA =====
+    # x^{2} → x^(2)
     expr = re.sub(r'\^\{([^}]+)\}', r'^(\1)', expr)
 
-    # Chỉ số dưới
+    # ===== CHỈ SỐ DƯỚI =====
     expr = re.sub(r'_\{([^}]+)\}', r'_(\1)', expr)
 
-    # Hệ phương trình
-    expr = expr.replace(r'\begin{cases}', '{')
-    expr = expr.replace(r'\end{cases}', '}')
-    expr = expr.replace(r'\\', '; ')
-
-    # So sánh
+    # ===== SO SÁNH =====
     expr = expr.replace(r'\le', '≤')
     expr = expr.replace(r'\ge', '≥')
     expr = expr.replace(r'\ne', '≠')
 
-    # Ký hiệu THCS
+    # ===== KÝ HIỆU HÌNH HỌC + SGK =====
     replacements = {
         r'\Delta': 'Δ',
-        r'\angle': '∠',
         r'\triangle': 'Δ',
-        r'\perp': '⟂',
+        r'\angle': '∠',
+        r'\perp': '⊥',
         r'\parallel': '∥',
         r'\pm': '±',
-        r'\cdot': '*',
-        r'\times': '*',
+        r'\cdot': '.',      # nhân SGK THCS
+        r'\times': '.',     # nhân SGK THCS
     }
     for k, v in replacements.items():
         expr = expr.replace(k, v)
 
-    # Bỏ ngoặc LaTeX
+    # ===== ĐỘ =====
+    expr = expr.replace(r'^\circ', '°')
+
+    # ===== LOẠI BỎ HÀM NGOÀI THCS =====
+    for f in ['int', 'lim', 'log', 'ln', 'sin', 'cos', 'tan']:
+        expr = expr.replace(f, '')
+
+    # ===== BỎ NGOẶC LATEX =====
     expr = expr.replace('{', '').replace('}', '')
 
     return expr
