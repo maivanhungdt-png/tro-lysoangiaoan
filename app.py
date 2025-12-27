@@ -140,7 +140,7 @@ def create_doc_stable(content, ten_bai, lop):
                 i += 1
             
             if len(table_lines) >= 3: 
-                try:
+                # REMOVED stray try:
                     valid_rows = [r for r in table_lines if '---' not in r]
                     if valid_rows:
                         cols_count = len(valid_rows[0].split('|')) - 2 
@@ -324,7 +324,7 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
     if not api_key: st.toast("Thiếu API Key!", icon="❌")
     elif not uploaded_files and not noidung_bosung and not has_framework: st.toast("Thiếu tài liệu!", icon="⚠️")
     else:
-        try:
+        # REMOVED stray try:
             with st.spinner('AI đang soạn giáo án (Times New Roman 14pt, A4, Căn lề chuẩn)...'):
                 model = genai.GenerativeModel('gemini-2.5-flash-lite-preview-09-2025')
                 
