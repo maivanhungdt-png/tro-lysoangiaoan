@@ -477,11 +477,11 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                     input_data.append(noidung_bosung)
 
                 # === SINH KẾT QUẢ ===
-		response = model.generate_content(input_data)
-		ket_qua_text = response.text
+                response = model.generate_content(input_data)
+                ket_qua_text = response.text
 
-		# ===== XỬ LÝ CÔNG THỨC TOÁN =====
-		ket_qua_text = process_math_blocks(ket_qua_text)
+                # ===== XỬ LÝ CÔNG THỨC TOÁN =====
+                ket_qua_text = process_math_blocks(ket_qua_text)
 
 
 
