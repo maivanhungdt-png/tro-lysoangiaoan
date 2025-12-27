@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit.components.v1 as components
 import google.generativeai as genai
 from PIL import Image
 import tempfile
@@ -140,7 +139,7 @@ def create_doc_stable(content, ten_bai, lop):
                 i += 1
             
             if len(table_lines) >= 3: 
-                # REMOVED stray try:
+                try:
                     valid_rows = [r for r in table_lines if '---' not in r]
                     if valid_rows:
                         cols_count = len(valid_rows[0].split('|')) - 2 
@@ -177,7 +176,10 @@ def create_doc_stable(content, ten_bai, lop):
                                                 run.font.size = Pt(14)
                                             else:
                                                 add_formatted_text(p, sub_line)
-            continue 
+        except Exception:
+            i += 1
+            continue
+
             
         if not line:
             i += 1
@@ -300,21 +302,7 @@ c1, c2 = st.columns(2)
 with c1: lop = st.text_input("📚 Lớp:", "Lớp 6")
 with c2: ten_bai = st.text_input("📌 Tên bài học:", placeholder="Ví dụ: bài...")
 
-noidung_bosung = st.text_area(
-    "✍️ Ghi chú bổ sung:",
-    height=120
-)
-import base64
-st.markdown("### 📋 COPY 1 CLICK")
-components.html(f"""
-<button onclick=\"const text = atob('{encoded}');navigator.clipboard.writeText(text);\"
-style=\"background:linear-gradient(90deg,#11998e,#38ef7d);color:white;
-border:none;padding:14px 28px;font-size:16px;border-radius:10px;cursor:pointer;\">
-📋 COPY TOÀN BỘ NỘI DUNG
-</button>
-<p style='color:green;margin-top:8px;'>✔ Bấm 1 lần là copy xong</p>
-""", height=130)
-
+noidung_bosung = st.text_area("✍️ Ghi chú thêm (nội dung/kiến thức):", height=100)
 yeu_cau_them = st.text_input("💡 Yêu cầu đặc biệt:", placeholder="Ví dụ: Tích hợp trò chơi khởi động...")
 
 # 3. NÚT XỬ LÝ
@@ -323,7 +311,7 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
     if not api_key: st.toast("Thiếu API Key!", icon="❌")
     elif not uploaded_files and not noidung_bosung and not has_framework: st.toast("Thiếu tài liệu!", icon="⚠️")
     else:
-        # REMOVED stray try:
+        try:
             with st.spinner('AI đang soạn giáo án (Times New Roman 14pt, A4, Căn lề chuẩn)...'):
                 model = genai.GenerativeModel('gemini-2.5-flash-lite-preview-09-2025')
                 
@@ -515,9 +503,7 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                     ket_qua_text = auto_wrap_math(ket_qua_text)
                     ket_qua_text = process_math_blocks(ket_qua_text)
 
-            
-        try:
-        except Exception as e:
+            except Exception as e:
                 st.error(f"Có lỗi xảy ra: {e}")
                 st.stop()
 
