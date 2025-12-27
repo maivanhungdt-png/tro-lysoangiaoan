@@ -321,6 +321,7 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                 - Mỗi ý trong mục I.2.c) phải được chuyển hóa thành ÍT NHẤT 01 HÀNH ĐỘNG CỤ THỂ của học sinh trong các hoạt động dạy học.
                 - Không được bổ sung hoặc suy diễn thêm năng lực số ngoài mục I.2.c).
                 Nếu trong Phần III còn thiếu bất kỳ nội dung nào đã nêu trong mục I.2.c), phải điều chỉnh lại hoạt động cho phù hợp trước khi hoàn thành bài soạn.
+                Khi tích hợp năng lực số trong Tiến trình dạy học, phải viết dưới dạng HÀNH ĐỘNG HỌC TẬP CỤ THỂ của học sinh trong cột “Hoạt động của giáo viên và học sinh”; không dùng ngoặc đơn, không ghi chú thích hay nhãn “tích hợp năng lực số”.
 
                 III. Tiến trình dạy học
                 CẤU TRÚC CHUNG:
@@ -356,7 +357,7 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
 		c) Sản phẩm
 		d) Tổ chức thực hiện (chỉ ghi đúng dòng này xong đến bảng luôn)
 		Bảng 2 cột
-
+		
 		VỚI MỖI HOẠT ĐỘNG, PHẢI TRÌNH BÀY ĐÚNG THỨ TỰ:
 		a) Mục tiêu
 		b) Nội dung
@@ -427,6 +428,10 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                 - Tuyệt đối chỉ bao gồm 4 Hoạt động, không phát sinh thêm.
                 - LUÔN LUÔN TUÂN THỦ THEO NHỮNG YÊU CẦU TRÊN
 
+                *Hướng dẫn về nhà:
+		- Ôn lại nội dung kiến thức đã học.
+		- Hoàn thành nốt các bài tập còn thiếu trên lớp và làm các bài tập cong lsij trong sách giáo khoa ...
+		- Chuẩn bị trước bài: “........................”.                
                 IV. Điều chỉnh sau tiết dạy
 
                 Lưu ý chung: Bám sát nội dung trong Sách giáo khoa và sách giáo viên (từ tài liệu đính kèm) để đưa nội dung vào bài soạn cho chính xác. KHÔNG dùng ký tự # ở đầu dòng.
