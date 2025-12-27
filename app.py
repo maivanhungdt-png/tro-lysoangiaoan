@@ -10,32 +10,39 @@ import re
 def latex_to_mathtype(expr: str) -> str:
     expr = expr.strip()
 
-    # ===== PHÂN SỐ → MATH TYPE LINEAR =====
-    # \frac{a}{b} → frac(a,b)
+    # ===== PHÂN SỐ → DẠNG SGK a/b =====
     while re.search(r'\\frac\{([^{}]+)\}\{([^{}]+)\}', expr):
         expr = re.sub(
             r'\\frac\{([^{}]+)\}\{([^{}]+)\}',
-            r'frac(\1,\2)',
+            r'(\1)/(\2)',
             expr
         )
 
     # ===== CĂN BẬC HAI =====
-    # \sqrt{x} → rad(x)
-    expr = re.sub(r'\\sqrt\{([^{}]+)\}', r'rad(\1)', expr)
+    expr = re.sub(r'\\sqrt\{([^{}]+)\}', r'√(\1)', expr)
 
-    # ===== LŨY THỪA =====
-    # x^{2} → x^(2)
-    expr = re.sub(r'\^\{([^}]+)\}', r'^(\1)', expr)
+    # ===== LŨY THỪA → CHỈ SỐ TRÊN =====
+    power_map = {
+        '0':'⁰','1':'¹','2':'²','3':'³','4':'⁴',
+        '5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹',
+        'n':'ⁿ'
+    }
+
+    def power_replace(match):
+        exp = match.group(1)
+        return ''.join(power_map.get(c, f'^({c})') for c in exp)
+
+    expr = re.sub(r'\^\{([^}]+)\}', lambda m: power_replace(m), expr)
 
     # ===== CHỈ SỐ DƯỚI =====
-    expr = re.sub(r'_\{([^}]+)\}', r'_(\1)', expr)
+    expr = re.sub(r'_\{([^}]+)\}', r'_\1', expr)
 
     # ===== SO SÁNH =====
     expr = expr.replace(r'\le', '≤')
     expr = expr.replace(r'\ge', '≥')
     expr = expr.replace(r'\ne', '≠')
 
-    # ===== KÝ HIỆU HÌNH HỌC + SGK =====
+    # ===== KÝ HIỆU HÌNH HỌC – SGK =====
     replacements = {
         r'\Delta': 'Δ',
         r'\triangle': 'Δ',
@@ -43,8 +50,8 @@ def latex_to_mathtype(expr: str) -> str:
         r'\perp': '⊥',
         r'\parallel': '∥',
         r'\pm': '±',
-        r'\cdot': '.',      # nhân SGK THCS
-        r'\times': '.',     # nhân SGK THCS
+        r'\cdot': '.',
+        r'\times': '.',
     }
     for k, v in replacements.items():
         expr = expr.replace(k, v)
@@ -52,7 +59,7 @@ def latex_to_mathtype(expr: str) -> str:
     # ===== ĐỘ =====
     expr = expr.replace(r'^\circ', '°')
 
-    # ===== LOẠI BỎ HÀM NGOÀI THCS =====
+    # ===== LOẠI HÀM KHÔNG THUỘC THCS =====
     for f in ['int', 'lim', 'log', 'ln', 'sin', 'cos', 'tan']:
         expr = expr.replace(f, '')
 
