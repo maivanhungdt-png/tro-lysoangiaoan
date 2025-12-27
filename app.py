@@ -7,6 +7,9 @@ import io
 import re
 # ===== XỬ LÝ CÔNG THỨC TOÁN THCS (LaTeX → MathType) =====
 
+# ===== XỬ LÝ CÔNG THỨC TOÁN THCS (CHUẨN SGK) =====
+import re
+
 def latex_to_mathtype(expr: str) -> str:
     expr = expr.strip()
 
@@ -24,20 +27,28 @@ def latex_to_mathtype(expr: str) -> str:
     # ===== CĂN BẬC HAI =====
     expr = re.sub(r'\\sqrt\{([^{}]+)\}', r'√(\1)', expr)
 
-    # ===== LŨY THỪA → CHỈ SỐ TRÊN (x², x³, xⁿ) =====
+    # ===== SỐ MŨ – BẮT MỌI TRƯỜNG HỢP THCS =====
     power_map = {
         '0':'⁰','1':'¹','2':'²','3':'³','4':'⁴',
-        '5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹',
-        'n':'ⁿ'
+        '5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'
     }
 
-    def power_replace(match):
-        exp = match.group(1)
-        if exp in power_map:
-            return power_map[exp]
-        return '^(' + exp + ')'
+    def to_superscript(num):
+        return ''.join(power_map.get(c, '^'+c) for c in num)
 
-    expr = re.sub(r'\^\{([^}]+)\}', lambda m: power_replace(m), expr)
+    # (x+1)^{2}, a^{10}
+    expr = re.sub(
+        r'(\([^)]+\)|[a-zA-Z0-9]+)\^\{(\d+)\}',
+        lambda m: m.group(1) + to_superscript(m.group(2)),
+        expr
+    )
+
+    # (x+1)^2, a^3, 10^2
+    expr = re.sub(
+        r'(\([^)]+\)|[a-zA-Z0-9]+)\^(\d+)',
+        lambda m: m.group(1) + to_superscript(m.group(2)),
+        expr
+    )
 
     # ===== CHỈ SỐ DƯỚI =====
     expr = re.sub(r'_\{([^}]+)\}', r'_\1', expr)
@@ -47,7 +58,7 @@ def latex_to_mathtype(expr: str) -> str:
     expr = expr.replace(r'\ge', '≥')
     expr = expr.replace(r'\ne', '≠')
 
-    # ===== HÌNH HỌC – ĐÚNG SGK =====
+    # ===== HÌNH HỌC – CHUẨN SGK =====
     replacements = {
         r'\Delta': 'Δ',
         r'\triangle': 'Δ',
@@ -62,7 +73,7 @@ def latex_to_mathtype(expr: str) -> str:
         expr = expr.replace(k, v)
 
     # ===== ĐỘ =====
-    expr = expr.replace(r'^\circ', '°')
+    expr = expr.replace(r'\^\circ', '°')
 
     # ===== LOẠI BỎ HÀM NGOÀI THCS =====
     for f in ['int', 'lim', 'log', 'ln', 'sin', 'cos', 'tan']:
@@ -72,20 +83,18 @@ def latex_to_mathtype(expr: str) -> str:
     # ===== DỌN SẠCH NGOẶC LATEX =====
     expr = expr.replace('{', '').replace('}', '')
 
-    # ===== GỌN KHOẢNG TRẮNG =====
+    # ===== LÀM ĐẸP DẤU =====
+    expr = re.sub(r'=', ' = ', expr)
+    expr = re.sub(r',', ', ', expr)
     expr = re.sub(r'\s+', ' ', expr).strip()
 
     return expr
 
 
 def process_math_blocks(text: str) -> str:
-    def repl(match):
-        latex = match.group(1)
-        return latex_to_mathtype(latex)
-
     return re.sub(
         r'\[MATH\](.*?)\[/MATH\]',
-        lambda m: repl(m),
+        lambda m: latex_to_mathtype(m.group(1)),
         text,
         flags=re.DOTALL
     )
