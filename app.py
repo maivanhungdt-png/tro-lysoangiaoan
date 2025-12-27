@@ -301,10 +301,11 @@ c1, c2 = st.columns(2)
 with c1: lop = st.text_input("📚 Lớp:", "Lớp 6")
 with c2: ten_bai = st.text_input("📌 Tên bài học:", placeholder="Ví dụ: bài...")
 
-noidung_bosung = 
+noidung_bosung = st.text_area(
+    "✍️ Ghi chú bổ sung:",
+    height=120
+)
 import base64
-encoded = base64.b64encode(ket_qua_text.encode("utf-8")).decode("utf-8")
-
 st.markdown("### 📋 COPY 1 CLICK")
 components.html(f"""
 <button onclick=\"const text = atob('{encoded}');navigator.clipboard.writeText(text);\"
