@@ -12,6 +12,12 @@ import re
 
 def latex_to_mathtype(expr: str) -> str:
     expr = expr.strip()
+    # ===== LOẠI BỎ KÝ HIỆU NGOÀI SGK =====
+    expr = re.sub(r'\\underbrace\{.*?\}_\{.*?\}', '', expr)
+    expr = re.sub(r'\\overbrace\{.*?\}_\{.*?\}', '', expr)
+    expr = re.sub(r'\\mathbb\{.*?\}', 'N', expr)
+    expr = re.sub(r'\\text\{.*?\}', '', expr)
+
 
     # ===== CHUẨN DẤU TRỪ =====
     expr = expr.replace('-', '−')
@@ -478,6 +484,14 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                 Lưu ý chung: Bám sát nội dung trong Sách giáo khoa và sách giáo viên (từ tài liệu đính kèm) để đưa nội dung vào bài soạn cho chính xác. KHÔNG dùng ký tự # ở đầu dòng.
 
                 QUY ƯỚC VIẾT CÔNG THỨC TOÁN (BẮT BUỘC TUÂN THỦ):
+		CẤM TUYỆT ĐỐI sử dụng các ký hiệu và lệnh sau trong công thức:
+		- \underbrace
+		- \overbrace
+		- \mathbb
+		- \text
+		- \displaystyle
+		- \left, \right
+		Nếu cần diễn giải, PHẢI viết bằng lời theo văn phong SGK Toán THCS.
 		- Ưu tiên viết công thức theo kiểu SGK THCS: a/b, x², √(x+1), dùng dấu “.” cho phép nhân.
 		- TẤT CẢ công thức toán học (biểu thức, phương trình, hệ phương trình, công thức, kết luận)
   đều phải đặt trong cặp thẻ [MATH] ... [/MATH].
