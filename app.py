@@ -308,12 +308,19 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                 2. Về năng lực: Trong phần này lại chia thành các phần sau:
                 a) Năng lực đặc thù
                 b) Năng lực chung
-                c) Tích hợp năng lực số, 
+                c) Tích hợp năng lực số
+                Nội dung tại mục c) “Tích hợp năng lực số” phải được coi là DỮ LIỆU ĐẦU VÀO BẮT BUỘC để thiết kế Phần III. Tiến trình dạy học, 
                 3. Về phẩm chất.
                 
                 II. Thiết bị dạy học và học liệu
                 1. Giáo viên
                 2. Học sinh
+
+                KHI SOẠN PHẦN III. TIẾN TRÌNH DẠY HỌC:
+                - Phải sử dụng TRỰC TIẾP các ý đã nêu trong mục I.2.c) Tích hợp năng lực số.
+                - Mỗi ý trong mục I.2.c) phải được chuyển hóa thành ÍT NHẤT 01 HÀNH ĐỘNG CỤ THỂ của học sinh trong các hoạt động dạy học.
+                - Không được bổ sung hoặc suy diễn thêm năng lực số ngoài mục I.2.c).
+                Nếu trong Phần III còn thiếu bất kỳ nội dung nào đã nêu trong mục I.2.c), phải điều chỉnh lại hoạt động cho phù hợp trước khi hoàn thành bài soạn.
 
                 III. Tiến trình dạy học
                 CẤU TRÚC CHUNG:
