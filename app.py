@@ -432,39 +432,43 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                 model = genai.GenerativeModel('gemini-2.5-flash-lite-preview-09-2025')
                 # ===== CHỌN PROMPT THEO MODE =====
                 if MODE_GIAO_AN_GOC:
-                    prompt_instruction = f"""Đóng vai là một Giáo viên THCS am hiểu Công văn 5512.
+                    prompt_instruction = f"""Đóng vai là Giáo viên THCS, am hiểu Công văn 5512.
 
 ⚠️ TÀI LIỆU ĐẦU VÀO LÀ GIÁO ÁN HOÀN CHỈNH.
 
 YÊU CẦU BẮT BUỘC:
-- GIỮ NGUYÊN 100% nội dung giáo án đã có.
+- GIỮ NGUYÊN 100% cấu trúc giáo án hiện có.
 - GIỮ NGUYÊN toàn bộ bảng 2 cột.
-- GIỮ NGUYÊN hình vẽ, sơ đồ trong bảng (nếu có).
-- KHÔNG viết lại nội dung.
-- KHÔNG diễn giải lại.
-- KHÔNG thêm bảng mới.
-- KHÔNG tạo hình minh họa mới.
+- GIỮ NGUYÊN thứ tự các hoạt động, các bước (Bước 1 → Bước 4).
+- GIỮ NGUYÊN nội dung cột “Ghi bảng / Sản phẩm cần đạt”.
+- GIỮ NGUYÊN toàn bộ hình vẽ, sơ đồ (nếu có trong giáo án gốc).
 
-CHỈ ĐƯỢC PHÉP THỰC HIỆN:
-1. Bổ sung mục I.2.c – Tích hợp năng lực số (nếu chưa có).
-2. Chuyển hóa năng lực số thành HÀNH ĐỘNG CỤ THỂ của học sinh
-   trong cột “Hoạt động của giáo viên và học sinh”.
-3. Tuyệt đối KHÔNG chỉnh sửa cột “Ghi bảng”.
+TUYỆT ĐỐI KHÔNG:
+- Viết lại bảng.
+- Sinh bảng mới.
+- Chuyển nội dung ra ngoài bảng.
+- Thêm đoạn thuyết minh ngoài bảng.
+- Thêm mục hay tiêu đề mới.
 
-Cách thể hiện năng lực số:
-- Viết dưới dạng: “HS sử dụng…”, “HS kiểm tra…”, “HS đối chiếu…”
-- Không ghi nhãn (NLS), không chú thích.
+NHIỆM VỤ DUY NHẤT ĐƯỢC PHÉP LÀ:
+- BỔ SUNG NĂNG LỰC SỐ bằng cách
+  CHÈN HÀNH ĐỘNG HỌC TẬP CỤ THỂ CỦA HỌC SINH
+  vào cột “Hoạt động của giáo viên và học sinh”.
 
-Phải tuân thủ đúng cấu trúc Công văn 5512.
-"""
-                else:
-                    prompt_instruction = f"""Đóng vai là một Giáo viên THCS với hơn 15 năm kinh nghiệm dạy học, am hiểu chương trình GDPT 2018.
-Nhiệm vụ: Soạn Kế hoạch bài dạy (Giáo án) cho bài: "{ten_bai}" - {lop}.
+CÁCH CHÈN NĂNG LỰC SỐ (BẮT BUỘC):
+- Mỗi ý năng lực số phải được chuyển thành 1 hành động của HS.
+- Chỉ chèn vào:
+  + Bước 2: Thực hiện nhiệm vụ
+  + hoặc Bước 3: Báo cáo – thảo luận
+- Viết theo dạng:
+  “HS sử dụng …”, “HS thao tác …”, “HS đối chiếu …”.
+- Không ghi nhãn “tích hợp năng lực số”.
+- Không đặt năng lực số ngoài bảng.
 
-DỮ LIỆU ĐẦU VÀO:
-- (Nếu có) File PDF Khung năng lực số đính kèm.
-- Các tài liệu hình ảnh/PDF thầy cô tải lên.
-- Ghi chú bổ sung: "{noidung_bosung}".
+Nếu giáo án có nhiều hoạt động, hãy phân bổ hợp lý
+hành động năng lực số vào các hoạt động phù hợp,
+nhưng KHÔNG được tạo hoạt động mới.
+
 """
 
 
