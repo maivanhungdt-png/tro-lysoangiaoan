@@ -465,7 +465,7 @@ KHI SOẠN PHẦN III. TIẾN TRÌNH DẠY HỌC:
                 - Mỗi ý trong mục I.2.c) phải được chuyển hóa thành ÍT NHẤT 01 HÀNH ĐỘNG CỤ THỂ của học sinh trong các hoạt động dạy học.
                 - Không được bổ sung hoặc suy diễn thêm năng lực số ngoài mục I.2.c).
                 Nếu trong Phần III còn thiếu bất kỳ nội dung nào đã nêu trong mục I.2.c), phải điều chỉnh lại hoạt động cho phù hợp trước khi hoàn thành bài soạn.
-                Khi tích hợp năng lực số trong Tiến trình dạy học, phải viết dưới dạng HÀNH ĐỘNG HỌC TẬP CỤ THỂ của học sinh trong cột “Hoạt động của giáo viên và học sinh”; không dùng ngoặc đơn, không ghi chú thích hay nhãn “tích hợp năng lực số”.
+                Khi tích hợp năng lực số trong Tiến trình dạy học, phải viết dưới dạng HÀNH ĐỘNG HỌC TẬP CỤ THỂ của học sinh trong cột “Hoạt động của giáo viên và học sinh”; không dùng ngoặc đơn.
 
 Nếu giáo án có nhiều hoạt động, hãy phân bổ hợp lý
 hành động năng lực số vào các hoạt động phù hợp,
