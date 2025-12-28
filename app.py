@@ -6,6 +6,7 @@ import os
 import io
 import re
 MODE_GIAO_AN_GOC = True
+MODE_TICH_HOP_NLS = True
 
 MATH_BLOCK = re.compile(r"\$\$(.*?)\$\$", re.DOTALL)
 from docx import Document
@@ -443,12 +444,15 @@ YÊU CẦU BẮT BUỘC:
 - GIỮ NGUYÊN nội dung cột “Ghi bảng / Sản phẩm cần đạt”.
 - GIỮ NGUYÊN toàn bộ hình vẽ, sơ đồ (nếu có trong giáo án gốc).
 
-TUYỆT ĐỐI KHÔNG:
-- Viết lại bảng.
-- Sinh bảng mới.
-- Chuyển nội dung ra ngoài bảng.
-- Thêm đoạn thuyết minh ngoài bảng.
-- Thêm mục hay tiêu đề mới.
+TUYỆT ĐỐI:
+- KHÔNG Chuyển nội dung ra ngoài bảng.
+- KHÔNG Thêm đoạn thuyết minh ngoài bảng.
+- KHÔNG Thêm mục hay tiêu đề mới.
+- KHÔNG được tạo bảng mới.
+- ĐƯỢC PHÉP CHỈNH SỬA NỘI DUNG cột “Hoạt động của giáo viên và học sinh”
+để chèn tích hợp năng lực số.
+- KHÔNG được thay đổi cột “Ghi bảng”.
+
 
 NHIỆM VỤ DUY NHẤT ĐƯỢC PHÉP LÀ:
 - BỔ SUNG NĂNG LỰC SỐ bằng cách
@@ -474,6 +478,20 @@ NHIỆM VỤ DUY NHẤT ĐƯỢC PHÉP LÀ:
   + Chỉ ghi hành động mà không có mã chỉ số.
   + Ghi mã chỉ số mà không có mô tả hành động.
 
+=== KIỂM TRA BẮT BUỘC TRƯỚC KHI KẾT THÚC ===
+
+- Trích xuất TOÀN BỘ các chỉ số trong mục I.2.c – Tích hợp năng lực số.
+- Với MỖI chỉ số, phải:
+  + Chèn ít nhất 01 hành động học tập cụ thể của học sinh
+  + Nằm trong cột “Hoạt động của giáo viên và học sinh”
+  + Viết đúng mẫu:
+
+“Tích hợp năng lực số:
+[MÃ CHỈ SỐ] – [TÊN CHỈ SỐ]: [HÀNH ĐỘNG CỤ THỂ CỦA HS]”
+
+- Nếu còn THIẾU BẤT KỲ chỉ số nào:
+  → KHÔNG ĐƯỢC KẾT THÚC
+  → PHẢI QUAY LẠI CHÈN BỔ SUNG
 
 Nếu giáo án có nhiều hoạt động, hãy phân bổ hợp lý
 hành động năng lực số vào các hoạt động phù hợp,
