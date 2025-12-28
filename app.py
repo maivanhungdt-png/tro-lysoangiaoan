@@ -6,7 +6,27 @@ import os
 import io
 import re
 MODE_GIAO_AN_GOC = True
-MODE_TICH_HOP_NLS = True
+MODE_TICH_HOP_NLS = False
+PROMPT_CHON_MA_NLS = """
+NHIỆM VỤ DUY NHẤT:
+
+1. Đọc TÊN BÀI và MỤC TIÊU trong giáo án được cung cấp.
+2. Đối chiếu với KHUNG NĂNG LỰC SỐ.
+3. CHỈ CHỌN NHỮNG MÃ NĂNG LỰC SỐ PHÙ HỢP.
+
+QUY ĐỊNH NGHIÊM NGẶT:
+- KHÔNG chèn vào giáo án.
+- KHÔNG viết lại giáo án.
+- KHÔNG mô tả hoạt động.
+- KHÔNG tạo mã mới.
+- KHÔNG dùng mã ngoài khung.
+
+KẾT QUẢ TRẢ VỀ DUY NHẤT THEO MẪU:
+
+DANH_SACH_MA:
+- 1.1.TC1a
+- 1.3.TC1a
+"""
 
 MATH_BLOCK = re.compile(r"\$\$(.*?)\$\$", re.DOTALL)
 from docx import Document
@@ -431,6 +451,40 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
         try:
             with st.spinner('AI đang soạn giáo án (Times New Roman 14pt, A4, Căn lề chuẩn)...'):
                 model = genai.GenerativeModel('gemini-2.5-flash-lite-preview-09-2025')
+                # ==============================
+                # PHA 1: AI CHỈ ĐƯỢC CHỌN MÃ NLS
+                # ==============================
+                input_data_ma = [PROMPT_CHON_MA_NLS]
+
+                if has_framework:
+                    input_data_ma.append(genai.upload_file(FILE_KHUNG_NANG_LUC))
+
+                if uploaded_files:
+                    for f in uploaded_files:
+                        if f.type == "application/pdf":
+                            with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
+                                tmp.write(f.getvalue())
+                            input_data_ma.append(genai.upload_file(tmp.name))
+
+                response_ma = model.generate_content(input_data_ma)
+                ds_ma = response_ma.text.strip() 
+                if "1." not in ds_ma:
+                    st.error("❌ Không xác định được mã năng lực số từ giáo án. Vui lòng kiểm tra lại giáo án hoặc khung NLS.")
+                    st.stop()
+
+
+                PROMPT_KHOA_MA = f"""
+                DANH SÁCH MÃ NĂNG LỰC SỐ ĐƯỢC PHÉP SỬ DỤNG (KHÓA CỨNG):
+
+                {ds_ma}
+
+                QUY ĐỊNH BẮT BUỘC:
+                - CHỈ ĐƯỢC SỬ DỤNG CÁC MÃ TRÊN.
+                - KHÔNG ĐƯỢC TẠO MÃ MỚI.
+                - MỖI MÃ CHỈ ĐƯỢC CHÈN 01 LẦN.
+                - KHÔNG ĐƯỢC DÙNG MÃ NGOÀI DANH SÁCH.
+                """
+
                 # ===== CHỌN PROMPT THEO MODE =====
                 if MODE_GIAO_AN_GOC:
                     prompt_instruction = f"""Đóng vai là Giáo viên THCS, am hiểu Công văn 5512.
@@ -502,7 +556,8 @@ nhưng KHÔNG được tạo hoạt động mới.
 
 
                
-                
+                prompt_instruction = prompt_instruction + "\n\n" + PROMPT_KHOA_MA
+
                 prompt_instruction = prompt_instruction + "\n\n" + CAU_TRUC_5512
                 input_data = [prompt_instruction]
                 temp_paths = []
