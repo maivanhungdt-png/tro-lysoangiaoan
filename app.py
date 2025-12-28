@@ -489,67 +489,25 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
                 if MODE_GIAO_AN_GOC:
                     prompt_instruction = f"""Đóng vai là Giáo viên THCS, am hiểu Công văn 5512.
 
+
 ⚠️ TÀI LIỆU ĐẦU VÀO LÀ GIÁO ÁN HOÀN CHỈNH.
 
+NHIỆM VỤ DUY NHẤT:
+- GIỮ NGUYÊN 100% nội dung giáo án gốc.
+- KHÔNG viết lại mục tiêu, nội dung, hoạt động.
+- KHÔNG thêm hoạt động mới.
+- CHỈ chèn các đoạn “Tích hợp năng lực số” vào đúng cột
+  “Hoạt động của giáo viên và học sinh”.
+
 YÊU CẦU BẮT BUỘC:
-- GIỮ NGUYÊN 100% cấu trúc giáo án hiện có.
-- GIỮ NGUYÊN toàn bộ bảng 2 cột.
-- GIỮ NGUYÊN thứ tự các hoạt động, các bước (Bước 1 → Bước 4).
-- GIỮ NGUYÊN nội dung cột “Ghi bảng / Sản phẩm cần đạt”.
-- GIỮ NGUYÊN toàn bộ hình vẽ, sơ đồ (nếu có trong giáo án gốc).
+- GIỮ NGUYÊN cấu trúc, bảng biểu, thứ tự hoạt động
+- KHÔNG tạo bảng mới
+- KHÔNG thay đổi cột “Ghi bảng”
 
-TUYỆT ĐỐI:
-- KHÔNG Chuyển nội dung ra ngoài bảng.
-- KHÔNG Thêm đoạn thuyết minh ngoài bảng.
-- KHÔNG Thêm mục hay tiêu đề mới.
-- KHÔNG được tạo bảng mới.
-- ĐƯỢC PHÉP CHỈNH SỬA NỘI DUNG cột “Hoạt động của giáo viên và học sinh”
-để chèn tích hợp năng lực số.
-- KHÔNG được thay đổi cột “Ghi bảng”.
+⚠️ YÊU CẦU KHI CHÈN NĂNG LỰC SỐ:
+- Ghi đúng mẫu
+- Dùng mã đã KHÓA trong PROMPT_KHOA_MA
 
-
-NHIỆM VỤ DUY NHẤT ĐƯỢC PHÉP LÀ:
-- BỔ SUNG NĂNG LỰC SỐ bằng cách
-  CHÈN HÀNH ĐỘNG HỌC TẬP CỤ THỂ CỦA HỌC SINH
-  vào cột “Hoạt động của giáo viên và học sinh”.
-
-⚠️ YÊU CẦU BẮT BUỘC KHI TÍCH HỢP NĂNG LỰC SỐ:
-
-- Khi chèn năng lực số vào cột “Hoạt động của giáo viên và học sinh”,
-  PHẢI ghi ĐẦY ĐỦ theo cấu trúc sau:
-
-  “Tích hợp năng lực số:
-   [MÃ CHỈ SỐ] – [TÊN CHỈ SỐ]: [HÀNH ĐỘNG CỤ THỂ CỦA HS]”
-
-- Ví dụ:
-  “Tích hợp năng lực số:
-   1.1.TC1a – Nhận biết dữ liệu số: HS sử dụng phần mềm GeoGebra
-   để xác định vị trí tương đối của đường thẳng và đường tròn.
-   1.3.TC1a – Kiểm tra tính đúng đắn: HS đối chiếu kết quả
-   tính toán thủ công với kết quả trên phần mềm.”
-
-- TUYỆT ĐỐI KHÔNG:
-  + Chỉ ghi hành động mà không có mã chỉ số.
-  + Ghi mã chỉ số mà không có mô tả hành động.
-
-=== KIỂM TRA BẮT BUỘC TRƯỚC KHI KẾT THÚC ===
-
-- Trích xuất TOÀN BỘ các chỉ số trong mục I.2.c – Tích hợp năng lực số.
-- Với MỖI chỉ số, phải:
-  + Chèn ít nhất 01 hành động học tập cụ thể của học sinh
-  + Nằm trong cột “Hoạt động của giáo viên và học sinh”
-  + Viết đúng mẫu:
-
-“Tích hợp năng lực số:
-[MÃ CHỈ SỐ] – [TÊN CHỈ SỐ]: [HÀNH ĐỘNG CỤ THỂ CỦA HS]”
-
-- Nếu còn THIẾU BẤT KỲ chỉ số nào:
-  → KHÔNG ĐƯỢC KẾT THÚC
-  → PHẢI QUAY LẠI CHÈN BỔ SUNG
-
-Nếu giáo án có nhiều hoạt động, hãy phân bổ hợp lý
-hành động năng lực số vào các hoạt động phù hợp,
-nhưng KHÔNG được tạo hoạt động mới.
 
 """
 
@@ -558,12 +516,11 @@ nhưng KHÔNG được tạo hoạt động mới.
                
                 prompt_instruction = prompt_instruction + "\n\n" + PROMPT_KHOA_MA
 
-                prompt_instruction = prompt_instruction + "\n\n" + CAU_TRUC_5512
+               
                 input_data = [prompt_instruction]
                 temp_paths = []
                 
-                if has_framework: input_data.append(genai.upload_file(FILE_KHUNG_NANG_LUC))
-                
+                            
                 if uploaded_files:
                     for f in uploaded_files:
                         if f.type == "application/pdf":
