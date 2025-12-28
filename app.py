@@ -5,8 +5,8 @@ import tempfile
 import os
 import io
 import re
-# 👇 THÊM DÒNG NÀY
-from auto_diagram_generator import tao_hinh_tu_noi_dung
+MODE_GIAO_AN_GOC = True
+
 MATH_BLOCK = re.compile(r"\$\$(.*?)\$\$", re.DOTALL)
 from docx import Document
 from docx.shared import Pt, RGBColor, Inches, Cm
@@ -190,27 +190,7 @@ def create_doc_stable(content, ten_bai, lop):
         else:
             p = doc.add_paragraph()
             add_formatted_text(p, line)
-            # ===== TẠO & CHÈN HÌNH MINH HỌA TỰ ĐỘNG =====
-            try:
-                # xác định môn học (đơn giản – có thể mở rộng sau)
-                mon = "Toán"
-                if "vật lí" in ten_bai.lower():
-                    mon = "Vật lí"
-                elif "hóa" in ten_bai.lower():
-                    mon = "Hóa học"
-                elif "sinh" in ten_bai.lower():
-                    mon = "Sinh học"
-                elif "sử" in ten_bai.lower():
-                    mon = "Lịch sử"
-
-                img_path = tao_hinh_tu_noi_dung(mon, line)
-                if img_path:
-                    p_img = doc.add_paragraph("Hình minh họa:")
-                    p_img.runs[0].bold = True
-                    doc.add_picture(img_path, width=Inches(3.5))
-            except Exception:
-                pass
-
+            
         i += 1
         
     return doc
@@ -313,16 +293,45 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
         try:
             with st.spinner('AI đang soạn giáo án (Times New Roman 14pt, A4, Căn lề chuẩn)...'):
                 model = genai.GenerativeModel('gemini-2.5-flash-lite-preview-09-2025')
-                
-                # --- PROMPT CHI TIẾT CỦA THẦY (BẢN GỐC ĐẦY ĐỦ) ---
-                prompt_instruction = f"""
-                Đóng vai là một Giáo viên THCS với hơn 15 năm kinh nghiệm dạy học, am hiểu chương trình GDPT 2018.
-                Nhiệm vụ: Soạn Kế hoạch bài dạy (Giáo án) cho bài: "{ten_bai}" - {lop}.
+                # ===== CHỌN PROMPT THEO MODE =====
+                if MODE_GIAO_AN_GOC:
+                    prompt_instruction = f"""Đóng vai là một Giáo viên THCS am hiểu Công văn 5512.
 
-                DỮ LIỆU ĐẦU VÀO:
-                - (Nếu có) File PDF Khung năng lực số đính kèm: Hãy dùng để đối chiếu nội dung bài học và đưa vào mục Năng lực số.
-                - Các tài liệu hình ảnh/PDF thầy cô tải lên: Phân tích để lấy nội dung kiến thức bài học.
-                - Ghi chú bổ sung: "{noidung_bosung}".
+⚠️ TÀI LIỆU ĐẦU VÀO LÀ GIÁO ÁN HOÀN CHỈNH.
+
+YÊU CẦU BẮT BUỘC:
+- GIỮ NGUYÊN 100% nội dung giáo án đã có.
+- GIỮ NGUYÊN toàn bộ bảng 2 cột.
+- GIỮ NGUYÊN hình vẽ, sơ đồ trong bảng (nếu có).
+- KHÔNG viết lại nội dung.
+- KHÔNG diễn giải lại.
+- KHÔNG thêm bảng mới.
+- KHÔNG tạo hình minh họa mới.
+
+CHỈ ĐƯỢC PHÉP THỰC HIỆN:
+1. Bổ sung mục I.2.c – Tích hợp năng lực số (nếu chưa có).
+2. Chuyển hóa năng lực số thành HÀNH ĐỘNG CỤ THỂ của học sinh
+   trong cột “Hoạt động của giáo viên và học sinh”.
+3. Tuyệt đối KHÔNG chỉnh sửa cột “Ghi bảng”.
+
+Cách thể hiện năng lực số:
+- Viết dưới dạng: “HS sử dụng…”, “HS kiểm tra…”, “HS đối chiếu…”
+- Không ghi nhãn (NLS), không chú thích.
+
+Phải tuân thủ đúng cấu trúc Công văn 5512.
+"""
+                else:
+                    prompt_instruction = f"""Đóng vai là một Giáo viên THCS với hơn 15 năm kinh nghiệm dạy học, am hiểu chương trình GDPT 2018.
+Nhiệm vụ: Soạn Kế hoạch bài dạy (Giáo án) cho bài: "{ten_bai}" - {lop}.
+
+DỮ LIỆU ĐẦU VÀO:
+- (Nếu có) File PDF Khung năng lực số đính kèm.
+- Các tài liệu hình ảnh/PDF thầy cô tải lên.
+- Ghi chú bổ sung: "{noidung_bosung}".
+"""
+
+
+
 
                 YÊU CẦU LUÔN LUÔN TUÂN THỦ CẤU TRÚC (CÔNG VĂN 5512):
                 I. Mục tiêu: Trong phần này lại chia thành các phần sau: 
