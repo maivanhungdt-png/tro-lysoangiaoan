@@ -5,6 +5,8 @@ import tempfile
 import os
 import io
 import re
+# 👇 THÊM DÒNG NÀY
+from auto_diagram_generator import tao_hinh_tu_noi_dung
 MATH_BLOCK = re.compile(r"\$\$(.*?)\$\$", re.DOTALL)
 from docx import Document
 from docx.shared import Pt, RGBColor, Inches, Cm
@@ -188,7 +190,27 @@ def create_doc_stable(content, ten_bai, lop):
         else:
             p = doc.add_paragraph()
             add_formatted_text(p, line)
-            
+            # ===== TẠO & CHÈN HÌNH MINH HỌA TỰ ĐỘNG =====
+            try:
+                # xác định môn học (đơn giản – có thể mở rộng sau)
+                mon = "Toán"
+                if "vật lí" in ten_bai.lower():
+                    mon = "Vật lí"
+                elif "hóa" in ten_bai.lower():
+                    mon = "Hóa học"
+                elif "sinh" in ten_bai.lower():
+                    mon = "Sinh học"
+                elif "sử" in ten_bai.lower():
+                    mon = "Lịch sử"
+
+                img_path = tao_hinh_tu_noi_dung(mon, line)
+                if img_path:
+                    p_img = doc.add_paragraph("Hình minh họa:")
+                    p_img.runs[0].bold = True
+                    doc.add_picture(img_path, width=Inches(3.5))
+            except Exception:
+                pass
+
         i += 1
         
     return doc
