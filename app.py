@@ -5,29 +5,6 @@ import tempfile
 import os
 import io
 import re
-MODE_GIAO_AN_GOC = True
-MODE_TICH_HOP_NLS = False
-PROMPT_CHON_MA_NLS = """
-NHIỆM VỤ DUY NHẤT:
-
-1. Đọc TÊN BÀI và MỤC TIÊU trong giáo án được cung cấp.
-2. Đối chiếu với KHUNG NĂNG LỰC SỐ.
-3. CHỈ CHỌN NHỮNG MÃ NĂNG LỰC SỐ PHÙ HỢP.
-
-QUY ĐỊNH NGHIÊM NGẶT:
-- KHÔNG chèn vào giáo án.
-- KHÔNG viết lại giáo án.
-- KHÔNG mô tả hoạt động.
-- KHÔNG tạo mã mới.
-- KHÔNG dùng mã ngoài khung.
-
-KẾT QUẢ TRẢ VỀ DUY NHẤT THEO MẪU:
-
-DANH_SACH_MA:
-- 1.1.TC1a
-- 1.3.TC1a
-"""
-
 MATH_BLOCK = re.compile(r"\$\$(.*?)\$\$", re.DOTALL)
 from docx import Document
 from docx.shared import Pt, RGBColor, Inches, Cm
@@ -41,143 +18,6 @@ from docx.oxml.ns import nsdecls
 st.set_page_config(page_title="Trợ lý Giáo án NLS", page_icon="📘", layout="centered")
 
 FILE_KHUNG_NANG_LUC = "khungnanglucso.pdf"
-CAU_TRUC_5512 = """
-
-                YÊU CẦU LUÔN LUÔN TUÂN THỦ CẤU TRÚC (CÔNG VĂN 5512):
-                I. Mục tiêu: Trong phần này lại chia thành các phần sau: 
-                1. Về kiến thức, 
-                2. Về năng lực: Trong phần này lại chia thành các phần sau:
-                a) Năng lực đặc thù
-                b) Năng lực chung
-                c) Tích hợp năng lực số
-                Nội dung tại mục c) “Tích hợp năng lực số” phải được coi là DỮ LIỆU ĐẦU VÀO BẮT BUỘC để thiết kế Phần III. Tiến trình dạy học, 
-                3. Về phẩm chất.
-                
-                II. Thiết bị dạy học và học liệu
-                1. Giáo viên
-                2. Học sinh
-
-                KHI SOẠN PHẦN III. TIẾN TRÌNH DẠY HỌC:
-                - Phải sử dụng TRỰC TIẾP các ý đã nêu trong mục I.2.c) Tích hợp năng lực số.
-                - Mỗi ý trong mục I.2.c) phải được chuyển hóa thành ÍT NHẤT 01 HÀNH ĐỘNG CỤ THỂ của học sinh trong các hoạt động dạy học.
-                - Không được bổ sung hoặc suy diễn thêm năng lực số ngoài mục I.2.c).
-                Nếu trong Phần III còn thiếu bất kỳ nội dung nào đã nêu trong mục I.2.c), phải điều chỉnh lại hoạt động cho phù hợp trước khi hoàn thành bài soạn.
-                Khi tích hợp năng lực số trong Tiến trình dạy học, phải viết dưới dạng HÀNH ĐỘNG HỌC TẬP CỤ THỂ của học sinh trong cột “Hoạt động của giáo viên và học sinh”; không dùng ngoặc đơn.
-
-                III. Tiến trình dạy học
-                CẤU TRÚC CHUNG:
-		- 1. Hoạt động 1: Khởi động
-		a) Mục tiêu
-		b) Nội dung
-		c) Sản phẩm
-		d) Tổ chức thực hiện (chỉ ghi đúng dòng này xong đến bảng luôn)
-		Bảng 2 cột
-		- 2. Hoạt động 2: Hình thành kiến thức mới
-  		+ Hoạt động 2.1: ứng với mục (1) của SGK
-		a) Mục tiêu
-		b) Nội dung
-		c) Sản phẩm
-		d) Tổ chức thực hiện (chỉ ghi đúng dòng này xong đến bảng luôn)
-		Bảng 2 cột
-		+ Hoạt động 2.2: ứng với mục (2) của SGK
-		a) Mục tiêu
-		b) Nội dung
-		c) Sản phẩm
-		d) Tổ chức thực hiện (chỉ ghi đúng dòng này xong đến bảng luôn)
-		Bảng 2 cột
-  		(+ Hoạt động 2.3 nếu có)
-		- 3. Hoạt động 3: Luyện tập
-		a) Mục tiêu
-		b) Nội dung
-		c) Sản phẩm
-		d) Tổ chức thực hiện (chỉ ghi đúng dòng này xong đến bảng luôn)
-		Bảng 2 cột
-		- 4. Hoạt động 4: Vận dụng
-		a) Mục tiêu
-		b) Nội dung
-		c) Sản phẩm
-		d) Tổ chức thực hiện (chỉ ghi đúng dòng này xong đến bảng luôn)
-		Bảng 2 cột
-		
-		VỚI MỖI HOẠT ĐỘNG, PHẢI TRÌNH BÀY ĐÚNG THỨ TỰ:
-		a) Mục tiêu
-		b) Nội dung
-		c) Sản phẩm
-		d) Tổ chức thực hiện (chỉ ghi đúng dòng này xong đến bảng luôn)
-		Bảng 2 cột
-
-		CÁC MỤC a), b), c), d) PHẢI VIẾT NGOÀI BẢNG.
-		SAU MỤC d) BẮT BUỘC MỚI ĐẾN BẢNG.
-
-		BẢNG PHẢI VIẾT ĐÚNG DẠNG:
-
-		| Hoạt động của giáo viên và học sinh | Ghi bảng |
-		|---|---|
-		| … | … |
-
-		QUY ĐỊNH CHUNG CHO TẤT CẢ BẢNG (KHÔNG NGOẠI LỆ):
-
-		- Mỗi hoạt động chỉ có 01 bảng.
-		- Mỗi bảng chỉ có 02 hàng (1 hàng tiêu đề, 1 hàng nội dung).
-		- Nội dung trong mỗi ô phải gộp bằng <br>, không chia thành nhiều hàng.
-		- Không dùng gạch đầu dòng tự động trong bảng.
-
-		QUY ĐỊNH BẮT BUỘC CHO CỘT “Hoạt động của giáo viên và học sinh” trong cột Hoạt động của giáo viên và học sinh:
-
-		- Chỉ mô tả thật chi tiết tiến trình tổ chức dạy học theo 4 bước:
-  		Bước 1: Chuyển giao nhiệm vụ (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
-  		Bước 2: Thực hiện nhiệm vụ (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
-  		Bước 3: Báo cáo, thảo luận (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
-  		Bước 4: Kết luận, nhận định (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
-
-		QUY ĐỊNH BẮT BUỘC CHO CỘT “Ghi bảng” (ÁP DỤNG CHO TẤT CẢ HOẠT ĐỘNG):
-		- Ghi KẾT QUẢ NỘI DUNG đạt được sau hoạt động.
-		- Ghi CỤ THỂ, ĐẦY ĐỦ nội dung tương ứng ở SGK.
-		- Có thể bao gồm:
-  		+ HĐx
-  		+ Khái niệm, định nghĩa
-  		+ Nhận xét, kết luận
-  		+ Ví dụ minh họa
-  		+ Luyện tập x
-  		+ Vận dụng x
-  		+ Bảng, sơ đồ, biểu thức
-  		+ Bài tập, câu hỏi và LỜI GIẢI
-
-		ÁP DỤNG RIÊNG:
-		- Hoạt động 1:
-  		+ Ghi bảng: nội dung dẫn nhập, kiến thức nền được huy động.
-		- Hoạt động 2.x:
-  		+ Ghi bảng: TOÀN BỘ nội dung kiến thức mục tương ứng ở sgk (bao gồm các HĐx, Luyện tập x, vận dụng x, theo từng mục 1 nhỏ, 2 nhỏ ... của sách giáo khoa).
-		- Hoạt động 3 (Luyện tập):Chỉ chữa bài tập của sách giáo khoa
-  		+ Ghi bảng: bài tập + lời giải chi tiết.
-		- Hoạt động 4 (Vận dụng):Các bài tập trong sách giáo khoa hoặc các bài toán có tính thực tế
-  		+ Ghi bảng: lời giải bài toán / kết quả tình huống / luật và kết quả trò chơi.
-
-		YÊU CẦU CỨNG:
-		- Không mô tả kết quả sư phạm.
-		- Không lặp lại câu chữ mục tiêu.
-		- Không bỏ trống cột “Ghi bảng”.
-
-                YÊU CẦU CHI TIẾT CHO TIẾN TRÌNH DẠY HỌC:
-		- Hoạt động 2.x:Nếu trong sách giáo khoa ứng với các mục 1, mục 2 .. mà có phần Vận dụng hoặc Vận dụng x, thì phải cho vào cột ghi bảng.
-                - Cần chi tiết cụ thể (đặc biệt là phần ghi bảng có đầy đủ tất cả nội dung trong sách giáo khoa).
-                - Các ý trong tiến trình dạy học được bắt đầu bằng dấu gạch đầu dòng (-).
-                - Tích hợp Học thông qua chơi vào 1 số hoạt động phù hợp.
-                - Riêng các trò chơi trong tiến trình dạy học cần TRÌNH BÀY RÕ LUẬT CHƠI.
-                - Bài học có thể soạn thành nhiều tiết và mỗi tiết chỉ có 45 phút, hãy điều chỉnh lượng kiến thức và hoạt động hợp lý.
-                - Không kèm chú thích nguồn trong bài soạn.
-                - Tuyệt đối chỉ bao gồm 4 Hoạt động, không phát sinh thêm.
-                - LUÔN LUÔN TUÂN THỦ THEO NHỮNG YÊU CẦU TRÊN
-
-                *Hướng dẫn về nhà:
-		- Ôn lại nội dung kiến thức đã học.
-		- Hoàn thành nốt các bài tập còn thiếu trên lớp và làm các bài tập cong lsij trong sách giáo khoa ...
-		- Chuẩn bị trước bài: “........................”.                
-                IV. Điều chỉnh sau tiết dạy
-
-                Lưu ý chung: Bám sát nội dung trong Sách giáo khoa và sách giáo viên (từ tài liệu đính kèm) để đưa nội dung vào bài soạn cho chính xác. KHÔNG dùng ký tự # ở đầu dòng.
-                LƯU Ý QUAN TRỌNG TỪ NGƯỜI DÙNG: {yeu_cau_them}
-                """
 
 # --- 2. HÀM XỬ LÝ WORD (ĐÃ CẬP NHẬT: GẠCH ĐẦU DÒNG THỦ CÔNG) ---
 
@@ -451,76 +291,159 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
         try:
             with st.spinner('AI đang soạn giáo án (Times New Roman 14pt, A4, Căn lề chuẩn)...'):
                 model = genai.GenerativeModel('gemini-2.5-flash-lite-preview-09-2025')
-                # ==============================
-                # PHA 1: AI CHỈ ĐƯỢC CHỌN MÃ NLS
-                # ==============================
-                input_data_ma = [PROMPT_CHON_MA_NLS]
+                
+                # --- PROMPT CHI TIẾT CỦA THẦY (BẢN GỐC ĐẦY ĐỦ) ---
+                prompt_instruction = f"""
+                Đóng vai là một Giáo viên THCS với hơn 15 năm kinh nghiệm dạy học, am hiểu chương trình GDPT 2018.
+                Nhiệm vụ: Soạn Kế hoạch bài dạy (Giáo án) cho bài: "{ten_bai}" - {lop}.
 
-                if has_framework:
-                    input_data_ma.append(genai.upload_file(FILE_KHUNG_NANG_LUC))
+                DỮ LIỆU ĐẦU VÀO:
+                - (Nếu có) File PDF Khung năng lực số đính kèm: Hãy dùng để đối chiếu nội dung bài học và đưa vào mục Năng lực số.
+                - Các tài liệu hình ảnh/PDF thầy cô tải lên: Phân tích để lấy nội dung kiến thức bài học.
+                - Ghi chú bổ sung: "{noidung_bosung}".
 
-                if uploaded_files:
-                    for f in uploaded_files:
-                        if f.type == "application/pdf":
-                            with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
-                                tmp.write(f.getvalue())
-                            input_data_ma.append(genai.upload_file(tmp.name))
+                YÊU CẦU LUÔN LUÔN TUÂN THỦ CẤU TRÚC (CÔNG VĂN 5512):
+                I. Mục tiêu: Trong phần này lại chia thành các phần sau: 
+                1. Về kiến thức, 
+                2. Về năng lực: Trong phần này lại chia thành các phần sau:
+                a) Năng lực đặc thù
+                b) Năng lực chung
+                c) Tích hợp năng lực số
+                Nội dung tại mục c) “Tích hợp năng lực số” phải được coi là DỮ LIỆU ĐẦU VÀO BẮT BUỘC để thiết kế Phần III. Tiến trình dạy học, 
+                3. Về phẩm chất.
+                
+                II. Thiết bị dạy học và học liệu
+                1. Giáo viên
+                2. Học sinh
 
-                response_ma = model.generate_content(input_data_ma)
-                ds_ma = response_ma.text.strip() 
-                if "1." not in ds_ma:
-                    st.error("❌ Không xác định được mã năng lực số từ giáo án. Vui lòng kiểm tra lại giáo án hoặc khung NLS.")
-                    st.stop()
+                KHI SOẠN PHẦN III. TIẾN TRÌNH DẠY HỌC:
+                - Phải sử dụng TRỰC TIẾP các ý đã nêu trong mục I.2.c) Tích hợp năng lực số.
+                - Mỗi ý trong mục I.2.c) phải được chuyển hóa thành ÍT NHẤT 01 HÀNH ĐỘNG CỤ THỂ của học sinh trong các hoạt động dạy học.
+                - Không được bổ sung hoặc suy diễn thêm năng lực số ngoài mục I.2.c).
+                Nếu trong Phần III còn thiếu bất kỳ nội dung nào đã nêu trong mục I.2.c), phải điều chỉnh lại hoạt động cho phù hợp trước khi hoàn thành bài soạn.
+                Khi tích hợp năng lực số trong Tiến trình dạy học, phải viết dưới dạng HÀNH ĐỘNG HỌC TẬP CỤ THỂ của học sinh trong cột “Hoạt động của giáo viên và học sinh”; không dùng ngoặc đơn, không ghi chú thích hay nhãn “tích hợp năng lực số”.
 
+                III. Tiến trình dạy học
+                CẤU TRÚC CHUNG:
+		- 1. Hoạt động 1: Khởi động
+		a) Mục tiêu
+		b) Nội dung
+		c) Sản phẩm
+		d) Tổ chức thực hiện (chỉ ghi đúng dòng này xong đến bảng luôn)
+		Bảng 2 cột
+		- 2. Hoạt động 2: Hình thành kiến thức mới
+  		+ Hoạt động 2.1: ứng với mục (1) của SGK
+		a) Mục tiêu
+		b) Nội dung
+		c) Sản phẩm
+		d) Tổ chức thực hiện (chỉ ghi đúng dòng này xong đến bảng luôn)
+		Bảng 2 cột
+		+ Hoạt động 2.2: ứng với mục (2) của SGK
+		a) Mục tiêu
+		b) Nội dung
+		c) Sản phẩm
+		d) Tổ chức thực hiện (chỉ ghi đúng dòng này xong đến bảng luôn)
+		Bảng 2 cột
+  		(+ Hoạt động 2.3 nếu có)
+		- 3. Hoạt động 3: Luyện tập
+		a) Mục tiêu
+		b) Nội dung
+		c) Sản phẩm
+		d) Tổ chức thực hiện (chỉ ghi đúng dòng này xong đến bảng luôn)
+		Bảng 2 cột
+		- 4. Hoạt động 4: Vận dụng
+		a) Mục tiêu
+		b) Nội dung
+		c) Sản phẩm
+		d) Tổ chức thực hiện (chỉ ghi đúng dòng này xong đến bảng luôn)
+		Bảng 2 cột
+		
+		VỚI MỖI HOẠT ĐỘNG, PHẢI TRÌNH BÀY ĐÚNG THỨ TỰ:
+		a) Mục tiêu
+		b) Nội dung
+		c) Sản phẩm
+		d) Tổ chức thực hiện (chỉ ghi đúng dòng này xong đến bảng luôn)
+		Bảng 2 cột
 
-                PROMPT_KHOA_MA = f"""
-                DANH SÁCH MÃ NĂNG LỰC SỐ ĐƯỢC PHÉP SỬ DỤNG (KHÓA CỨNG):
+		CÁC MỤC a), b), c), d) PHẢI VIẾT NGOÀI BẢNG.
+		SAU MỤC d) BẮT BUỘC MỚI ĐẾN BẢNG.
 
-                {ds_ma}
+		BẢNG PHẢI VIẾT ĐÚNG DẠNG:
 
-                QUY ĐỊNH BẮT BUỘC:
-                - CHỈ ĐƯỢC SỬ DỤNG CÁC MÃ TRÊN.
-                - KHÔNG ĐƯỢC TẠO MÃ MỚI.
-                - MỖI MÃ CHỈ ĐƯỢC CHÈN 01 LẦN.
-                - KHÔNG ĐƯỢC DÙNG MÃ NGOÀI DANH SÁCH.
+		| Hoạt động của giáo viên và học sinh | Ghi bảng |
+		|---|---|
+		| … | … |
+
+		QUY ĐỊNH CHUNG CHO TẤT CẢ BẢNG (KHÔNG NGOẠI LỆ):
+
+		- Mỗi hoạt động chỉ có 01 bảng.
+		- Mỗi bảng chỉ có 02 hàng (1 hàng tiêu đề, 1 hàng nội dung).
+		- Nội dung trong mỗi ô phải gộp bằng <br>, không chia thành nhiều hàng.
+		- Không dùng gạch đầu dòng tự động trong bảng.
+
+		QUY ĐỊNH BẮT BUỘC CHO CỘT “Hoạt động của giáo viên và học sinh” trong cột Hoạt động của giáo viên và học sinh:
+
+		- Chỉ mô tả thật chi tiết tiến trình tổ chức dạy học theo 4 bước:
+  		Bước 1: Chuyển giao nhiệm vụ (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
+  		Bước 2: Thực hiện nhiệm vụ (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
+  		Bước 3: Báo cáo, thảo luận (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
+  		Bước 4: Kết luận, nhận định (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
+
+		QUY ĐỊNH BẮT BUỘC CHO CỘT “Ghi bảng” (ÁP DỤNG CHO TẤT CẢ HOẠT ĐỘNG):
+		- Ghi KẾT QUẢ NỘI DUNG đạt được sau hoạt động.
+		- Ghi CỤ THỂ, ĐẦY ĐỦ nội dung tương ứng ở SGK.
+		- Có thể bao gồm:
+  		+ HĐx
+  		+ Khái niệm, định nghĩa
+  		+ Nhận xét, kết luận
+  		+ Ví dụ minh họa
+  		+ Luyện tập x
+  		+ Vận dụng x
+  		+ Bảng, sơ đồ, biểu thức
+  		+ Bài tập, câu hỏi và LỜI GIẢI
+
+		ÁP DỤNG RIÊNG:
+		- Hoạt động 1:
+  		+ Ghi bảng: nội dung dẫn nhập, kiến thức nền được huy động.
+		- Hoạt động 2.x:
+  		+ Ghi bảng: TOÀN BỘ nội dung kiến thức mục tương ứng ở sgk (bao gồm các HĐx, Luyện tập x, vận dụng x, theo từng mục 1 nhỏ, 2 nhỏ ... của sách giáo khoa).
+		- Hoạt động 3 (Luyện tập):Chỉ chữa bài tập của sách giáo khoa
+  		+ Ghi bảng: bài tập + lời giải chi tiết.
+		- Hoạt động 4 (Vận dụng):Các bài tập trong sách giáo khoa hoặc các bài toán có tính thực tế
+  		+ Ghi bảng: lời giải bài toán / kết quả tình huống / luật và kết quả trò chơi.
+
+		YÊU CẦU CỨNG:
+		- Không mô tả kết quả sư phạm.
+		- Không lặp lại câu chữ mục tiêu.
+		- Không bỏ trống cột “Ghi bảng”.
+
+                YÊU CẦU CHI TIẾT CHO TIẾN TRÌNH DẠY HỌC:
+		- Hoạt động 2.x:Nếu trong sách giáo khoa ứng với các mục 1, mục 2 .. mà có phần Vận dụng hoặc Vận dụng x, thì phải cho vào cột ghi bảng.
+                - Cần chi tiết cụ thể (đặc biệt là phần ghi bảng có đầy đủ tất cả nội dung trong sách giáo khoa).
+                - Các ý trong tiến trình dạy học được bắt đầu bằng dấu gạch đầu dòng (-).
+                - Tích hợp Học thông qua chơi vào 1 số hoạt động phù hợp.
+                - Riêng các trò chơi trong tiến trình dạy học cần TRÌNH BÀY RÕ LUẬT CHƠI.
+                - Bài học có thể soạn thành nhiều tiết và mỗi tiết chỉ có 45 phút, hãy điều chỉnh lượng kiến thức và hoạt động hợp lý.
+                - Không kèm chú thích nguồn trong bài soạn.
+                - Tuyệt đối chỉ bao gồm 4 Hoạt động, không phát sinh thêm.
+                - LUÔN LUÔN TUÂN THỦ THEO NHỮNG YÊU CẦU TRÊN
+
+                *Hướng dẫn về nhà:
+		- Ôn lại nội dung kiến thức đã học.
+		- Hoàn thành nốt các bài tập còn thiếu trên lớp và làm các bài tập cong lsij trong sách giáo khoa ...
+		- Chuẩn bị trước bài: “........................”.                
+                IV. Điều chỉnh sau tiết dạy
+
+                Lưu ý chung: Bám sát nội dung trong Sách giáo khoa và sách giáo viên (từ tài liệu đính kèm) để đưa nội dung vào bài soạn cho chính xác. KHÔNG dùng ký tự # ở đầu dòng.
+
+                LƯU Ý QUAN TRỌNG TỪ NGƯỜI DÙNG: {yeu_cau_them}
                 """
 
-                # ===== CHỌN PROMPT THEO MODE =====
-                if MODE_GIAO_AN_GOC:
-                    prompt_instruction = f"""Đóng vai là Giáo viên THCS, am hiểu Công văn 5512.
-
-
-⚠️ TÀI LIỆU ĐẦU VÀO LÀ GIÁO ÁN HOÀN CHỈNH.
-
-NHIỆM VỤ DUY NHẤT:
-- GIỮ NGUYÊN 100% nội dung giáo án gốc.
-- KHÔNG viết lại mục tiêu, nội dung, hoạt động.
-- KHÔNG thêm hoạt động mới.
-- CHỈ chèn các đoạn “Tích hợp năng lực số” vào đúng cột
-  “Hoạt động của giáo viên và học sinh”.
-
-YÊU CẦU BẮT BUỘC:
-- GIỮ NGUYÊN cấu trúc, bảng biểu, thứ tự hoạt động
-- KHÔNG tạo bảng mới
-- KHÔNG thay đổi cột “Ghi bảng”
-
-⚠️ YÊU CẦU KHI CHÈN NĂNG LỰC SỐ:
-- Ghi đúng mẫu
-- Dùng mã đã KHÓA trong PROMPT_KHOA_MA
-
-
-"""
-
-
-
-               
-                prompt_instruction = prompt_instruction + "\n\n" + PROMPT_KHOA_MA
-
-               
                 input_data = [prompt_instruction]
                 temp_paths = []
                 
-                            
+                if has_framework: input_data.append(genai.upload_file(FILE_KHUNG_NANG_LUC))
+                
                 if uploaded_files:
                     for f in uploaded_files:
                         if f.type == "application/pdf":
