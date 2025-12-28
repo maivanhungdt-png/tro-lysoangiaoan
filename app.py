@@ -41,7 +41,7 @@ CAU_TRUC_5512 = """
                 - Mỗi ý trong mục I.2.c) phải được chuyển hóa thành ÍT NHẤT 01 HÀNH ĐỘNG CỤ THỂ của học sinh trong các hoạt động dạy học.
                 - Không được bổ sung hoặc suy diễn thêm năng lực số ngoài mục I.2.c).
                 Nếu trong Phần III còn thiếu bất kỳ nội dung nào đã nêu trong mục I.2.c), phải điều chỉnh lại hoạt động cho phù hợp trước khi hoàn thành bài soạn.
-                Khi tích hợp năng lực số trong Tiến trình dạy học, phải viết dưới dạng HÀNH ĐỘNG HỌC TẬP CỤ THỂ của học sinh trong cột “Hoạt động của giáo viên và học sinh”; không dùng ngoặc đơn, không ghi chú thích hay nhãn “tích hợp năng lực số”.
+                Khi tích hợp năng lực số trong Tiến trình dạy học, phải viết dưới dạng HÀNH ĐỘNG HỌC TẬP CỤ THỂ của học sinh trong cột “Hoạt động của giáo viên và học sinh”; không dùng ngoặc đơn.
 
                 III. Tiến trình dạy học
                 CẤU TRÚC CHUNG:
@@ -455,17 +455,25 @@ NHIỆM VỤ DUY NHẤT ĐƯỢC PHÉP LÀ:
   CHÈN HÀNH ĐỘNG HỌC TẬP CỤ THỂ CỦA HỌC SINH
   vào cột “Hoạt động của giáo viên và học sinh”.
 
-CÁCH CHÈN NĂNG LỰC SỐ (BẮT BUỘC):
-- Mỗi ý năng lực số phải được chuyển thành 1 hành động của HS.
-- Chỉ chèn vào:
-  + Bước 2: Thực hiện nhiệm vụ
-  + hoặc Bước 3: Báo cáo – thảo luận
-KHI SOẠN PHẦN III. TIẾN TRÌNH DẠY HỌC:
-                - Phải sử dụng TRỰC TIẾP các ý đã nêu trong mục I.2.c) Tích hợp năng lực số.
-                - Mỗi ý trong mục I.2.c) phải được chuyển hóa thành ÍT NHẤT 01 HÀNH ĐỘNG CỤ THỂ của học sinh trong các hoạt động dạy học.
-                - Không được bổ sung hoặc suy diễn thêm năng lực số ngoài mục I.2.c).
-                Nếu trong Phần III còn thiếu bất kỳ nội dung nào đã nêu trong mục I.2.c), phải điều chỉnh lại hoạt động cho phù hợp trước khi hoàn thành bài soạn.
-                Khi tích hợp năng lực số trong Tiến trình dạy học, phải viết dưới dạng HÀNH ĐỘNG HỌC TẬP CỤ THỂ của học sinh trong cột “Hoạt động của giáo viên và học sinh”; không dùng ngoặc đơn.
+⚠️ YÊU CẦU BẮT BUỘC KHI TÍCH HỢP NĂNG LỰC SỐ:
+
+- Khi chèn năng lực số vào cột “Hoạt động của giáo viên và học sinh”,
+  PHẢI ghi ĐẦY ĐỦ theo cấu trúc sau:
+
+  “Tích hợp năng lực số:
+   [MÃ CHỈ SỐ] – [TÊN CHỈ SỐ]: [HÀNH ĐỘNG CỤ THỂ CỦA HS]”
+
+- Ví dụ:
+  “Tích hợp năng lực số:
+   1.1.TC1a – Nhận biết dữ liệu số: HS sử dụng phần mềm GeoGebra
+   để xác định vị trí tương đối của đường thẳng và đường tròn.
+   1.3.TC1a – Kiểm tra tính đúng đắn: HS đối chiếu kết quả
+   tính toán thủ công với kết quả trên phần mềm.”
+
+- TUYỆT ĐỐI KHÔNG:
+  + Chỉ ghi hành động mà không có mã chỉ số.
+  + Ghi mã chỉ số mà không có mô tả hành động.
+
 
 Nếu giáo án có nhiều hoạt động, hãy phân bổ hợp lý
 hành động năng lực số vào các hoạt động phù hợp,
