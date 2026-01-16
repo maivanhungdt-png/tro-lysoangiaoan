@@ -386,7 +386,7 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
 		- Chỉ mô tả thật chi tiết tiến trình tổ chức dạy học theo 4 bước:
   		Bước 1: Chuyển giao nhiệm vụ (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
   		Bước 2: Thực hiện nhiệm vụ (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
-  		Bước 3: Báo cáo, thảo luận (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
+  		Bước 3: Báo cáo, thảo luận (Phải trình bày trong cột Hoạt động của giáo viên và học sinh, tích hợp năng lực số nếu có)
   		Bước 4: Kết luận, nhận định (Phải trình bày trong cột Hoạt động của giáo viên và học sinh)
 
 		QUY ĐỊNH BẮT BUỘC CHO CỘT “Ghi bảng” (ÁP DỤNG CHO TẤT CẢ HOẠT ĐỘNG):
@@ -430,7 +430,7 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
 
                 *Hướng dẫn về nhà:
 		- Ôn lại nội dung kiến thức đã học.
-		- Hoàn thành nốt các bài tập còn thiếu trên lớp và làm các bài tập cong lsij trong sách giáo khoa ...
+		- Hoàn thành nốt các bài tập còn thiếu trên lớp và làm các bài tập còn lại trong sách giáo khoa ...
 		- Chuẩn bị trước bài: “........................”.                
                 IV. Điều chỉnh sau tiết dạy
 
@@ -496,4 +496,5 @@ st.markdown(
     "<div style='text-align: center; color: #666;'>© 2025 - Mai Văn Hùng - Trường THCS Đồng Yên - SĐT: 0941037116</div>",
     unsafe_allow_html=True
 )
+
 
