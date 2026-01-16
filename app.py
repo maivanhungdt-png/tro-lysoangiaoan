@@ -472,16 +472,7 @@ if st.button("🚀 SOẠN GIÁO ÁN NGAY"):
             f'<div class="lesson-plan-paper">{ket_qua_text}</div>',
             unsafe_allow_html=True
         )
-
-        st.markdown("### 📋 COPY NỘI DUNG (DÁN MASSIVEMARK)")
-
-        st.text_area(
-            "👉 Bôi đen (Ctrl+A) → Copy (Ctrl+C) → dán vào MassiveMark",
-            ket_qua_text,
-            height=400
-        )
-
-
+        
         # ===== TẠO FILE WORD =====
         doc = create_doc_stable(ket_qua_text, ten_bai, lop)
         buf = io.BytesIO()
@@ -505,3 +496,4 @@ st.markdown(
     "<div style='text-align: center; color: #666;'>© 2025 - Mai Văn Hùng - Trường THCS Đồng Yên - SĐT: 0941037116</div>",
     unsafe_allow_html=True
 )
+
